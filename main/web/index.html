@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>ESP32 KannaCloud Dashboard</title>
+<script src='https://cdn.tailwindcss.com'></script>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
+<script>tailwind.config={darkMode:'class'}</script>
+<link rel='stylesheet' href='/api/webfiles/dashboard.css'>
+<script defer src='/api/webfiles/dashboard.js'></script>
+</head>
+<body class='bg-gray-900 text-white'>
+
+<!-- Navigation Bar -->
+<nav class='bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4'>
+<div class='flex items-center justify-between'>
+<div class='flex items-center space-x-8'>
+<h1 class='text-2xl font-bold text-green-600 dark:text-green-400'>🌱 KannaCloud</h1>
+<div class='space-x-4'>
+<a href='#' onclick='showDashboard(); return false;' class='text-green-600 dark:text-green-400 font-semibold'>Dashboard</a>
+<a href='#' onclick='showEditor(); return false;' class='text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400'>Code Editor</a>
+</div>
+</div>
+<div class='flex items-center space-x-4'>
+<button onclick='toggleTheme()' id='themeToggle' class='text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'>
+<i class='fas fa-moon text-xl'></i>
+</button>
+</div>
+</div>
+</nav>
+
+<div class='container mx-auto px-6 py-8'>
+
+<!-- Status Card -->
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-6 card-animate'>
+<div class='flex items-center justify-between mb-4'>
+<div class='flex items-center gap-3'>
+<div class='bg-green-500 w-3 h-3 rounded-full status-dot' id='status-dot'></div>
+<h2 class='text-xl font-bold text-gray-900 dark:text-white' id='status-text'>Device Online</h2>
+</div>
+<button onclick='loadStatus()' class='bg-green-600 dark:bg-green-400 hover:bg-green-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded-md'>
+<i class='fas fa-sync-alt'></i> Refresh
+</button>
+</div>
+
+<!-- Stats Grid -->
+<div class='grid grid-cols-1 md:grid-cols-4 gap-6'>
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
+<div class='text-gray-500 dark:text-gray-400 text-sm'>📱 Device ID</div>
+<div class='text-lg font-bold mt-2 text-gray-900 dark:text-white' id='device-id'>Loading...</div>
+</div>
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
+<div class='text-gray-500 dark:text-gray-400 text-sm'>📡 WiFi SSID</div>
+<div class='text-lg font-bold mt-2 text-gray-900 dark:text-white' id='wifi-ssid'>Loading...</div>
+</div>
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
+<div class='text-gray-500 dark:text-gray-400 text-sm'>🌐 IP Address</div>
+<div class='text-lg font-bold mt-2 text-gray-900 dark:text-white' id='ip-addr'>Loading...</div>
+</div>
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
+<div class='text-gray-500 dark:text-gray-400 text-sm'>⏱️ Uptime</div>
+<div class='text-lg font-bold mt-2 text-gray-900 dark:text-white' id='uptime'>Loading...</div>
+</div>
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
+<div class='text-gray-500 dark:text-gray-400 text-sm'>🕒 System Time</div>
+<div class='text-lg font-bold mt-2 text-gray-900 dark:text-white' id='current-time'>Loading...</div>
+</div>
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
+<div class='text-gray-500 dark:text-gray-400 text-sm'>💾 Free Memory</div>
+<div class='text-lg font-bold mt-2 text-gray-900 dark:text-white' id='free-heap'>Loading...</div>
+</div>
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
+<div class='text-gray-500 dark:text-gray-400 text-sm'>📶 WiFi Signal</div>
+<div class='text-lg font-bold mt-2 text-gray-900 dark:text-white' id='wifi-rssi'>Loading...</div>
+</div>
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700'>
+<div class='text-gray-500 dark:text-gray-400 text-sm'>🔋 CPU Usage</div>
+<div class='text-lg font-bold mt-2 text-gray-900 dark:text-white' id='cpu-usage'>Loading...</div>
+</div>
+</div>
+</div>
+
+<!-- Tabs Card -->
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg shadow card-animate'>
+<div class='flex border-b border-gray-200 dark:border-gray-700 mb-6'>
+<button class='px-6 py-3 text-green-600 dark:text-green-400 border-b-2 border-green-600 dark:border-green-400 font-semibold tab active' onclick='showTab(0)'>📊 Real-Time Data</button>
+<button class='px-6 py-3 text-gray-600 dark:text-gray-400 border-b-2 border-transparent hover:text-gray-900 dark:hover:text-white tab' onclick='showTab(1)'>🔬 Sensors</button>
+<button class='px-6 py-3 text-gray-600 dark:text-gray-400 border-b-2 border-transparent hover:text-gray-900 dark:hover:text-white tab' onclick='showTab(2)'>⚙️ Settings</button>
+<button class='px-6 py-3 text-gray-600 dark:text-gray-400 border-b-2 border-transparent hover:text-gray-900 dark:hover:text-white tab' onclick='showTab(3)'>🔧 Actions</button>
+</div>
+
+<div class='tab-content active' id='tab-0'>
+<h2 class='text-xl font-bold text-gray-900 dark:text-white mb-4'>📊 Current Sensor Values</h2>
+<div id='sensor-values' class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+<div class='text-gray-500 dark:text-gray-400'>Loading sensor data...</div>
+</div>
+</div>
+
+<div class='tab-content' id='tab-1' style='display:none'>
+<h2 class='text-xl font-bold text-gray-900 dark:text-white mb-4'>🔬 Sensor Configuration</h2>
+<button onclick='rescanSensors()' class='bg-green-600 dark:bg-green-400 hover:bg-green-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded-md mb-4'>
+<i class='fas fa-sync-alt'></i> Rescan I2C Bus
+</button>
+<div id='sensor-list' class='text-gray-600 dark:text-gray-400'>Loading sensors...</div>
+</div>
+
+<div class='tab-content' id='tab-2' style='display:none'>
+<h2 class='text-xl font-bold text-gray-900 dark:text-white mb-4'>⚙️ Configuration</h2>
+<div class='mb-4'>
+<label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>MQTT Telemetry Interval (seconds)</label>
+<input type='number' id='mqtt-interval' value='10' min='1' max='3600' 
+class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white'>
+<button onclick='saveSetting()' class='mt-3 bg-green-600 dark:bg-green-400 hover:bg-green-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded-md'>
+<i class='fas fa-save'></i> Save Settings
+</button>
+</div>
+<div class='mt-6 pt-6 border-t border-gray-200 dark:border-gray-700'>
+<h3 class='text-lg font-semibold text-gray-900 dark:text-white mb-3'>Sensor Reading Control</h3>
+<div class='flex gap-3'>
+<button onclick='pauseSensors()' class='bg-yellow-600 dark:bg-yellow-400 hover:bg-yellow-700 dark:hover:bg-yellow-500 text-white px-4 py-2 rounded-md'>
+<i class='fas fa-pause'></i> Pause Sensor Readings
+</button>
+<button onclick='resumeSensors()' class='bg-green-600 dark:bg-green-400 hover:bg-green-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded-md'>
+<i class='fas fa-play'></i> Resume Sensor Readings
+</button>
+</div>
+<p class='text-sm text-gray-500 dark:text-gray-400 mt-2'>Pause sensor readings to perform manual sensor configuration or troubleshooting.</p>
+</div>
+</div>
+
+<div class='tab-content' id='tab-3' style='display:none'>
+<h2 class='text-xl font-bold text-gray-900 dark:text-white mb-4'>🔧 Device Control</h2>
+<div class='mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg'>
+<h3 class='text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2'>🔒 Trust Certificate</h3>
+<p class='text-sm text-blue-800 dark:text-blue-200 mb-3'>Download and install the CA certificate to trust all KannaCloud devices in your browser.</p>
+<a href='/ca.crt' download='kannacloud-ca.crt' class='inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>
+<i class='fas fa-download'></i> Download CA Certificate
+</a>
+<p class='text-xs text-blue-700 dark:text-blue-300 mt-2'>After download: Settings → Security → Manage Certificates → Import to Trusted Root</p>
+</div>
+<div class='mb-6 p-4 bg-gray-50 dark:bg-gray-900/30 border border-gray-200 dark:border-gray-700 rounded-lg'>
+<h3 class='text-lg font-semibold text-gray-900 dark:text-white mb-2'>⬆️ Firmware Update</h3>
+<p class='text-sm text-gray-600 dark:text-gray-300 mb-3'>Select an ESP-IDF .bin image generated for this device and upload it directly over Wi-Fi. The device will reboot automatically after a successful upload.</p>
+<input type='file' id='firmwareFile' accept='.bin,application/octet-stream' class='block w-full text-sm text-gray-700 dark:text-gray-200 mb-3'>
+<div class='flex items-center gap-3'>
+<button onclick='uploadFirmware()' class='bg-green-600 dark:bg-green-400 hover:bg-green-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded-md'>
+<i class='fas fa-upload'></i> Upload Firmware
+</button>
+<span id='firmwareStatus' class='text-sm text-gray-600 dark:text-gray-300'></span>
+</div>
+<p class='text-xs text-gray-500 dark:text-gray-400 mt-2'>Keep power connected and do not close this page until the upload completes.</p>
+</div>
+<div class='space-y-3'>
+<button onclick='testMQTT()' class='bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white px-4 py-2 rounded-md'>
+<i class='fas fa-wifi'></i> Test MQTT Connection
+</button>
+<button onclick='rebootDevice()' class='bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white px-4 py-2 rounded-md ml-2'>
+<i class='fas fa-redo'></i> Reboot Device
+</button>
+<button onclick='clearWiFi()' class='bg-red-600 dark:bg-red-500 hover:bg-red-700 dark:hover:bg-red-600 text-white px-4 py-2 rounded-md ml-2'>
+<i class='fas fa-trash'></i> Clear WiFi & Reset
+</button>
+</div>
+</div>
+</div>
+
+<!-- Sensor Detail Modal -->
+<div id='sensorModal' class='fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex items-start justify-center overflow-y-auto py-12 px-4'>
+  <div class='relative w-full max-w-xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 p-6'>
+    <button class='absolute top-3 right-3 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white' onclick='closeSensorModal()'>
+      <i class='fas fa-times text-xl'></i>
+    </button>
+    <div id='sensorModalTitle' class='text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 pr-8'>Sensor</div>
+    <div id='sensorModalValue' class='mt-6 text-gray-900 dark:text-white'>Loading...</div>
+    <div id='sensorModalCalibration' class='mt-6'></div>
+  </div>
+</div>
+
+</div>
+
+<!-- Code Editor Section (hidden by default) -->
+<div id='editorSection' style='display:none;' class='container mx-auto px-6 py-8'>
+<div class='bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-6'>
+<h2 class='text-2xl font-bold text-gray-900 dark:text-white mb-4'><i class='fas fa-code'></i> Web File Editor</h2>
+<p class='text-gray-600 dark:text-gray-400 mb-4'>Edit your dashboard HTML, CSS, and JavaScript files directly in the browser. Changes take effect immediately after saving.</p>
+
+<div class='mb-6 p-4 bg-gray-50 dark:bg-gray-900/40 border border-dashed border-gray-300 dark:border-gray-700 rounded-lg'>
+<h3 class='text-lg font-semibold text-gray-900 dark:text-white mb-2'>📁 Upload Dashboard Asset</h3>
+<p class='text-sm text-gray-600 dark:text-gray-300 mb-3'>Use this uploader to replace HTML, CSS, or JavaScript files with new versions from your computer. File names must match existing assets.</p>
+<input type='file' id='assetFileInput' accept='.html,.css,.js,text/html,text/css,application/javascript' class='block w-full text-sm text-gray-700 dark:text-gray-200 mb-3'>
+<div class='flex items-center gap-3'>
+<button onclick='uploadAssetFile()' class='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>
+<i class='fas fa-file-upload'></i> Upload File
+</button>
+<span id='assetUploadStatus' class='text-sm text-gray-600 dark:text-gray-300'></span>
+</div>
+<p class='text-xs text-gray-500 dark:text-gray-400 mt-2'>Allowed extensions: .html, .css, .js (max 200 KB per file).</p>
+</div>
+
+<div class='mb-4'>
+<label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Select File:</label>
+<select id='fileSelector' onchange='loadFile()' class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white'>
+<option value=''>-- Select a file --</option>
+</select>
+</div>
+
+<div class='mb-4'>
+<textarea id='codeEditor' rows='25' class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white font-mono text-sm' placeholder='Select a file to edit...'></textarea>
+</div>
+
+<div class='flex gap-2'>
+<button onclick='saveFile()' class='bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md'>
+<i class='fas fa-save'></i> Save File
+</button>
+<button onclick='refreshPreview()' class='bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md'>
+<i class='fas fa-eye'></i> Preview Changes
+</button>
+<button onclick='resetFile()' class='bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-md'>
+<i class='fas fa-undo'></i> Reset
+</button>
+</div>
+
+<div class='mt-4 p-3 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-400 text-yellow-800 dark:text-yellow-200'>
+<p class='font-semibold'><i class='fas fa-exclamation-triangle'></i> Important:</p>
+<p class='text-sm'>Changes are saved to flash memory. Be careful not to break the dashboard by introducing syntax errors. Always test changes before saving.</p>
+</div>
+</div>
+</div>
+
+</body>
+</html>

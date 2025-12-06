@@ -1,0 +1,125 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1-2\tools/idf_monitor.py -p COM18 -b 115200 --toolchain-prefix riscv32-esp-elf- --target esp32c6 --revision 0 --decode-panic backtrace C:\Code\kc_device\build_c6\kc_device.elf C:\Code\kc_device\build_c6\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1-2\tools\idf.py' '-B' 'build_c6' '-D' 'SDKCONFIG=sdkconfig.c6' '-p' 'COM18'
+[0;32mI (144) esp_image: segment 1: paddr=00058640 vaddr=40800000 sizeESP-ROM:esp32c6-20220919[0m
+Build:Sep 19 2022
+rst:0x15 (USB_UART_HPSYS),boot:0x1f (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4080b6e0
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40875730,len:0x1744
+load:0x4086b910,len:0xe78
+load:0x4086e610,len:0x31c8
+entry 0x4086b91a
+[0;32mI (23) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (23) boot: compile time Dec  5 2025 13:40:53[0m
+[0;32mI (24) boot: chip revision: v0.2[0m
+[0;32mI (24) boot: efuse block revision: v0.3[0m
+[0;32mI (26) boot.esp32c6: SPI Speed      : 80MHz[0m
+[0;32mI (30) boot.esp32c6: SPI Mode       : DIO[0m
+[0;32mI (34) boot.esp32c6: SPI Flash Size : 2MB[0m
+[0;32mI (38) boot: Enabling RNG early entropy source...[0m
+[0;32mI (42) boot: Partition Table:[0m
+[0;32mI (45) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (51) boot:  0 nvs              WiFi data        01 02 00009000 00004000[0m
+[0;32mI (58) boot:  1 nvs_key          NVS keys         01 04 0000d000 00001000[0m
+[0;32mI (64) boot:  2 phy_init         RF data          01 01 0000e000 00001000[0m
+[0;32mI (71) boot:  3 factory          factory app      00 00 00010000 001f0000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=42128020 size=48618h (296472) map[0m
+[0;32mI (144) esp_image: segment 1: paddr=00058640 vaddr=40800000 size=079d8h ( 31192) load[0m
+[0;32mI (151) esp_image: segment 2: paddr=00060020 vaddr=42000020 size=125890h (1202320) map[0m
+[0;32mI (377) esp_image: segment 3: paddr=001858b8 vaddr=408079d8 size=198e0h (104672) load[0m
+[0;32mI (400) esp_image: segment 4: paddr=0019f1a0 vaddr=408212c0 size=03a64h ( 14948) load[0m
+[0;32mI (411) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (412) boot: Disabling RNG early entropy source...[0m
+[0;32mI (422) cpu_start: Unicore app[0m
+[0;32mI (430) cpu_start: Pro cpu start user code[0m
+[0;32mI (430) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (431) app_init: Application information:[0m
+[0;32mI (431) app_init: Project name:     kc_device[0m
+[0;32mI (434) app_init: App version:      4236587-dirty[0m
+[0;32mI (439) app_init: Compile time:     Dec  5 2025 13:40:25[0m
+[0;32mI (444) app_init: ELF file SHA256:  f03b00650...[0m
+[0;32mI (448) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (452) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (456) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (460) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (464) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (470) heap_init: At 4082E7E0 len 0004DE30 (311 KiB): RAM[0m
+[0;32mI (475) heap_init: At 4087C610 len 00002F54 (11 KiB): RAM[0m
+[0;32mI (480) heap_init: At 50000000 len 00003FE8 (15 KiB): RTCRAM[0m
+[0;32mI (486) spi_flash: detected chip: generic[0m
+[0;32mI (489) spi_flash: flash io: dio[0m
+[0;33mW (492) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (505) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (511) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (517) coexist: coex firmware version: b0bcc39[0m
+[0;32mI (522) coexist: coexist rom version 5b8dcfa[0m
+[0;32mI (526) main_task: Started on CPU0[0m
+[0;32mI (526) main_task: Calling app_main()[0m
+[0;32mI (526) MAIN: =================================[0m
+[0;32mI (536) MAIN: KC-Device WiFi Provisioning[0m
+[0;32mI (536) MAIN: =================================[0m
+[0;32mI (536) CHIP_INFO: ========================================[0m
+[0;32mI (546) CHIP_INFO: Chip Information[0m
+[0;32mI (546) CHIP_INFO: ========================================[0m
+[0;32mI (556) CHIP_INFO: Model:         ESP32-C6[0m
+[0;32mI (556) CHIP_INFO: Architecture:  RISC-V[0m
+[0;32mI (556) CHIP_INFO: Revision:      v0.2[0m
+[0;32mI (566) CHIP_INFO: CPU Cores:     1[0m
+[0;32mI (566) CHIP_INFO: Flash Size:    2 MB[0m
+[0;32mI (566) CHIP_INFO: Features:[0m
+[0;32mI (576) CHIP_INFO:   - WiFi:      Yes (2.4 GHz)[0m
+[0;32mI (576) CHIP_INFO:   - Bluetooth: No[0m
+[0;32mI (576) CHIP_INFO:   - BLE:       Yes[0m
+[0;32mI (586) CHIP_INFO:   - WiFi 6:    Yes (802.11ax)[0m
+[0;32mI (586) CHIP_INFO:   - Zigbee:    Yes (802.15.4)[0m
+[0;32mI (596) CHIP_INFO:   - Thread:    Yes (802.15.4)[0m
+[0;32mI (596) CHIP_INFO: ========================================[0m
+[0;32mI (606) CHIP_INFO: ESP-IDF Version: v5.5.1[0m
+[0;32mI (606) CHIP_INFO: ========================================[0m
+[0;32mI (616) SECURITY: =================================[0m
+[0;32mI (616) SECURITY: Initializing Security Features[0m
+[0;32mI (616) SECURITY: =================================[0m
+[0;32mI (626) SECURITY: NVS keys partition found at 0xd000 (size: 4096 bytes)[0m
+[0;32mI (636) SECURITY: Initializing NVS with encryption...[0m
+[0;32mI (636) SECURITY: ✓ NVS encryption keys loaded from partition[0m
+[0;32mI (686) SECURITY: ✓ NVS encryption initialized successfully[0m
+[0;32mI (686) SECURITY: ✓ WiFi credentials will be stored encrypted[0m
+[0;33mW (686) SECURITY: ✗ Flash encryption is DISABLED[0m
+[0;33mW (686) SECURITY:   Firmware and data are NOT protected in flash[0m
+[0;33mW (696) SECURITY:   Enable flash encryption for production deployment[0m
+[0;32mI (696) SECURITY: =================================[0m
+[0;32mI (706) SECURITY: Security Status Summary:[0m
+[0;32mI (706) SECURITY:   NVS Encryption:   ENABLED ✓[0m
+[0;32mI (716) SECURITY:   Flash Encryption: DISABLED ✗[0m
+[0;32mI (716) SECURITY:   Key Protection:   HMAC-based (eFuse)[0m
+[0;32mI (726) SECURITY:   Security Level:   MEDIUM ✓✓[0m
+[0;32mI (726) SECURITY: =================================[0m
+[0;32mI (726) RESET_BTN: Initializing reset button on GPIO1[0m
+[0;32mI (736) RESET_BTN: Reset button initialized successfully[0m
+[0;32mI (736) RESET_BTN:   Short press (<3s): Clear WiFi credentials[0m
+[0;32mI (746) RESET_BTN:   Long press (>=3s): Factory reset[0m
+[0;32mI (746) PROV_STATE: Provisioning state machine initialized[0m
+[0;32mI (756) PROV_STATE: State change callback registered[0m
+[0;32mI (766) MAIN: Found stored credentials, initializing WiFi manager[0m
+[0;32mI (766) WIFI_MGR: Initializing WiFi manager[0m
+[0;32mI (776) pp: pp rom version: 5b8dcfa[0m
+[0;32mI (776) net80211: net80211 rom version: 5b8dcfa[0m
+[0;32mI (786) wifi:wifi driver task: 40836bd0, prio:23, stack:6656, core=0[0m
+[0;32mI (806) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (806) wifi:wifi certification version: v7.0[0m
+[0;32mI (806) wifi:config NVS flash: enabled[0m
+[0;32mI (806) wifi:config nano formatting: disabled[0m
+[0;32mI (806) wifi:mac_version:HAL_MAC_ESP32AX_761,ut_version:N, band mode:0x1[0m
+[0;32mI (816) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (816) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (826) wifi:Init management short buffer num: 32[0m
+[0;32mI (826) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (836) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (836) wifi:Init static rx buffer size: 1700 (rxctrl:92, csi:512)[0m
+[0;32mI (846) wifi:Init static rx buffer num: 10[0m
+[0;32mI (846) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (846) wifi_init: rx ba win: 6[0m
+[0;32mI (856) wifi_init: accept mbox: 6[0m
+[0;32mI (856) wifi_init: tcpip mbox: 32[0m
+[0;32mI (856) wifi_init: ud

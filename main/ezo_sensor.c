@@ -1,0 +1,1056 @@
+/**
+ * @file ezo_sensor.c
+ * @brief Atlas Scientific EZO sensor driver implementation
+ */
+
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "ezo_sensor.h"
+#include "esp_log.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+static const char *TAG = "EZO_SENSOR";
+
+static esp_err_t ezo_sensor_receive_response(ezo_sensor_t *sensor, char *response, size_t response_size);
+static esp_err_t ezo_sensor_parse_values(char *response, float values[4], uint8_t *count);
+
+/**
+ * @brief Send command and read response from EZO sensor
+ */
+esp_err_t ezo_sensor_send_command(ezo_sensor_t *sensor, const char *command, 
+                                   char *response, size_t response_size, uint32_t delay_ms) {
+    if (sensor == NULL || command == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    ESP_LOGI(TAG, "Sending command to 0x%02X: %s", sensor->config.i2c_address, command);
+
+    // Send command
+    esp_err_t ret = i2c_master_transmit(sensor->dev_handle, (const uint8_t *)command, 
+                                        strlen(command), EZO_RESPONSE_TIMEOUT_MS);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to send command: %s", esp_err_to_name(ret));
+        return ret;
+    }
+
+    // Check if this is an I2C address change command (device will reboot)
+    if (strncmp(command, "I2C,", 4) == 0) {
+        ESP_LOGW(TAG, "I2C address change command sent - device will reboot");
+        return ESP_OK;
+    }
+
+    // Wait for sensor to process command
+    vTaskDelay(pdMS_TO_TICKS(delay_ms));
+
+    // Read response if buffer provided
+    if (response != NULL && response_size > 0) {
+        return ezo_sensor_receive_response(sensor, response, response_size);
+    }
+
+    return ESP_OK;
+}
+
+static esp_err_t ezo_sensor_receive_response(ezo_sensor_t *sensor, char *response, size_t response_size) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    uint8_t buffer[EZO_LARGEST_STRING] = {0};
+    esp_err_t ret = i2c_master_receive(sensor->dev_handle, buffer, EZO_LARGEST_STRING, EZO_RESPONSE_TIMEOUT_MS);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to read response: %s", esp_err_to_name(ret));
+        return ret;
+    }
+
+    uint8_t status = buffer[0];
+    if (status == EZO_RESP_SUCCESS) {
+        if (response != NULL && response_size > 0) {
+            size_t copy_len = (response_size - 1 < EZO_LARGEST_STRING - 1) ?
+                              response_size - 1 : EZO_LARGEST_STRING - 1;
+            size_t j = 0;
+            for (size_t i = 1; i < EZO_LARGEST_STRING && j < copy_len && buffer[i] != 0; i++) {
+                response[j++] = (char)buffer[i];
+            }
+            response[j] = '\0';
+        }
+        return ESP_OK;
+    }
+
+    if (status == EZO_RESP_SYNTAX_ERROR) {
+        ESP_LOGE(TAG, "Syntax error in command response");
+        return ESP_ERR_INVALID_ARG;
+    }
+    if (status == EZO_RESP_NOT_READY) {
+        return ESP_ERR_NOT_FINISHED;
+    }
+    if (status == EZO_RESP_NO_DATA) {
+        return ESP_ERR_NOT_FOUND;
+    }
+
+    ESP_LOGE(TAG, "Unknown response code: 0x%02X", status);
+    return ESP_FAIL;
+}
+
+static esp_err_t ezo_sensor_parse_values(char *response, float values[4], uint8_t *count) {
+    if (response == NULL || values == NULL || count == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    *count = 0;
+    char *token = strtok(response, ",");
+    while (token != NULL && *count < 4) {
+        if (token[0] == '-' || token[0] == '.' || (token[0] >= '0' && token[0] <= '9')) {
+            values[*count] = atof(token);
+            (*count)++;
+        }
+        token = strtok(NULL, ",");
+    }
+
+    return ESP_OK;
+}
+
+/**
+ * @brief Initialize EZO sensor
+ */
+esp_err_t ezo_sensor_init(ezo_sensor_t *sensor, i2c_master_bus_handle_t bus_handle, uint8_t i2c_address) {
+    if (sensor == NULL || bus_handle == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    ESP_LOGI(TAG, "Initializing EZO sensor at address 0x%02X", i2c_address);
+
+    // Initialize configuration
+    memset(&sensor->config, 0, sizeof(ezo_sensor_config_t));
+    sensor->config.i2c_address = i2c_address;
+    sensor->bus_handle = bus_handle;
+    sensor->config.temp_compensation = 25.0f;
+    sensor->config.temp_comp_valid = false;
+    sensor->config.calibration_status[0] = '\0';
+    sensor->config.calibration_status_valid = false;
+
+    // Create I2C device handle
+    i2c_device_config_t dev_cfg = {
+        .dev_addr_length = I2C_ADDR_BIT_LEN_7,
+        .device_address = i2c_address,
+        .scl_speed_hz = 100000,
+    };
+
+    esp_err_t ret = i2c_master_bus_add_device(bus_handle, &dev_cfg, &sensor->dev_handle);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to add I2C device: %s", esp_err_to_name(ret));
+        return ret;
+    }
+
+    // Get device information with retries for slow sensors
+    const int max_retries = 3;
+    for (int i = 0; i < max_retries; i++) {
+        ret = ezo_sensor_get_device_info(sensor);
+        if (ret == ESP_OK) {
+            break;
+        }
+        if (ret == ESP_ERR_NOT_FINISHED && i < max_retries - 1) {
+            ESP_LOGW(TAG, "Sensor not ready, retrying in 2 seconds... (attempt %d/%d)", i + 1, max_retries);
+            vTaskDelay(pdMS_TO_TICKS(2000));
+        } else if (i == max_retries - 1) {
+            ESP_LOGW(TAG, "Failed to get device info after %d retries, continuing anyway", max_retries);
+        }
+    }
+
+    ESP_LOGI(TAG, "EZO sensor initialized: Type=%s, FW=%s", 
+             sensor->config.type, sensor->config.firmware_version);
+
+    return ESP_OK;
+}
+
+esp_err_t ezo_sensor_refresh_settings(ezo_sensor_t *sensor) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    esp_err_t overall = ESP_OK;
+
+    if (sensor->config.capability_flags & EZO_CAP_CALIBRATION) {
+        char status[sizeof(sensor->config.calibration_status)] = {0};
+        esp_err_t ret = ezo_sensor_get_calibration_status(sensor, status, sizeof(status));
+        if (ret == ESP_OK) {
+            strncpy(sensor->config.calibration_status, status, sizeof(sensor->config.calibration_status) - 1);
+            sensor->config.calibration_status[sizeof(sensor->config.calibration_status) - 1] = '\0';
+            sensor->config.calibration_status_valid = true;
+        } else {
+            sensor->config.calibration_status[0] = '\0';
+            sensor->config.calibration_status_valid = false;
+            if (overall == ESP_OK) {
+                overall = ret;
+            }
+        }
+    }
+
+    if ((sensor->config.capability_flags & EZO_CAP_TEMP_COMP) && strcmp(sensor->config.type, EZO_TYPE_PH) == 0) {
+        float temp_c = 0.0f;
+        esp_err_t ret = ezo_ph_get_temperature_comp(sensor, &temp_c);
+        if (ret == ESP_OK) {
+            sensor->config.temp_compensation = temp_c;
+            sensor->config.temp_comp_valid = true;
+        } else {
+            sensor->config.temp_comp_valid = false;
+            if (overall == ESP_OK) {
+                overall = ret;
+            }
+        }
+    }
+
+    if (sensor->config.capability_flags & EZO_CAP_MODE) {
+        bool continuous = sensor->config.continuous_mode;
+        esp_err_t ret = ezo_sensor_get_continuous_mode(sensor, &continuous);
+        if (ret == ESP_OK) {
+            sensor->config.continuous_mode = continuous;
+        } else if (overall == ESP_OK) {
+            overall = ret;
+        }
+    }
+
+    // Sleep state cannot be queried; assume awake unless explicitly changed elsewhere.
+
+    return overall;
+}
+
+/**
+ * @brief Deinitialize EZO sensor
+ */
+esp_err_t ezo_sensor_deinit(ezo_sensor_t *sensor) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    if (sensor->dev_handle != NULL) {
+        esp_err_t ret = i2c_master_bus_rm_device(sensor->dev_handle);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to remove I2C device: %s", esp_err_to_name(ret));
+            return ret;
+        }
+        sensor->dev_handle = NULL;
+    }
+
+    return ESP_OK;
+}
+
+/**
+ * @brief Get device information
+ */
+esp_err_t ezo_sensor_get_device_info(ezo_sensor_t *sensor) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    // Send info command
+    esp_err_t ret = ezo_sensor_send_command(sensor, "i", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    // Parse response: ?I,<type>,<version>
+    char *token = strtok(response, ",");
+    int field = 0;
+    
+    while (token != NULL) {
+        if (field == 0 && strcmp(token, "?I") == 0) {
+            // Valid info response
+        } else if (field == 1) {
+            // Sensor type
+            strncpy(sensor->config.type, token, EZO_MAX_SENSOR_TYPE - 1);
+            sensor->config.type[EZO_MAX_SENSOR_TYPE - 1] = '\0';  // Ensure null termination
+        } else if (field == 2) {
+            // Firmware version
+            strncpy(sensor->config.firmware_version, token, EZO_MAX_FW_VERSION - 1);
+            sensor->config.firmware_version[EZO_MAX_FW_VERSION - 1] = '\0';  // Ensure null termination
+        }
+        token = strtok(NULL, ",");
+        field++;
+    }
+
+    // Set capability defaults based on type
+    sensor->config.capability_flags = 0;
+    if (strcmp(sensor->config.type, EZO_TYPE_PH) == 0) {
+        sensor->config.capability_flags = EZO_CAP_CALIBRATION | EZO_CAP_TEMP_COMP |
+                                          EZO_CAP_MODE | EZO_CAP_SLEEP;
+    } else if (strcmp(sensor->config.type, EZO_TYPE_ORP) == 0) {
+        sensor->config.capability_flags = EZO_CAP_CALIBRATION | EZO_CAP_MODE |
+                                          EZO_CAP_SLEEP;
+    } else if (strcmp(sensor->config.type, EZO_TYPE_EC) == 0) {
+        sensor->config.capability_flags = EZO_CAP_CALIBRATION | EZO_CAP_MODE;
+    } else if (strcmp(sensor->config.type, EZO_TYPE_RTD) == 0) {
+        sensor->config.capability_flags = EZO_CAP_CALIBRATION;
+    } else if (strcmp(sensor->config.type, EZO_TYPE_DO) == 0) {
+        sensor->config.capability_flags = EZO_CAP_CALIBRATION | EZO_CAP_MODE;
+    }
+
+    // Get sensor name
+    ret = ezo_sensor_get_name(sensor, sensor->config.name, sizeof(sensor->config.name));
+    if (ret != ESP_OK) {
+        ESP_LOGW(TAG, "Failed to get sensor name");
+    }
+
+    // Get LED status
+    ret = ezo_sensor_get_led(sensor, &sensor->config.led_control);
+    if (ret != ESP_OK) {
+        ESP_LOGW(TAG, "Failed to get LED status");
+    }
+
+    // Get protocol lock status
+    ret = ezo_sensor_get_plock(sensor, &sensor->config.protocol_lock);
+    if (ret != ESP_OK) {
+        ESP_LOGW(TAG, "Failed to get protocol lock status");
+    }
+
+    // Get sensor-specific parameters
+    if (strcmp(sensor->config.type, EZO_TYPE_RTD) == 0) {
+        ezo_rtd_get_scale(sensor, &sensor->config.rtd.temperature_scale);
+    } else if (strcmp(sensor->config.type, EZO_TYPE_PH) == 0) {
+        ezo_ph_get_extended_scale(sensor, &sensor->config.ph.extended_scale);
+    } else if (strcmp(sensor->config.type, EZO_TYPE_EC) == 0) {
+        ezo_ec_get_probe_type(sensor, &sensor->config.ec.probe_type);
+        ezo_ec_get_tds_factor(sensor, &sensor->config.ec.tds_conversion_factor);
+    } else if (strcmp(sensor->config.type, EZO_TYPE_HUM) == 0) {
+        // Query which output parameters are enabled
+        char param_response[EZO_LARGEST_STRING] = {0};
+        ret = ezo_sensor_send_command(sensor, "O,?", param_response, sizeof(param_response), EZO_SHORT_WAIT_MS);
+        if (ret == ESP_OK) {
+            // Parse response: ?O,HUM,T,Dew or ?O,HUM,Dew etc.
+            // Reset counts
+            sensor->config.hum.param_count = 0;
+            sensor->config.hum.param_hum = false;
+            sensor->config.hum.param_t = false;
+            sensor->config.hum.param_dew = false;
+            
+            char *param_token = strtok(param_response, ",");
+            int param_field = 0;
+            
+            while (param_token != NULL && sensor->config.hum.param_count < 4) {
+                if (param_field == 0 && strcmp(param_token, "?O") == 0) {
+                    // Valid output query response
+                } else if (param_field > 0) {
+                    // Store parameter name and set flag
+                    strncpy(sensor->config.hum.param_order[sensor->config.hum.param_count], 
+                           param_token, sizeof(sensor->config.hum.param_order[0]) - 1);
+                    
+                    if (strcmp(param_token, "HUM") == 0) {
+                        sensor->config.hum.param_hum = true;
+                    } else if (strcmp(param_token, "T") == 0) {
+                        sensor->config.hum.param_t = true;
+                    } else if (strcmp(param_token, "Dew") == 0) {
+                        sensor->config.hum.param_dew = true;
+                    }
+                    
+                    sensor->config.hum.param_count++;
+                }
+                param_token = strtok(NULL, ",");
+                param_field++;
+            }
+            
+            ESP_LOGI(TAG, "HUM sensor has %d parameters enabled", sensor->config.hum.param_count);
+        } else {
+            ESP_LOGW(TAG, "Failed to query HUM output parameters");
+        }
+    }
+
+    return ESP_OK;
+}
+
+/**
+ * @brief Read sensor value
+ */
+esp_err_t ezo_sensor_read(ezo_sensor_t *sensor, float *value) {
+    if (sensor == NULL || value == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, "R", response, sizeof(response), EZO_LONG_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    // Parse the numeric response
+    *value = atof(response);
+    
+    ESP_LOGI(TAG, "Sensor 0x%02X read: %.2f", sensor->config.i2c_address, *value);
+    
+    return ESP_OK;
+}
+
+/**
+ * @brief Read all sensor values (for multi-value sensors like HUM)
+ */
+esp_err_t ezo_sensor_read_all(ezo_sensor_t *sensor, float values[4], uint8_t *count) {
+    if (sensor == NULL || values == NULL || count == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, "R", response, sizeof(response), EZO_LONG_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    ret = ezo_sensor_parse_values(response, values, count);
+    if (ret == ESP_OK) {
+        ESP_LOGI(TAG, "Sensor 0x%02X read %d values: %.2f%s",
+                 sensor->config.i2c_address,
+                 *count,
+                 *count > 0 ? values[0] : 0.0f,
+                 *count > 1 ? ",..." : "");
+    }
+    return ret;
+}
+
+esp_err_t ezo_sensor_start_read(ezo_sensor_t *sensor) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    return ezo_sensor_send_command(sensor, "R", NULL, 0, 0);
+}
+
+esp_err_t ezo_sensor_fetch_all(ezo_sensor_t *sensor, float values[4], uint8_t *count) {
+    if (sensor == NULL || values == NULL || count == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    esp_err_t ret = ezo_sensor_receive_response(sensor, response, sizeof(response));
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    esp_err_t parse_ret = ezo_sensor_parse_values(response, values, count);
+    if (parse_ret == ESP_OK) {
+        ESP_LOGI(TAG, "Sensor 0x%02X fetch %d values: %.2f%s",
+                 sensor->config.i2c_address,
+                 *count,
+                 *count > 0 ? values[0] : 0.0f,
+                 *count > 1 ? ",..." : "");
+    }
+    return parse_ret;
+}
+
+/**
+ * @brief Get sensor name
+ */
+esp_err_t ezo_sensor_get_name(ezo_sensor_t *sensor, char *name, size_t name_size) {
+    if (sensor == NULL || name == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, "Name,?", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    // Parse response: ?Name,<name>
+    char *token = strtok(response, ",");
+    if (token != NULL && strcmp(token, "?Name") == 0) {
+        token = strtok(NULL, ",");
+        if (token != NULL) {
+            strncpy(name, token, name_size - 1);
+            name[name_size - 1] = '\0';
+        }
+    }
+
+    return ESP_OK;
+}
+
+/**
+ * @brief Set sensor name
+ */
+esp_err_t ezo_sensor_set_name(ezo_sensor_t *sensor, const char *name) {
+    if (sensor == NULL || name == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    snprintf(command, sizeof(command), "Name,%s", name);
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        strncpy(sensor->config.name, name, EZO_MAX_SENSOR_NAME - 1);
+    }
+    
+    return ret;
+}
+
+/**
+ * @brief Get LED status
+ */
+esp_err_t ezo_sensor_get_led(ezo_sensor_t *sensor, bool *enabled) {
+    if (sensor == NULL || enabled == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, "L,?", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    // Parse response: ?L,<0|1>
+    char *token = strtok(response, ",");
+    if (token != NULL && strcmp(token, "?L") == 0) {
+        token = strtok(NULL, ",");
+        if (token != NULL) {
+            *enabled = (atoi(token) == 1);
+        }
+    }
+
+    return ESP_OK;
+}
+
+/**
+ * @brief Set LED control
+ */
+esp_err_t ezo_sensor_set_led(ezo_sensor_t *sensor, bool enabled) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    const char *command = enabled ? "L,1" : "L,0";
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.led_control = enabled;
+    }
+    
+    return ret;
+}
+
+/**
+ * @brief Get protocol lock status
+ */
+esp_err_t ezo_sensor_get_plock(ezo_sensor_t *sensor, bool *locked) {
+    if (sensor == NULL || locked == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, "Plock,?", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    // Parse response: ?Plock,<0|1>
+    char *token = strtok(response, ",");
+    if (token != NULL && strcmp(token, "?Plock") == 0) {
+        token = strtok(NULL, ",");
+        if (token != NULL) {
+            *locked = (atoi(token) == 1);
+        }
+    }
+
+    return ESP_OK;
+}
+
+/**
+ * @brief Set protocol lock
+ */
+esp_err_t ezo_sensor_set_plock(ezo_sensor_t *sensor, bool locked) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    const char *command = locked ? "Plock,1" : "Plock,0";
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.protocol_lock = locked;
+    }
+    
+    return ret;
+}
+
+/**
+ * @brief Factory reset
+ */
+esp_err_t ezo_sensor_factory_reset(ezo_sensor_t *sensor) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    ESP_LOGW(TAG, "Factory resetting sensor at 0x%02X", sensor->config.i2c_address);
+    
+    return ezo_sensor_send_command(sensor, "Factory", NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+/**
+ * @brief Change I2C address
+ */
+esp_err_t ezo_sensor_change_i2c_address(ezo_sensor_t *sensor, uint8_t new_address) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[16];
+    snprintf(command, sizeof(command), "I2C,%d", new_address);
+    
+    ESP_LOGW(TAG, "Changing I2C address from 0x%02X to 0x%02X (device will reboot)", 
+             sensor->config.i2c_address, new_address);
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+// EC-specific functions
+esp_err_t ezo_ec_get_probe_type(ezo_sensor_t *sensor, float *probe_type) {
+    if (sensor == NULL || probe_type == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, "K,?", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    // Parse response: ?K,<value>
+    char *token = strtok(response, ",");
+    if (token != NULL && strcmp(token, "?K") == 0) {
+        token = strtok(NULL, ",");
+        if (token != NULL) {
+            *probe_type = atof(token);
+        }
+    }
+
+    return ESP_OK;
+}
+
+esp_err_t ezo_ec_set_probe_type(ezo_sensor_t *sensor, float probe_type) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[16];
+    snprintf(command, sizeof(command), "K,%.2f", probe_type);
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.ec.probe_type = probe_type;
+    }
+    
+    return ret;
+}
+
+esp_err_t ezo_ec_get_tds_factor(ezo_sensor_t *sensor, float *factor) {
+    if (sensor == NULL || factor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, "TDS,?", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    // Parse response: ?TDS,<value>
+    char *token = strtok(response, ",");
+    if (token != NULL && strcmp(token, "?TDS") == 0) {
+        token = strtok(NULL, ",");
+        if (token != NULL) {
+            *factor = atof(token);
+        }
+    }
+
+    return ESP_OK;
+}
+
+esp_err_t ezo_ec_set_tds_factor(ezo_sensor_t *sensor, float factor) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[16];
+    snprintf(command, sizeof(command), "TDS,%.2f", factor);
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.ec.tds_conversion_factor = factor;
+    }
+    
+    return ret;
+}
+
+esp_err_t ezo_ec_set_output_parameter(ezo_sensor_t *sensor, const char *param, bool enabled) {
+    if (sensor == NULL || param == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[16];
+    snprintf(command, sizeof(command), "O,%s,%d", param, enabled ? 1 : 0);
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+// RTD-specific functions
+esp_err_t ezo_rtd_get_scale(ezo_sensor_t *sensor, char *scale) {
+    if (sensor == NULL || scale == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, "S,?", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    // Parse response: ?S,<scale>
+    char *token = strtok(response, ",");
+    if (token != NULL && strcmp(token, "?S") == 0) {
+        token = strtok(NULL, ",");
+        if (token != NULL && strlen(token) > 0) {
+            *scale = token[0];
+        }
+    }
+
+    return ESP_OK;
+}
+
+esp_err_t ezo_rtd_set_scale(ezo_sensor_t *sensor, char scale) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[8];
+    snprintf(command, sizeof(command), "S,%c", scale);
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.rtd.temperature_scale = scale;
+    }
+    
+    return ret;
+}
+
+// pH-specific functions
+esp_err_t ezo_ph_get_extended_scale(ezo_sensor_t *sensor, bool *enabled) {
+    if (sensor == NULL || enabled == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, "pHext,?", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    // Parse response: ?pHext,<0|1>
+    char *token = strtok(response, ",");
+    if (token != NULL && strcmp(token, "?pHext") == 0) {
+        token = strtok(NULL, ",");
+        if (token != NULL) {
+            *enabled = (atoi(token) == 1);
+        }
+    }
+
+    return ESP_OK;
+}
+
+esp_err_t ezo_ph_set_extended_scale(ezo_sensor_t *sensor, bool enabled) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[16];
+    snprintf(command, sizeof(command), "pHext,%d", enabled ? 1 : 0);
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.ph.extended_scale = enabled;
+    }
+    
+    return ret;
+}
+
+// Calibration functions
+esp_err_t ezo_ph_calibrate(ezo_sensor_t *sensor, const char *point, float value) {
+    if (sensor == NULL || point == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    
+    if (strcmp(point, "clear") == 0) {
+        snprintf(command, sizeof(command), "Cal,clear");
+    } else if (strcmp(point, "mid") == 0) {
+        snprintf(command, sizeof(command), "Cal,mid,%.2f", value);
+    } else if (strcmp(point, "low") == 0) {
+        snprintf(command, sizeof(command), "Cal,low,%.2f", value);
+    } else if (strcmp(point, "high") == 0) {
+        snprintf(command, sizeof(command), "Cal,high,%.2f", value);
+    } else {
+        return ESP_ERR_INVALID_ARG;
+    }
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_rtd_calibrate(ezo_sensor_t *sensor, float temperature) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    
+    if (temperature <= -999.0f) {
+        snprintf(command, sizeof(command), "Cal,clear");
+    } else {
+        snprintf(command, sizeof(command), "Cal,%.2f", temperature);
+    }
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_ec_calibrate(ezo_sensor_t *sensor, const char *point, uint32_t value) {
+    if (sensor == NULL || point == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    
+    if (strcmp(point, "clear") == 0) {
+        snprintf(command, sizeof(command), "Cal,clear");
+    } else if (strcmp(point, "dry") == 0) {
+        snprintf(command, sizeof(command), "Cal,dry");
+    } else if (strcmp(point, "low") == 0) {
+        snprintf(command, sizeof(command), "Cal,low,%lu", (unsigned long)value);
+    } else if (strcmp(point, "high") == 0) {
+        snprintf(command, sizeof(command), "Cal,high,%lu", (unsigned long)value);
+    } else {
+        return ESP_ERR_INVALID_ARG;
+    }
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_do_calibrate(ezo_sensor_t *sensor, const char *point) {
+    if (sensor == NULL || point == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    
+    if (strcmp(point, "clear") == 0) {
+        snprintf(command, sizeof(command), "Cal,clear");
+    } else if (strcmp(point, "atm") == 0) {
+        snprintf(command, sizeof(command), "Cal");
+    } else if (strcmp(point, "0") == 0) {
+        snprintf(command, sizeof(command), "Cal,0");
+    } else {
+        return ESP_ERR_INVALID_ARG;
+    }
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_orp_calibrate(ezo_sensor_t *sensor, float value) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    
+    if (value <= -999.0f) {
+        snprintf(command, sizeof(command), "Cal,clear");
+    } else {
+        snprintf(command, sizeof(command), "Cal,%.0f", value);
+    }
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_sensor_get_calibration_status(ezo_sensor_t *sensor, char *status, size_t status_size) {
+    if (sensor == NULL || status == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    
+    return ezo_sensor_send_command(sensor, "Cal,?", status, status_size, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_ph_get_temperature_comp(ezo_sensor_t *sensor, float *temperature_c) {
+    if (sensor == NULL || temperature_c == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    if (!(sensor->config.capability_flags & EZO_CAP_TEMP_COMP)) {
+        return ESP_ERR_NOT_SUPPORTED;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    esp_err_t ret = ezo_sensor_send_command(sensor, "T,?", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    char *token = strtok(response, ",");
+    if (token != NULL && strcmp(token, "?T") == 0) {
+        token = strtok(NULL, ",");
+        if (token != NULL) {
+            *temperature_c = atof(token);
+            sensor->config.temp_compensation = *temperature_c;
+            sensor->config.temp_comp_valid = true;
+            return ESP_OK;
+        }
+    }
+    return ESP_FAIL;
+}
+
+esp_err_t ezo_ph_set_temperature_comp(ezo_sensor_t *sensor, float temperature_c) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    if (!(sensor->config.capability_flags & EZO_CAP_TEMP_COMP)) {
+        return ESP_ERR_NOT_SUPPORTED;
+    }
+
+    char command[16];
+    snprintf(command, sizeof(command), "T,%.2f", temperature_c);
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.temp_compensation = temperature_c;
+        sensor->config.temp_comp_valid = true;
+    }
+    return ret;
+}
+
+esp_err_t ezo_sensor_set_continuous_mode(ezo_sensor_t *sensor, bool enable) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    if (!(sensor->config.capability_flags & EZO_CAP_MODE)) {
+        return ESP_ERR_NOT_SUPPORTED;
+    }
+
+    const char *command = enable ? "C" : "C,0";
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.continuous_mode = enable;
+    }
+    return ret;
+}
+
+esp_err_t ezo_sensor_get_continuous_mode(ezo_sensor_t *sensor, bool *enabled) {
+    if (sensor == NULL || enabled == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    if (!(sensor->config.capability_flags & EZO_CAP_MODE)) {
+        return ESP_ERR_NOT_SUPPORTED;
+    }
+
+    char response[EZO_LARGEST_STRING] = {0};
+    esp_err_t ret = ezo_sensor_send_command(sensor, "C,?", response, sizeof(response), EZO_SHORT_WAIT_MS);
+    if (ret != ESP_OK) {
+        return ret;
+    }
+
+    char *token = strtok(response, ",");
+    if (token != NULL && strcmp(token, "?C") == 0) {
+        token = strtok(NULL, ",");
+        if (token != NULL) {
+            *enabled = (atoi(token) == 1);
+            sensor->config.continuous_mode = *enabled;
+            return ESP_OK;
+        }
+    }
+    return ESP_FAIL;
+}
+
+esp_err_t ezo_sensor_sleep(ezo_sensor_t *sensor) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    if (!(sensor->config.capability_flags & EZO_CAP_SLEEP)) {
+        return ESP_ERR_NOT_SUPPORTED;
+    }
+
+    esp_err_t ret = ezo_sensor_send_command(sensor, "Sleep", NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.sleeping = true;
+    }
+    return ret;
+}
+
+esp_err_t ezo_sensor_wake(ezo_sensor_t *sensor) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    if (!(sensor->config.capability_flags & EZO_CAP_SLEEP)) {
+        return ESP_ERR_NOT_SUPPORTED;
+    }
+
+    esp_err_t ret = ezo_sensor_send_command(sensor, "Wake", NULL, 0, EZO_SHORT_WAIT_MS);
+    if (ret == ESP_OK) {
+        sensor->config.sleeping = false;
+    }
+    return ret;
+}
+
+// Output string control functions
+esp_err_t ezo_rtd_set_output_parameter(ezo_sensor_t *sensor, const char *param, bool enabled) {
+    if (sensor == NULL || param == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    snprintf(command, sizeof(command), "O,%s,%d", param, enabled ? 1 : 0);
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_hum_set_output_parameter(ezo_sensor_t *sensor, const char *param, bool enabled) {
+    if (sensor == NULL || param == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    snprintf(command, sizeof(command), "O,%s,%d", param, enabled ? 1 : 0);
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_ph_set_output_parameter(ezo_sensor_t *sensor, const char *param, bool enabled) {
+    if (sensor == NULL || param == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    snprintf(command, sizeof(command), "O,%s,%d", param, enabled ? 1 : 0);
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_do_set_output_parameter(ezo_sensor_t *sensor, const char *param, bool enabled) {
+    if (sensor == NULL || param == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    char command[32];
+    snprintf(command, sizeof(command), "O,%s,%d", param, enabled ? 1 : 0);
+    
+    return ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+}
+
+esp_err_t ezo_sensor_get_output_config(ezo_sensor_t *sensor, char *config, size_t config_size) {
+    if (sensor == NULL || config == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    
+    return ezo_sensor_send_command(sensor, "O,?", config, config_size, EZO_SHORT_WAIT_MS);
+}

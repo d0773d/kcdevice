@@ -1,0 +1,1705 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1-2\tools/idf_monitor.py -p COM18 -b 115200 --toolchain-prefix riscv32-esp-elf- --target esp32c6 --revision 0 --decode-panic backtrace C:\Code\kc_device\build_c6\kc_device.elf C:\Code\kc_device\build_c6\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1-2\tools\idf.py' '-B' 'build_c6' '-D' 'SDKCONFIG=sdkconfig.c6' '-p' 'COM18'
+[0;32mI (144) esp_image: segment 1: paddr=000585d8 vaddr=40800000 sizeESP-ROM:esp32c6-20220919[0m
+Build:Sep 19 2022
+rst:0x15 (USB_UART_HPSYS),boot:0x1f (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4080b6e0
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40875730,len:0x1744
+load:0x4086b910,len:0xe78
+load:0x4086e610,len:0x31c8
+entry 0x4086b91a
+[0;32mI (23) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (23) boot: compile time Dec  5 2025 13:40:53[0m
+[0;32mI (24) boot: chip revision: v0.2[0m
+[0;32mI (24) boot: efuse block revision: v0.3[0m
+[0;32mI (26) boot.esp32c6: SPI Speed      : 80MHz[0m
+[0;32mI (30) boot.esp32c6: SPI Mode       : DIO[0m
+[0;32mI (34) boot.esp32c6: SPI Flash Size : 2MB[0m
+[0;32mI (38) boot: Enabling RNG early entropy source...[0m
+[0;32mI (42) boot: Partition Table:[0m
+[0;32mI (45) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (51) boot:  0 nvs              WiFi data        01 02 00009000 00004000[0m
+[0;32mI (58) boot:  1 nvs_key          NVS keys         01 04 0000d000 00001000[0m
+[0;32mI (64) boot:  2 phy_init         RF data          01 01 0000e000 00001000[0m
+[0;32mI (71) boot:  3 factory          factory app      00 00 00010000 001f0000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=42128020 size=485b0h (296368) map[0m
+[0;32mI (144) esp_image: segment 1: paddr=000585d8 vaddr=40800000 size=07a40h ( 31296) load[0m
+[0;32mI (151) esp_image: segment 2: paddr=00060020 vaddr=42000020 size=12580ch (1202188) map[0m
+[0;32mI (377) esp_image: segment 3: paddr=00185834 vaddr=40807a40 size=19878h (104568) load[0m
+[0;32mI (400) esp_image: segment 4: paddr=0019f0b4 vaddr=408212c0 size=03a64h ( 14948) load[0m
+[0;32mI (411) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (412) boot: Disabling RNG early entropy source...[0m
+[0;32mI (422) cpu_start: Unicore app[0m
+[0;32mI (430) cpu_start: Pro cpu start user code[0m
+[0;32mI (430) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (431) app_init: Application information:[0m
+[0;32mI (431) app_init: Project name:     kc_device[0m
+[0;32mI (434) app_init: App version:      4236587-dirty[0m
+[0;32mI (439) app_init: Compile time:     Dec  5 2025 13:40:25[0m
+[0;32mI (444) app_init: ELF file SHA256:  f66609796...[0m
+[0;32mI (448) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (452) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (456) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (460) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (464) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (470) heap_init: At 4082E7E0 len 0004DE30 (311 KiB): RAM[0m
+[0;32mI (475) heap_init: At 4087C610 len 00002F54 (11 KiB): RAM[0m
+[0;32mI (480) heap_init: At 50000000 len 00003FE8 (15 KiB): RTCRAM[0m
+[0;32mI (486) spi_flash: detected chip: generic[0m
+[0;32mI (489) spi_flash: flash io: dio[0m
+[0;33mW (492) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (505) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (511) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (517) coexist: coex firmware version: b0bcc39[0m
+[0;32mI (522) coexist: coexist rom version 5b8dcfa[0m
+[0;32mI (526) main_task: Started on CPU0[0m
+[0;32mI (526) main_task: Calling app_main()[0m
+[0;32mI (526) MAIN: =================================[0m
+[0;32mI (536) MAIN: KC-Device WiFi Provisioning[0m
+[0;32mI (536) MAIN: =================================[0m
+[0;32mI (536) CHIP_INFO: ========================================[0m
+[0;32mI (546) CHIP_INFO: Chip Information[0m
+[0;32mI (546) CHIP_INFO: ========================================[0m
+[0;32mI (556) CHIP_INFO: Model:         ESP32-C6[0m
+[0;32mI (556) CHIP_INFO: Architecture:  RISC-V[0m
+[0;32mI (556) CHIP_INFO: Revision:      v0.2[0m
+[0;32mI (566) CHIP_INFO: CPU Cores:     1[0m
+[0;32mI (566) CHIP_INFO: Flash Size:    2 MB[0m
+[0;32mI (566) CHIP_INFO: Features:[0m
+[0;32mI (576) CHIP_INFO:   - WiFi:      Yes (2.4 GHz)[0m
+[0;32mI (576) CHIP_INFO:   - Bluetooth: No[0m
+[0;32mI (576) CHIP_INFO:   - BLE:       Yes[0m
+[0;32mI (586) CHIP_INFO:   - WiFi 6:    Yes (802.11ax)[0m
+[0;32mI (586) CHIP_INFO:   - Zigbee:    Yes (802.15.4)[0m
+[0;32mI (596) CHIP_INFO:   - Thread:    Yes (802.15.4)[0m
+[0;32mI (596) CHIP_INFO: ========================================[0m
+[0;32mI (606) CHIP_INFO: ESP-IDF Version: v5.5.1[0m
+[0;32mI (606) CHIP_INFO: ========================================[0m
+[0;32mI (616) SECURITY: =================================[0m
+[0;32mI (616) SECURITY: Initializing Security Features[0m
+[0;32mI (616) SECURITY: =================================[0m
+[0;32mI (626) SECURITY: NVS keys partition found at 0xd000 (size: 4096 bytes)[0m
+[0;32mI (636) SECURITY: Initializing NVS with encryption...[0m
+[0;32mI (636) SECURITY: ✓ NVS encryption keys loaded from partition[0m
+[0;32mI (686) SECURITY: ✓ NVS encryption initialized successfully[0m
+[0;32mI (686) SECURITY: ✓ WiFi credentials will be stored encrypted[0m
+[0;33mW (686) SECURITY: ✗ Flash encryption is DISABLED[0m
+[0;33mW (686) SECURITY:   Firmware and data are NOT protected in flash[0m
+[0;33mW (696) SECURITY:   Enable flash encryption for production deployment[0m
+[0;32mI (696) SECURITY: =================================[0m
+[0;32mI (706) SECURITY: Security Status Summary:[0m
+[0;32mI (706) SECURITY:   NVS Encryption:   ENABLED ✓[0m
+[0;32mI (716) SECURITY:   Flash Encryption: DISABLED ✗[0m
+[0;32mI (716) SECURITY:   Key Protection:   HMAC-based (eFuse)[0m
+[0;32mI (726) SECURITY:   Security Level:   MEDIUM ✓✓[0m
+[0;32mI (726) SECURITY: =================================[0m
+[0;32mI (726) RESET_BTN: Initializing reset button on GPIO1[0m
+[0;32mI (736) RESET_BTN: Reset button initialized successfully[0m
+[0;32mI (736) RESET_BTN:   Short press (<3s): Clear WiFi credentials[0m
+[0;32mI (746) RESET_BTN:   Long press (>=3s): Factory reset[0m
+[0;32mI (746) PROV_STATE: Provisioning state machine initialized[0m
+[0;32mI (756) PROV_STATE: State change callback registered[0m
+[0;32mI (756) WIFI_MGR: Initializing WiFi manager[0m
+[0;32mI (766) pp: pp rom version: 5b8dcfa[0m
+[0;32mI (766) net80211: net80211 rom version: 5b8dcfa[0m
+[0;32mI (786) wifi:wifi driver task: 40836bd0, prio:23, stack:6656, core=0[0m
+[0;32mI (796) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (796) wifi:wifi certification version: v7.0[0m
+[0;32mI (806) wifi:config NVS flash: enabled[0m
+[0;32mI (806) wifi:config nano formatting: disabled[0m
+[0;32mI (806) wifi:mac_version:HAL_MAC_ESP32AX_761,ut_version:N, band mode:0x1[0m
+[0;32mI (816) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (816) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (816) wifi:Init management short buffer num: 32[0m
+[0;32mI (826) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (826) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (836) wifi:Init static rx buffer size: 1700 (rxctrl:92, csi:512)[0m
+[0;32mI (836) wifi:Init static rx buffer num: 10[0m
+[0;32mI (846) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (846) wifi_init: rx ba win: 6[0m
+[0;32mI (846) wifi_init: accept mbox: 6[0m
+[0;32mI (856) wifi_init: tcpip mbox: 32[0m
+[0;32mI (856) wifi_init: udp mbox: 6[0m
+[0;32mI (856) wifi_init: tcp mbox: 6[0m
+[0;32mI (866) wifi_init: tcp tx win: 5760[0m
+[0;32mI (866) wifi_init: tcp rx win: 5760[0m
+[0;32mI (866) wifi_init: tcp mss: 1440[0m
+[0;32mI (866) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (876) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (876) wifi_init: WiFi SLP IRAM OP enabled[0m
+[0;32mI (886) phy_init: phy_version 341,a6c8fe6,Jul 30 2025,18:34:11[0m
+[0;33mW (976) wifi:ACK_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (976) wifi:CTS_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (986) wifi:(agc)0x600a7128:0xd21659ec, min.avgNF:0xce->0xd2(dB), RCalCount:0x164, min.RRssi:0x9ec(-97.25)[0m
+[0;32mI (996) wifi:11ax coex: WDEVAX_PTI0(0x55777555), WDEVAX_PTI1(0x00003377).[0m
+
+[0;32mI (996) wifi:mode : sta (98:a3:16:90:2f:08)[0m
+[0;32mI (1006) wifi:enable tsf[0m
+[0;32mI (1006) WIFI_MGR: WiFi station started, attempting to connect...[0m
+[0;32mI (1016) WIFI_MGR: WiFi manager initialized successfully[0m
+[0;32mI (1016) MAIN: Found stored credentials, attempting to connect to: AP-5GHz[0m
+[0;32mI (1026) WIFI_MGR: Connecting to WiFi SSID: AP-5GHz[0m
+[0;33mW (1026) wifi:(itwt)itwt_stop_process![0m
+[0;32mI (1036) wifi:flush txq[0m
+[0;32mI (1036) wifi:stop sw txq[0m
+[0;32mI (1036) wifi:lmac stop hw txq[0m
+[0;33mW (1036) wifi:ACK_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (1046) wifi:CTS_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (1056) wifi:(agc)0x600a7128:0xd207d9e6, min.avgNF:0xce->0xd2(dB), RCalCount:0x7d, min.RRssi:0x9e6(-97.62)[0m
+[0;32mI (1066) wifi:11ax coex: WDEVAX_PTI0(0x55777555), WDEVAX_PTI1(0x00003377).[0m
+
+[0;32mI (1076) wifi:mode : sta (98:a3:16:90:2f:08)[0m
+[0;32mI (1076) wifi:enable tsf[0m
+[0;32mI (1076) WIFI_MGR: WiFi station started, attempting to connect...[0m
+[0;32mI (1086) PROV_STATE: State transition: IDLE -> WIFI_CONNECTING (Status: SUCCESS, Message: Initiating WiFi connection)[0m
+[0;32mI (1096) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Initiating WiFi connection[0m
+[0;32mI (1106) MAIN: Connecting to stored WiFi network...[0m
+[0;32mI (1156) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (1156) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (1156) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (1166) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (1176) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (1186) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (1186) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (1196) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (1206) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (1216) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (1226) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (1236) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1236) wifi:(connect)dot11_authmode:0x6, pairwise_cipher:0x3, group_cipher:0x3[0m
+[0;32mI (1246) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1506) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1526) wifi:Association refused temporarily time 1953, comeback time 2053 (TUs)[0m
+[0;32mI (3626) wifi:state: assoc -> auth (0xb0)[0m
+[0;32mI (3906) wifi:state: auth -> init (0x600)[0m
+[0;32mI (3906) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (3906) WIFI_MGR: WiFi disconnected (reason: 202)[0m
+[0;32mI (3906) WIFI_MGR: Retry connection attempt 1/5[0m
+[0;32mI (3906) PROV_STATE: State transition: WIFI_CONNECTING -> WIFI_CONNECTING (Status: SUCCESS, Message: Connecting... (attempt 1/5))[0m
+[0;32mI (3926) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Connecting... (attempt 1/5)[0m
+[0;32mI (6316) WIFI_MGR: WiFi disconnected (reason: 205)[0m
+[0;32mI (6316) WIFI_MGR: Retry connection attempt 2/5[0m
+[0;32mI (6316) PROV_STATE: State transition: WIFI_CONNECTING -> WIFI_CONNECTING (Status: SUCCESS, Message: Connecting... (attempt 2/5))[0m
+[0;32mI (6326) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Connecting... (attempt 2/5)[0m
+[0;32mI (6316) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (6336) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (6346) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (6356) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (6356) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (6366) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (6376) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (6386) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (6386) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (6406) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (6416) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (6416) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (6426) wifi:(connect)dot11_authmode:0x6, pairwise_cipher:0x3, group_cipher:0x3[0m
+[0;32mI (6436) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (6696) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (6706) wifi:(assoc)RESP, Extended Capabilities length:11, operating_mode_notification:0[0m
+[0;32mI (6706) wifi:(assoc)RESP, Extended Capabilities, MBSSID:0, TWT Responder:0, OBSS Narrow Bandwidth RU In OFDMA Tolerance:0[0m
+[0;32mI (6716) wifi:Extended Capabilities length:11, operating_mode_notification:1[0m
+[0;32mI (6726) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (6736) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (6736) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (6746) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (6756) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (6766) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (6766) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (6776) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (6786) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (6796) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (6806) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (6816) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (6816) wifi:(he)ppe_thresholds_present:1, nominal_packet_padding(rx:3, cfg:2)[0m
+[0;32mI (6826) wifi:(trc)phytype:CBW20-SGI, snr:20, maxRate:172, highestRateIdx:0[0m
+[0;33mW (6826) wifi:(trc)band:2G, phymode:3, highestRateIdx:0, lowestRateIdx:11, dataSchedTableSize:14[0m
+[0;32mI (6836) wifi:(trc)band:2G, rate(L-MCS3, rateIdx:5), ampdu(rate:L-MCS3, schedIdx(5, stop:8)), snr:20, ampduState:wait operational[0m
+[0;32mI (6846) wifi:ifidx:0, rssi:-78, nf:-98, phytype(0x3, CBW20-SGI), phymode(0x7, 11ax), max_rate:172, he:1, vht:0, ht:1[0m
+[0;32mI (6856) wifi:(ht)max.RxAMPDULenExponent:3(65535 bytes), MMSS:5(4 us)[0m
+[0;32mI (6886) wifi:(extcap)mbssid:0, enhanced_mbssid_advertise:0, complete_nontxbssid_profiles:0, twt_responder: 1[0m
+[0;32mI (6886) wifi:connected with AP-5GHz, aid = 24, channel 1, BW20, bssid = 72:13:01:32:b2:79[0m
+[0;32mI (6896) wifi:security: WPA3-SAE, phy:ax, rssi:-78, cipher(pairwise:0x3, group:0x3), pmf:1, [0m
+[0;32mI (6906) wifi:pm start, type: 1, twt_start:0[0m
+
+[0;32mI (6906) wifi:pm start, type:1, aid:0x18, trans-BSSID:72:13:01:32:b2:79, BSSID[5]:0x79, mbssid(max-indicator:0, index:0), he:1[0m
+[0;32mI (6916) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (6926) wifi:set rx beacon pti, rx_bcn_pti: 10, bcn_timeout: 25000, mt_pti: 10, mt_time: 10000[0m
+[0;32mI (6936) wifi:[ADDBA]TX addba request, tid:0, dialogtoken:1, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (6946) wifi:[ADDBA]TX addba request, tid:7, dialogtoken:2, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x20)[0m
+[0;32mI (6956) wifi:[ADDBA]TX addba request, tid:5, dialogtoken:3, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (6966) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (6976) wifi:[ADDBA]RX addba response, status:0, tid:0/tb:1(0xa1), bufsize:32, batimeout:0, txa_wnd:32[0m
+[0;32mI (6986) wifi:[ADDBA]RX addba response, status:0, tid:7/tb:1(0xa1), bufsize:32, batimeout:0, txa_wnd:32[0m
+[0;33mW (8126) wifi:<ba-add>idx:0, ifx:0, tid:7, TAHI:0x10079b2, TALO:0x32011372, (ssn:4, win:64, cur_ssn:4), CONF:0xc0007005[0m
+[0;32mI (9506) esp_netif_handlers: sta ip: 192.168.0.176, mask: 255.255.255.0, gw: 192.168.0.1[0m
+[0;32mI (9506) WIFI_MGR: WiFi connected! IP: 192.168.0.176[0m
+[0;32mI (9506) WIFI_MGR: Credentials saved to NVS successfully[0m
+[0;32mI (9506) PROV_STATE: State transition: WIFI_CONNECTING -> PROVISIONED (Status: SUCCESS, Message: 192.168.0.176)[0m
+[0;32mI (9516) MAIN: State changed: PROVISIONED | Status: SUCCESS | Message: 192.168.0.176[0m
+[0;32mI (10106) MAIN: Successfully connected using stored credentials[0m
+[0;32mI (10106) PROV_STATE: State transition: PROVISIONED -> PROVISIONED (Status: SUCCESS, Message: Connected using stored credentials)[0m
+[0;32mI (10106) MAIN: State changed: PROVISIONED | Status: SUCCESS | Message: Connected using stored credentials[0m
+[0;32mI (10116) MAIN: Initializing NTP time synchronization...[0m
+[0;32mI (10126) TIME_SYNC: Initializing SNTP time synchronization[0m
+[0;32mI (10126) TIME_SYNC: Timezone set to: UTC (default)[0m
+[0;32mI (10136) TIME_SYNC: NTP server 0: pool.ntp.org[0m
+[0;32mI (10136) TIME_SYNC: NTP server 1: time.nist.gov[0m
+[0;32mI (10136) TIME_SYNC: NTP server 2: time.google.com[0m
+[0;32mI (10146) TIME_SYNC: SNTP initialized, waiting for time sync...[0m
+[0;32mI (10146) MAIN: Waiting for time synchronization...[0m
+[0;33mW (13216) wifi:<ba-add>idx:1, ifx:0, tid:0, TAHI:0x10079b2, TALO:0x32011372, (ssn:1, win:64, cur_ssn:1), CONF:0xc0000005[0m
+[0;32mI (13276) TIME_SYNC: ✓ Time synchronized: 2025-12-05 21:47:27[0m
+[0;32mI (13276) MAIN: ====================================[0m
+[0;32mI (13276) MAIN: Time Synchronized Successfully![0m
+[0;32mI (13276) MAIN: Current time: 2025-12-05 21:47:27 UTC[0m
+[0;32mI (13286) MAIN: ====================================[0m
+[0;32mI (14156) MAIN: Initializing API key manager...[0m
+[0;32mI (14156) API_KEY_MGR: Initializing API key manager[0m
+[0;32mI (14156) API_KEY_MGR: No stored API keys found[0m
+[0;32mI (14156) API_KEY_MGR: API key manager initialized with 0 keys[0m
+[0;32mI (14156) MAIN: Initializing cloud provisioning...[0m
+[0;32mI (14166) CLOUD_PROV: Initializing cloud provisioning[0m
+[0;32mI (14166) MAIN: Starting cloud provisioning...[0m
+[0;32mI (14176) CLOUD_PROV: ===========================================[0m
+[0;32mI (14176) CLOUD_PROV: Starting automatic device provisioning[0m
+[0;32mI (14186) CLOUD_PROV: ===========================================[0m
+[0;32mI (14186) CLOUD_PROV: Device already has certificates[0m
+[0;32mI (14196) MAIN: ====================================[0m
+[0;32mI (14196) MAIN: Cloud Provisioning Successful![0m
+[0;32mI (14206) MAIN: Message: Already provisioned[0m
+[0;32mI (14206) MAIN: ====================================[0m
+[0;32mI (14216) MAIN: Downloading MQTT CA certificate...[0m
+[0;32mI (14216) CLOUD_PROV: MQTT CA certificate already exists (1425 bytes), skipping download[0m
+[0;32mI (14226) MAIN: Running in cloud-only mode (ESP32-C6 - no local dashboard)[0m
+[0;32mI (14226) MAIN: Initializing I2C scanner...[0m
+[0;32mI (14236) I2C_SCAN: Initializing I2C master bus[0m
+[0;32mI (14236) I2C_SCAN:   SDA: GPIO47, SCL: GPIO48[0m
+[1;31mE (14246) i2c.master: i2c_new_master_bus(966): invalid SDA/SCL pin number[0m
+[1;31mE (14246) I2C_SCAN: Failed to initialize I2C master bus: ESP_ERR_INVALID_ARG[0m
+[0;33mW (14256) MAIN: Failed to initialize I2C: ESP_ERR_INVALID_ARG[0m
+[0;32mI (14266) MAIN: Starting sensor reading task...[0m
+[0;32mI (14266) SENSOR_MGR: Sensor reading task started (interval: 10 seconds)[0m
+[0;32mI (14276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (14276) SENSOR_MGR: Sensor reading task started[0m
+[0;32mI (14286) MAIN: Initializing MQTT client...[0m
+[0;32mI (14286) MQTT_CLIENT: Initializing MQTT client[0m
+[0;32mI (14286) MQTT_CLIENT: Broker URI: mqtts://mqtt.kannacloud.com:8883[0m
+[0;32mI (14296) MQTT_CLIENT: Device ID: esp32-98a316902f08[0m
+[0;32mI (14306) MQTT_CLIENT: Username: sensor01[0m
+[0;32mI (14306) MQTT_CLIENT: Configuring MQTTS with TLS encryption[0m
+[0;32mI (14316) MQTT_CLIENT: Loaded CA certificate for MQTTS (1424 bytes)[0m
+[0;32mI (14316) MQTT_CLIENT: Certificate START: -----BEGIN CERTIFICATE-----[0m
+MIID7TCCAtWgAwIBAgIUJ3peazJES0Y1KwBDIDqz703ItnwwDQYJKoZIhvcNAQEL
+BQAwgYUxCzAJBgNVBAYTAlVTMRAwDgYDVQQIDAdBcml6b25hMRQwEgYD
+[0;32mI (14336) MQTT_CLIENT: Certificate END: YkF[0m
+2OVAwGyyM4LaaQDVJyXcjXQ1cs5HC6nKomKRWlSCCW/bzkQgFI7V9YL9N7uq5CzF
+iw==
+-----END CERTIFICATE-----
+
+[0;32mI (14346) MQTT_CLIENT: Certificate null-terminated: YES[0m
+[0;32mI (14346) MQTT_CLIENT: ✓ TLS encryption enabled with CA certificate verification[0m
+[0;32mI (14356) MQTT_CLIENT: ✓ MQTT client initialized successfully[0m
+[0;32mI (14366) MQTT_CLIENT: Starting MQTT client...[0m
+[0;32mI (14366) MQTT_CLIENT: MQTT publish task started (interval: 10 seconds)[0m
+[0;32mI (14376) MQTT_CLIENT: ✓ MQTT publish task started (publish interval: 10 seconds)[0m
+[0;32mI (14386) MAIN: ✓ MQTT telemetry enabled[0m
+[0;32mI (14386) SENSOR_MGR: Reading interval updated to 10 seconds[0m
+[0;32mI (14396) MQTT_CLIENT: MQTT publish interval updated to 10 seconds[0m
+[0;32mI (14396) MAIN: Entering normal operation mode[0m
+[0;32mI (16036) MQTT_CLIENT: ✓ Connected to MQTT broker[0m
+[0;32mI (16036) MQTT_CLIENT: Subscribed to: kannacloud/sensor/esp32-98a316902f08/cmd[0m
+[0;32mI (16036) MQTT_CLIENT: Device ready to publish sensor data[0m
+[0;32mI (16216) MQTT_CLIENT: Subscribed, msg_id=56537[0m
+[0;32mI (16376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (16376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (24276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (26376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (26376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (34276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (36376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (36376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (44276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (46376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (46376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (54276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (56376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (56376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (64276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (66376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (66376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (74276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (76376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (76376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (84276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (86376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (86376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (94276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (96376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (96376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (104276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (106376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (106376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (114276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (116376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (116376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (124276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (126376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (126376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (134276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (136376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (136376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (144276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (146376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (146376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (154276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (156376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (156376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (164276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (166376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (166376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (174276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (176376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (176376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (184276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (186376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (186376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (194276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (196376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (196376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (204276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (206376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (206376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (214276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (216376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (216376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (224276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (226376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (226376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (234276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (236376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (236376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (244276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (246376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (246376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (254276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (256376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (256376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (264276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (266376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (266376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (274276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (276376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (276376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (284276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (286376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (286376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (294276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (296376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (296376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (304276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (306376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (306376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (314276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (316376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (316376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (324276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (326376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (326376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (334276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (336376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (336376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (344276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (346376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (346376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (354276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (356376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (356376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (364276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (366376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (366376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (374276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (376376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (376376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (384276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (386376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (386376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (394276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (396376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (396376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (404276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (406376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (406376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (414276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (416376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (416376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (424276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (426376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (426376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (434276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (436376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (436376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (444276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (446376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (446376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (454276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (456376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (456376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (464276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (466376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (466376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (474276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (476376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (476376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (484276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (486376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (486376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (494276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (496376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (496376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (504276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (506376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (506376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (514276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (516376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (516376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (524276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (526376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (526376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (534276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (536376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (536376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (544276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (546376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (546376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (554276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (556376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (556376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (564276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (566376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (566376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (574276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (576376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (576376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (584276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (586376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (586376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (594276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (596376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (596376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (604276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (606376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (606376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (614276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (616376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (616376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (624276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (626376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (626376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (634276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (636376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (636376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (644276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (646376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (646376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (654276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (656376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (656376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (664276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (666376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (666376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (674276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (676376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (676376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (684276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (686376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (686376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (694276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (696376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (696376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (704276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (706376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (706376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (714276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (716376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (716376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (724276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (726376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (726376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (734276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (736376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (736376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (744276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (746376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (746376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (754276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (756376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (756376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (764276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (766376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (766376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (774276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (776376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (776376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (784276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (786376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (786376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (794276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (796376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (796376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (804276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (806376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (806376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (814276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (816376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (816376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (824276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (826376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (826376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (834276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (836376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (836376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (844276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (846376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (846376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (854276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (856376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (856376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (864276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (866376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (866376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (874276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (876376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (876376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (884276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (886376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (886376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (894276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (896376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (896376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (904276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (906376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (906376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (914276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (916376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (916376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (924276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (926376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (926376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (934276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (936376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (936376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (944276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (946376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (946376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (954276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (956376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (956376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (964276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (966376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (966376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (974276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (976376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (976376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (984276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (986376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (986376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (994276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (996376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (996376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1004276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1006376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1006376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1014276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1016376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1016376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1024276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1026376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1026376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1034276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1036376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1036376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1044276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1046376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1046376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1054276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1056376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1056376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1064276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1066376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1066376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1074276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1076376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1076376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1084276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1086376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1086376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1094276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1096376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1096376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1104276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1106376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1106376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1114276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1116376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1116376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1124276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1126376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1126376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1134276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1136376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1136376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1144276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1146376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1146376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1154276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1156376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1156376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1164276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1166376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1166376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1174276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1176376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1176376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1184276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1186376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1186376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1194276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1196376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1196376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1204276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1206376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (1206376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1214276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1216376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (1216376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1224276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1226376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1226376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1234276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1236376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1236376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1244276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1246376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1246376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1254276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1256376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1256376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1264276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1266376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1266376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1274276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1276376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1276376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1284276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1286376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1286376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1294276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1296376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1296376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1304276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1306376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1306376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1314276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1316376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1316376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1324276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1326376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1326376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1334276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1336376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (1336376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1344276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1346376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (1346376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1354276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1356376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (1356376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1364276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1366376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1366376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1374276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1376376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1376376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1384276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1386376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1386376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1394276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1396376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1396376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1404276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1406376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1406376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1414276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1416376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1416376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1424276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1426376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1426376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1434276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1436376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1436376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1444276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1446376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1446376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1454276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1456376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1456376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1464276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1466376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1466376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1474276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1476376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1476376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1484276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1486376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1486376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1494276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1496376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1496376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1504276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1506376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1506376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1514276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1516376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1516376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1524276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1526376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1526376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1534276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1536376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1536376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1544276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1546376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1546376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1554276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1556376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1556376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1564276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1566376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1566376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1574276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1576376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1576376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1584276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1586376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1586376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1594276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1596376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1596376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1604276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1606376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1606376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1614276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1616376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1616376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1624276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1626376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1626376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1634276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1636376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1636376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1644276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1646376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1646376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1654276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1656376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1656376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1664276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1666376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1666376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1674276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1676376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1676376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1684276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1686376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1686376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1694276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1696376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1696376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1704276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1706376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1706376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1714276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1716376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1716376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1724276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1726376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1726376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1734276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1736376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1736376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1744276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1746376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1746376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1754276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1756376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1756376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1764276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1766376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1766376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1774276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1776376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1776376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1784276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1786376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1786376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1794276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1796376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1796376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1804276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1806376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1806376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1814276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1816376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1816376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1824276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1826376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (1826376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1834276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1836376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1836376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1844276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1846376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1846376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1854276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1856376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1856376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1864276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1866376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1866376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1874276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1876376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1876376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1884276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1886376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1886376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1894276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1896376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1896376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1904276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1906376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1906376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1914276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1916376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1916376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1924276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1926376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (1926376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1934276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1936376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-77}[0m
+[0;32mI (1936376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1944276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1946376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1946376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1954276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1956376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1956376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1964276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1966376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1966376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1974276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1976376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1976376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1984276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1986376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (1986376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (1994276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (1996376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (1996376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2004276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2006376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2006376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2014276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2016376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2016376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2024276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2026376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2026376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2034276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2036376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2036376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2044276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2046376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2046376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2054276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2056376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2056376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2064276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2066376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2066376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2074276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2076376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2076376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2084276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2086376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2086376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2094276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2096376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2096376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2104276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2106376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2106376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2114276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2116376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2116376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2124276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2126376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2126376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2134276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2136376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2136376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2144276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2146376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2146376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2154276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2156376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2156376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2164276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2166376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2166376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2174276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2176376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2176376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2184276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2186376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2186376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2194276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2196376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2196376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2204276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2206376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2206376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2214276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2216376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2216376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2224276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2226376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2226376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2234276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2236376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2236376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2244276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2246376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2246376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2254276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2256376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2256376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2264276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2266376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2266376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2274276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2276376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2276376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2284276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2286376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2286376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2294276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2296376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2296376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2304276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2306376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2306376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2314276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2316376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2316376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2324276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2326376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2326376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2326806) wifi:(opr)bss color disabled:1[0m
+[0;32mI (2326806) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (2326816) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (2326826) wifi:(opr)len:8, BSS Color:5, disabled:1, Partial BSS Color:0[0m
+[0;32mI (2327626) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (2327626) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (2327636) wifi:(opr)len:8, BSS Color:3, disabled:0, Partial BSS Color:0[0m
+[0;32mI (2334276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2336376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2336376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2344276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2346376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2346376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2354276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2356376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2356376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2364276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2366376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2366376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2374276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2376376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2376376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2384276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2386376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2386376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2394276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2396376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2396376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2404276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2406376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2406376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2414276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2416376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2416376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2424276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2426376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2426376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2434276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2436376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2436376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2444276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2446376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2446376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2454276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2456376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2456376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2464276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2466376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2466376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2474276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2476376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2476376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2484276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2486376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2486376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2494276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2496376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2496376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2504276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2506376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2506376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2514276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2516376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2516376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2524276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2526376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2526376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2534276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2536376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2536376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2544276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2546376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2546376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2554276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2556376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2556376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2564276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2566376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2566376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2574276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2576376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2576376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2584276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2586376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2586376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2594276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2596376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (2596376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2604276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2606376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2606376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2614276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2616376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (2616376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2624276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2626376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2626376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2634276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2636376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2636376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2644276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2646376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (2646376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2654276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2656376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2656376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2664276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2666376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2666376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2674276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2676376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2676376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2684276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2686376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2686376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2694276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2696376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2696376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2704276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2706376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2706376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2714276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2716376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2716376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2724276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2726376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2726376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2734276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2736376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2736376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2744276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2746376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2746376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2754276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2756376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2756376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2764276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2766376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2766376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2774276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2776376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2776376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2784276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2786376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2786376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2794276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2796376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2796376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2804276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2806376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2806376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2814276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2816376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2816376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2824276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2826376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2826376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2834276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2836376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2836376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2844276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2846376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2846376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2854276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2856376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2856376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2864276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2866376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2866376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2874276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2876376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2876376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2884276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2886376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2886376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2894276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2896376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2896376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2904276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2906376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2906376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2914276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2916376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2916376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2924276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2926376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2926376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2934276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2936376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2936376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2944276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2946376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2946376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2954276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2956376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2956376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2964276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2966376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2966376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2974276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2976376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2976376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2984276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2986376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (2986376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (2994276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (2996376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (2996376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3004276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3006376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3006376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3014276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3016376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3016376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3024276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3026376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3026376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3034276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3036376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3036376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3044276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3046376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3046376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3054276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3056376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3056376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3064276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3066376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3066376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3074276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3076376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3076376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3084276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3086376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3086376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3094276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3096376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3096376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3104276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3106376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3106376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3114276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3116376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3116376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3124276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3126376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3126376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3134276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3136376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3136376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3144276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3146376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3146376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3154276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3156376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3156376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3164276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3166376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3166376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3174276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3176376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3176376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3184276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3186376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3186376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3194276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3196376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3196376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3204276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3206376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3206376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3214276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3216376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3216376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3224276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3226376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3226376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3234276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3236376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3236376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3244276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3246376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3246376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3254276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3256376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3256376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3264276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3266376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3266376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3274276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3276376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3276376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3284276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3286376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3286376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3294276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3296376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3296376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3304276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3306376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3306376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3314276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3316376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3316376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3324276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3326376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3326376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3334276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3336376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (3336376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3344276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3346376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3346376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3354276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3356376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3356376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3364276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3366376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3366376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3374276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3376376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3376376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3384276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3386376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3386376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3394276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3396376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3396376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3404276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3406376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3406376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3414276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3416376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3416376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3424276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3426376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3426376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3434276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3436376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3436376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3444276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3446376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3446376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3454276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3456376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3456376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3464276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3466376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3466376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3474276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3476376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3476376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3484276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3486376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3486376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3494276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3496376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3496376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3504276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3506376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3506376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3514276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3516376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3516376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3524276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3526376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3526376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3534276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3536376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3536376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3544276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3546376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3546376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3554276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3556376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3556376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3564276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3566376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3566376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3574276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3576376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3576376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3584276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3586376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3586376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3594276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3596376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3596376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3604276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3606376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3606376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3613386) TIME_SYNC: ✓ Time synchronized: 2025-12-05 22:47:27[0m
+[0;32mI (3613386) MAIN: ====================================[0m
+[0;32mI (3613386) MAIN: Time Synchronized Successfully![0m
+[0;32mI (3613396) MAIN: Current time: 2025-12-05 22:47:27 UTC[0m
+[0;32mI (3613396) MAIN: ====================================[0m
+[0;32mI (3614276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3616376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3616376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3624276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3626376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3626376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3634276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3636376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3636376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3644276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3646376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3646376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3654276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3656376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3656376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3664276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3666376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3666376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3674276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3676376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3676376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3684276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3686376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3686376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3694276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3696376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3696376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3704276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3706376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3706376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3714276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3716376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3716376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3724276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3726376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3726376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3734276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3736376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3736376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3744276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3746376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3746376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3754276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3756376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3756376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3764276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3766376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3766376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3774276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3776376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3776376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3784276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3786376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3786376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3794276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3796376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3796376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3804276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3806376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3806376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3814276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3816376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3816376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3824276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3826376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3826376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3834276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3836376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3836376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3844276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3846376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3846376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3854276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3856376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3856376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3864276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3866376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3866376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3874276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3876376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3876376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3884276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3886376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3886376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3894276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3896376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3896376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3904276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3906376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3906376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3914276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3916376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3916376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3924276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3926376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3926376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3934276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3936376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3936376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3944276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3946376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3946376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3954276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3956376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3956376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3964276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3966376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (3966376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3974276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3976376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (3976376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3984276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3986376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3986376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (3994276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (3996376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (3996376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4004276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4006376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4006376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4014276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4016376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4016376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4024276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4026376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4026376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4034276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4036376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4036376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4044276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4046376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4046376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4054276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4056376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (4056376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4064276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4066376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-78}[0m
+[0;32mI (4066376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4074276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4076376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4076376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4084276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4086376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4086376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4094276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4096376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-82}[0m
+[0;32mI (4096376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4104276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4106376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4106376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4114276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4116376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4116376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4124276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4126376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4126376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4134276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4136376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4136376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4144276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4146376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4146376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4154276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4156376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4156376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4164276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4166376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4166376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4174276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4176376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4176376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4184276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4186376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4186376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4194276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4196376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4196376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4204276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4206376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4206376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4214276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4216376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4216376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4224276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4226376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4226376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4234276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4236376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4236376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4244276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4246376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4246376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4254276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4256376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-84}[0m
+[0;32mI (4256376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4264276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4266376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4266376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4274276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4276376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4276376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4284276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4286376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4286376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4294276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4296376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4296376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4304276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4306376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4306376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4314276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4316376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4316376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4324276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4326376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4326376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4334276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4336376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4336376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4344276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4346376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4346376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4354276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4356376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4356376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4364276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4366376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4366376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4374276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4376376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4376376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4384276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4386376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4386376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4394276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4396376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4396376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4404276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4406376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4406376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4414276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4416376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4416376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4424276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4426376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4426376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4434276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4436376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4436376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4444276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4446376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4446376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4454276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4456376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4456376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4464276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4466376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4466376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4474276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4476376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4476376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4484276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4486376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4486376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4494276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4496376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4496376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4504276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4506376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-82}[0m
+[0;32mI (4506376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4514276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4516376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4516376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4524276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4526376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4526376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4534276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4536376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4536376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4544276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4546376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4546376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4554276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4556376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4556376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4564276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4566376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4566376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4574276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4576376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-81}[0m
+[0;32mI (4576376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4584276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4586376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-80}[0m
+[0;32mI (4586376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4594276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4596376) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-98a316902f08","sensors":{},"rssi":-79}[0m
+[0;32mI (4596376) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (4604276) SENSOR_MGR: Sensor cache refreshed (no sensors detected)[0m
+[0;32mI (4606376) MQTT_CLIENT: P

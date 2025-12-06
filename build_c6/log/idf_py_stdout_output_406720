@@ -1,0 +1,752 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1-2\tools/idf_monitor.py -p COM18 -b 115200 --toolchain-prefix riscv32-esp-elf- --target esp32c6 --revision 0 --decode-panic backtrace C:\Code\kc_device\build_c6\kc_device.elf C:\Code\kc_device\build_c6\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1-2\tools\idf.py' '-B' 'build_c6' '-D' 'SDKCONFIG=sdkconfig.c6' '-p' 'COM18'
+[0;32mI (144) esp_image: segment 1: paddr=000585d8 vaddr=40800000 sizeESP-ROM:esp32c6-20220919[0m
+Build:Sep 19 2022
+rst:0x15 (USB_UART_HPSYS),boot:0x1f (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4080b6e0
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40875730,len:0x1744
+load:0x4086b910,len:0xe78
+load:0x4086e610,len:0x31c8
+entry 0x4086b91a
+[0;32mI (23) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (23) boot: compile time Dec  5 2025 13:40:53[0m
+[0;32mI (24) boot: chip revision: v0.2[0m
+[0;32mI (24) boot: efuse block revision: v0.3[0m
+[0;32mI (26) boot.esp32c6: SPI Speed      : 80MHz[0m
+[0;32mI (30) boot.esp32c6: SPI Mode       : DIO[0m
+[0;32mI (34) boot.esp32c6: SPI Flash Size : 2MB[0m
+[0;32mI (38) boot: Enabling RNG early entropy source...[0m
+[0;32mI (42) boot: Partition Table:[0m
+[0;32mI (45) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (51) boot:  0 nvs              WiFi data        01 02 00009000 00004000[0m
+[0;32mI (58) boot:  1 nvs_key          NVS keys         01 04 0000d000 00001000[0m
+[0;32mI (64) boot:  2 phy_init         RF data          01 01 0000e000 00001000[0m
+[0;32mI (71) boot:  3 factory          factory app      00 00 00010000 001f0000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=42128020 size=485b0h (296368) map[0m
+[0;32mI (144) esp_image: segment 1: paddr=000585d8 vaddr=40800000 size=07a40h ( 31296) load[0m
+[0;32mI (151) esp_image: segment 2: paddr=00060020 vaddr=42000020 size=12580ch (1202188) map[0m
+[0;32mI (377) esp_image: segment 3: paddr=00185834 vaddr=40807a40 size=19878h (104568) load[0m
+[0;32mI (400) esp_image: segment 4: paddr=0019f0b4 vaddr=408212c0 size=03a64h ( 14948) load[0m
+[0;32mI (411) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (412) boot: Disabling RNG early entropy source...[0m
+[0;32mI (422) cpu_start: Unicore app[0m
+[0;32mI (430) cpu_start: Pro cpu start user code[0m
+[0;32mI (430) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (431) app_init: Application information:[0m
+[0;32mI (431) app_init: Project name:     kc_device[0m
+[0;32mI (434) app_init: App version:      4236587-dirty[0m
+[0;32mI (439) app_init: Compile time:     Dec  5 2025 13:40:25[0m
+[0;32mI (444) app_init: ELF file SHA256:  a7d6c77ef...[0m
+[0;32mI (448) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (452) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (456) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (460) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (464) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (470) heap_init: At 4082E7E0 len 0004DE30 (311 KiB): RAM[0m
+[0;32mI (475) heap_init: At 4087C610 len 00002F54 (11 KiB): RAM[0m
+[0;32mI (480) heap_init: At 50000000 len 00003FE8 (15 KiB): RTCRAM[0m
+[0;32mI (486) spi_flash: detected chip: generic[0m
+[0;32mI (489) spi_flash: flash io: dio[0m
+[0;33mW (492) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (505) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (511) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (517) coexist: coex firmware version: b0bcc39[0m
+[0;32mI (522) coexist: coexist rom version 5b8dcfa[0m
+[0;32mI (526) main_task: Started on CPU0[0m
+[0;32mI (526) main_task: Calling app_main()[0m
+[0;32mI (526) MAIN: =================================[0m
+[0;32mI (536) MAIN: KC-Device WiFi Provisioning[0m
+[0;32mI (536) MAIN: =================================[0m
+[0;32mI (536) CHIP_INFO: ========================================[0m
+[0;32mI (546) CHIP_INFO: Chip Information[0m
+[0;32mI (546) CHIP_INFO: ========================================[0m
+[0;32mI (556) CHIP_INFO: Model:         ESP32-C6[0m
+[0;32mI (556) CHIP_INFO: Architecture:  RISC-V[0m
+[0;32mI (556) CHIP_INFO: Revision:      v0.2[0m
+[0;32mI (566) CHIP_INFO: CPU Cores:     1[0m
+[0;32mI (566) CHIP_INFO: Flash Size:    2 MB[0m
+[0;32mI (566) CHIP_INFO: Features:[0m
+[0;32mI (576) CHIP_INFO:   - WiFi:      Yes (2.4 GHz)[0m
+[0;32mI (576) CHIP_INFO:   - Bluetooth: No[0m
+[0;32mI (576) CHIP_INFO:   - BLE:       Yes[0m
+[0;32mI (586) CHIP_INFO:   - WiFi 6:    Yes (802.11ax)[0m
+[0;32mI (586) CHIP_INFO:   - Zigbee:    Yes (802.15.4)[0m
+[0;32mI (596) CHIP_INFO:   - Thread:    Yes (802.15.4)[0m
+[0;32mI (596) CHIP_INFO: ========================================[0m
+[0;32mI (606) CHIP_INFO: ESP-IDF Version: v5.5.1[0m
+[0;32mI (606) CHIP_INFO: ========================================[0m
+[0;32mI (616) SECURITY: =================================[0m
+[0;32mI (616) SECURITY: Initializing Security Features[0m
+[0;32mI (616) SECURITY: =================================[0m
+[0;32mI (626) SECURITY: NVS keys partition found at 0xd000 (size: 4096 bytes)[0m
+[0;32mI (636) SECURITY: Initializing NVS with encryption...[0m
+[0;32mI (636) SECURITY: ✓ NVS encryption keys loaded from partition[0m
+[0;32mI (676) SECURITY: ✓ NVS encryption initialized successfully[0m
+[0;32mI (676) SECURITY: ✓ WiFi credentials will be stored encrypted[0m
+[0;33mW (676) SECURITY: ✗ Flash encryption is DISABLED[0m
+[0;33mW (686) SECURITY:   Firmware and data are NOT protected in flash[0m
+[0;33mW (686) SECURITY:   Enable flash encryption for production deployment[0m
+[0;32mI (696) SECURITY: =================================[0m
+[0;32mI (696) SECURITY: Security Status Summary:[0m
+[0;32mI (706) SECURITY:   NVS Encryption:   ENABLED ✓[0m
+[0;32mI (706) SECURITY:   Flash Encryption: DISABLED ✗[0m
+[0;32mI (716) SECURITY:   Key Protection:   HMAC-based (eFuse)[0m
+[0;32mI (716) SECURITY:   Security Level:   MEDIUM ✓✓[0m
+[0;32mI (726) SECURITY: =================================[0m
+[0;32mI (726) RESET_BTN: Initializing reset button on GPIO1[0m
+[0;32mI (736) RESET_BTN: Reset button initialized successfully[0m
+[0;32mI (736) RESET_BTN:   Short press (<3s): Clear WiFi credentials[0m
+[0;32mI (746) RESET_BTN:   Long press (>=3s): Factory reset[0m
+[0;32mI (746) PROV_STATE: Provisioning state machine initialized[0m
+[0;32mI (756) PROV_STATE: State change callback registered[0m
+[0;32mI (756) WIFI_MGR: Initializing WiFi manager[0m
+[0;32mI (766) pp: pp rom version: 5b8dcfa[0m
+[0;32mI (766) net80211: net80211 rom version: 5b8dcfa[0m
+[0;32mI (776) wifi:wifi driver task: 40836bb4, prio:23, stack:6656, core=0[0m
+[0;32mI (796) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (796) wifi:wifi certification version: v7.0[0m
+[0;32mI (796) wifi:config NVS flash: enabled[0m
+[0;32mI (796) wifi:config nano formatting: disabled[0m
+[0;32mI (796) wifi:mac_version:HAL_MAC_ESP32AX_761,ut_version:N, band mode:0x1[0m
+[0;32mI (806) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (806) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (816) wifi:Init management short buffer num: 32[0m
+[0;32mI (816) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (826) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (826) wifi:Init static rx buffer size: 1700 (rxctrl:92, csi:512)[0m
+[0;32mI (836) wifi:Init static rx buffer num: 10[0m
+[0;32mI (836) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (836) wifi_init: rx ba win: 6[0m
+[0;32mI (846) wifi_init: accept mbox: 6[0m
+[0;32mI (846) wifi_init: tcpip mbox: 32[0m
+[0;32mI (846) wifi_init: udp mbox: 6[0m
+[0;32mI (846) wifi_init: tcp mbox: 6[0m
+[0;32mI (856) wifi_init: tcp tx win: 5760[0m
+[0;32mI (856) wifi_init: tcp rx win: 5760[0m
+[0;32mI (856) wifi_init: tcp mss: 1440[0m
+[0;32mI (866) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (866) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (866) wifi_init: WiFi SLP IRAM OP enabled[0m
+[0;32mI (876) phy_init: phy_version 341,a6c8fe6,Jul 30 2025,18:34:11[0m
+[0;33mW (976) wifi:ACK_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (976) wifi:CTS_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (976) wifi:(agc)0x600a7128:0xd202e9e2, min.avgNF:0xce->0xd2(dB), RCalCount:0x2d, min.RRssi:0x9e2(-97.88)[0m
+[0;32mI (986) wifi:11ax coex: WDEVAX_PTI0(0x55777555), WDEVAX_PTI1(0x00003377).[0m
+
+[0;32mI (996) wifi:mode : sta (98:a3:16:90:2f:08)[0m
+[0;32mI (996) wifi:enable tsf[0m
+[0;32mI (1006) WIFI_MGR: WiFi station started, attempting to connect...[0m
+[0;32mI (1006) WIFI_MGR: WiFi manager initialized successfully[0m
+[0;32mI (1016) MAIN: Found stored credentials, attempting to connect to: AP-5GHz[0m
+[0;32mI (1016) WIFI_MGR: Connecting to WiFi SSID: AP-5GHz[0m
+[0;33mW (1026) wifi:(itwt)itwt_stop_process![0m
+[0;32mI (1026) wifi:flush txq[0m
+[0;32mI (1026) wifi:stop sw txq[0m
+[0;32mI (1026) wifi:lmac stop hw txq[0m
+[0;33mW (1036) wifi:ACK_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (1046) wifi:CTS_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (1046) wifi:(agc)0x600a7128:0xd219f9e8, min.avgNF:0xce->0xd2(dB), RCalCount:0x19f, min.RRssi:0x9e8(-97.50)[0m
+[0;32mI (1056) wifi:11ax coex: WDEVAX_PTI0(0x55777555), WDEVAX_PTI1(0x00003377).[0m
+
+[0;32mI (1066) wifi:mode : sta (98:a3:16:90:2f:08)[0m
+[0;32mI (1066) wifi:enable tsf[0m
+[0;32mI (1076) WIFI_MGR: WiFi station started, attempting to connect...[0m
+[0;32mI (1076) PROV_STATE: State transition: IDLE -> WIFI_CONNECTING (Status: SUCCESS, Message: Initiating WiFi connection)[0m
+[0;32mI (1086) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (1096) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (1106) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (1106) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (1116) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (1126) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (1136) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (1136) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (1146) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (1156) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (1166) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (1176) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1186) wifi:(connect)dot11_authmode:0x6, pairwise_cipher:0x3, group_cipher:0x3[0m
+[0;32mI (1186) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1196) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Initiating WiFi connection[0m
+[0;32mI (1206) MAIN: Connecting to stored WiFi network...[0m
+[0;32mI (1466) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (1476) wifi:Association refused temporarily time 1953, comeback time 2053 (TUs)[0m
+[0;32mI (3576) wifi:state: assoc -> auth (0xb0)[0m
+[0;32mI (3846) wifi:state: auth -> init (0x600)[0m
+[0;32mI (3846) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (3846) WIFI_MGR: WiFi disconnected (reason: 202)[0m
+[0;32mI (3856) WIFI_MGR: Retry connection attempt 1/5[0m
+[0;32mI (3856) PROV_STATE: State transition: WIFI_CONNECTING -> WIFI_CONNECTING (Status: SUCCESS, Message: Connecting... (attempt 1/5))[0m
+[0;32mI (3866) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Connecting... (attempt 1/5)[0m
+[0;32mI (6256) WIFI_MGR: WiFi disconnected (reason: 205)[0m
+[0;32mI (6266) WIFI_MGR: Retry connection attempt 2/5[0m
+[0;32mI (6266) PROV_STATE: State transition: WIFI_CONNECTING -> WIFI_CONNECTING (Status: SUCCESS, Message: Connecting... (attempt 2/5))[0m
+[0;32mI (6266) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Connecting... (attempt 2/5)[0m
+[0;32mI (6326) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (6326) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (6326) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (6326) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (6336) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (6346) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (6356) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (6366) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (6366) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (6386) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (6396) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (6396) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (6406) wifi:(connect)dot11_authmode:0x6, pairwise_cipher:0x3, group_cipher:0x3[0m
+[0;32mI (6416) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (6696) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (6736) wifi:(assoc)RESP, Extended Capabilities length:11, operating_mode_notification:0[0m
+[0;32mI (6736) wifi:(assoc)RESP, Extended Capabilities, MBSSID:0, TWT Responder:0, OBSS Narrow Bandwidth RU In OFDMA Tolerance:0[0m
+[0;32mI (6746) wifi:Extended Capabilities length:11, operating_mode_notification:1[0m
+[0;32mI (6756) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (6766) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (6766) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (6776) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (6776) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (6786) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (6796) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (6806) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (6816) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (6826) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (6836) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (6836) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (6846) wifi:(he)ppe_thresholds_present:1, nominal_packet_padding(rx:3, cfg:2)[0m
+[0;32mI (6846) wifi:(trc)phytype:CBW20-SGI, snr:13, maxRate:172, highestRateIdx:0[0m
+[0;33mW (6856) wifi:(trc)band:2G, phymode:3, highestRateIdx:0, lowestRateIdx:11, dataSchedTableSize:14[0m
+[0;32mI (6866) wifi:(trc)band:2G, rate(L-MCS1, rateIdx:7), ampdu(rate:L-MCS1, schedIdx(7, stop:8)), snr:13, ampduState:wait operational[0m
+[0;32mI (6876) wifi:ifidx:0, rssi:-85, nf:-98, phytype(0x3, CBW20-SGI), phymode(0x7, 11ax), max_rate:172, he:1, vht:0, ht:1[0m
+[0;32mI (6886) wifi:(ht)max.RxAMPDULenExponent:3(65535 bytes), MMSS:5(4 us)[0m
+[0;32mI (6926) wifi:(extcap)mbssid:0, enhanced_mbssid_advertise:0, complete_nontxbssid_profiles:0, twt_responder: 1[0m
+[0;32mI (6926) wifi:connected with AP-5GHz, aid = 23, channel 1, BW20, bssid = 72:13:01:32:b2:79[0m
+[0;32mI (6926) wifi:security: WPA3-SAE, phy:ax, rssi:-85, cipher(pairwise:0x3, group:0x3), pmf:1, [0m
+[0;32mI (6936) wifi:pm start, type: 1, twt_start:0[0m
+
+[0;32mI (6936) wifi:pm start, type:1, aid:0x17, trans-BSSID:72:13:01:32:b2:79, BSSID[5]:0x79, mbssid(max-indicator:0, index:0), he:1[0m
+[0;32mI (6956) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (6956) wifi:set rx beacon pti, rx_bcn_pti: 10, bcn_timeout: 25000, mt_pti: 10, mt_time: 10000[0m
+[0;32mI (6966) wifi:[ADDBA]TX addba request, tid:0, dialogtoken:1, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (6976) wifi:[ADDBA]TX addba request, tid:7, dialogtoken:2, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x20)[0m
+[0;32mI (6986) wifi:[ADDBA]TX addba request, tid:5, dialogtoken:3, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (7006) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (7016) wifi:[ADDBA]RX addba response, status:0, tid:7/tb:1(0xa1), bufsize:32, batimeout:0, txa_wnd:32[0m
+[1;31mE (7016) wifi:CCMP replay detected: A1=98:a3:16:90:2f:08 A2=72:13:01:32:b2:79 PN=1, RSC=2 seq=528[0m
+[0;33mW (7666) wifi:<ba-add>idx:0, ifx:0, tid:7, TAHI:0x10079b2, TALO:0x32011372, (ssn:4, win:64, cur_ssn:4), CONF:0xc0007005[0m
+[0;32mI (11536) esp_netif_handlers: sta ip: 192.168.0.176, mask: 255.255.255.0, gw: 192.168.0.1[0m
+[0;32mI (11536) WIFI_MGR: WiFi connected! IP: 192.168.0.176[0m
+[0;32mI (11536) WIFI_MGR: Credentials saved to NVS successfully[0m
+[0;32mI (11536) PROV_STATE: State transition: WIFI_CONNECTING -> PROVISIONED (Status: SUCCESS, Message: 192.168.0.176)[0m
+[0;32mI (11546) MAIN: State changed: PROVISIONED | Status: SUCCESS | Message: 192.168.0.176[0m
+[0;32mI (12206) MAIN: Successfully connected using stored credentials[0m
+[0;32mI (12206) PROV_STATE: State transition: PROVISIONED -> PROVISIONED (Status: SUCCESS, Message: Connected using stored credentials)[0m
+[0;32mI (12206) MAIN: State changed: PROVISIONED | Status: SUCCESS | Message: Connected using stored credentials[0m
+[0;32mI (12216) MAIN: Initializing NTP time synchronization...[0m
+[0;32mI (12226) TIME_SYNC: Initializing SNTP time synchronization[0m
+[0;32mI (12226) TIME_SYNC: Timezone set to: UTC (default)[0m
+[0;32mI (12236) TIME_SYNC: NTP server 0: pool.ntp.org[0m
+[0;32mI (12236) TIME_SYNC: NTP server 1: time.nist.gov[0m
+[0;32mI (12236) TIME_SYNC: NTP server 2: time.google.com[0m
+[0;32mI (12246) TIME_SYNC: SNTP initialized, waiting for time sync...[0m
+[0;32mI (12246) MAIN: Waiting for time synchronization...[0m
+[0;33mW (12506) wifi:<ba-add>idx:1, ifx:0, tid:0, TAHI:0x10079b2, TALO:0x32011372, (ssn:1, win:64, cur_ssn:1), CONF:0xc0000005[0m
+[0;32mI (13506) wifi:[ADDBA]TX addba request, tid:0, dialogtoken:4, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (13506) wifi:[ADDBA]RX addba response, status:0, tid:0/tb:1(0xa1), bufsize:32, batimeout:0, txa_wnd:32[0m
+[0;32mI (13596) TIME_SYNC: ✓ Time synchronized: 2025-12-05 21:31:02[0m
+[0;32mI (13596) MAIN: ====================================[0m
+[0;32mI (13596) MAIN: Time Synchronized Successfully![0m
+[0;32mI (13596) MAIN: Current time: 2025-12-05 21:31:02 UTC[0m
+[0;32mI (13606) MAIN: ====================================[0m
+[0;32mI (14256) MAIN: Initializing API key manager...[0m
+[0;32mI (14256) API_KEY_MGR: Initializing API key manager[0m
+[0;32mI (14256) API_KEY_MGR: No stored API keys found[0m
+[0;32mI (14256) API_KEY_MGR: API key manager initialized with 0 keys[0m
+[0;32mI (14256) MAIN: Initializing cloud provisioning...[0m
+[0;32mI (14266) CLOUD_PROV: Initializing cloud provisioning[0m
+[0;32mI (14266) MAIN: Starting cloud provisioning...[0m
+[0;32mI (14276) CLOUD_PROV: ===========================================[0m
+[0;32mI (14276) CLOUD_PROV: Starting automatic device provisioning[0m
+[0;32mI (14286) CLOUD_PROV: ===========================================[0m
+[0;32mI (14286) CLOUD_PROV: Requesting certificate generation from https://ssl.kannacloud.com[0m
+[0;32mI (15756) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (16876) CLOUD_PROV: Certificate generated with ID: VKFb9_0zcEjBTOm5ry0owA[0m
+[0;32mI (16876) CLOUD_PROV: Downloading key from: https://ssl.kannacloud.com/download/VKFb9_0zcEjBTOm5ry0owA/key[0m
+[0;32mI (17906) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (18826) CLOUD_PROV: Download response - Status: 200, Length: 1675 bytes[0m
+[0;32mI (18826) CLOUD_PROV: Response preview: -----BEGIN RSA PRIVATE KEY-----[0m
+MIIEowIBAAKCAQEA0dfkhneue2fpyfrQuqWfCOhTSClNS8bjqLQm8MSalEzQqft3
+L24h+TtSazTIljNJ9khReYgcbxt4Zk5MgZTKyXetbWMswDQAI7Rc4QyeGhNR7Dsa
+kbK1dVu6StuzMn4uuhA/JnZbBo5k6RMHDYzT/V
+[0;32mI (18846) CLOUD_PROV: Downloaded key (1675 bytes)[0m
+[0;32mI (18846) CLOUD_PROV: Downloading cert from: https://ssl.kannacloud.com/download/VKFb9_0zcEjBTOm5ry0owA/cert[0m
+[0;32mI (20056) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (21196) CLOUD_PROV: Download response - Status: 200, Length: 1509 bytes[0m
+[0;32mI (21196) CLOUD_PROV: Response preview: -----BEGIN CERTIFICATE-----[0m
+MIIELjCCAxagAwIBAgIUeD0drwirysP1812B1n7qq/Q0bAAwDQYJKoZIhvcNAQEL
+BQAwgZoxETAPBgNVBAMMCGtjLmxvY2FsMRMwEQYDVQQKDApLYW5uYUNsb3VkMRQw
+EgYDVQQLDAtJb1QgU2Vuc29yczEUMBIGA1UEBwwLQ2
+[0;32mI (21216) CLOUD_PROV: Downloaded cert (1509 bytes)[0m
+[0;32mI (21216) CLOUD_PROV: Downloading ca from: https://ssl.kannacloud.com/download/VKFb9_0zcEjBTOm5ry0owA/ca[0m
+[0;32mI (22216) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (23116) CLOUD_PROV: Download response - Status: 404, Length: 207 bytes[0m
+[0;32mI (23126) CLOUD_PROV: Response preview: <!doctype html>[0m
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai
+[1;31mE (23136) CLOUD_PROV: Failed to download ca: ESP_OK (status: 404)[0m
+[0;33mW (23146) CLOUD_PROV: CA certificate download failed (optional): ESP_FAIL[0m
+[0;32mI (23146) CLOUD_PROV: Initializing certificate NVS partition[0m
+[1;31mE (23156) CLOUD_PROV: Failed to initialize NVS partition: ESP_ERR_NOT_FOUND[0m
+[0;33mW (23166) MAIN: Cloud provisioning failed, dashboard not available[0m
+[0;32mI (23166) MAIN: Entering normal operation mode[0m
+[0;32mI (30706) RESET_BTN: Button held for 46 ms...[0m
+[0;32mI (30806) RESET_BTN: Button held for 146 ms...[0m
+[0;32mI (30906) RESET_BTN: Button held for 246 ms...[0m
+[0;33mW (30966) MAIN: ====================================[0m
+[0;33mW (30966) MAIN: SHORT PRESS DETECTED (313 ms)[0m
+[0;33mW (30966) MAIN: Clearing WiFi credentials...[0m
+[0;33mW (30966) MAIN: ====================================[0m
+[0;32mI (30976) WIFI_MGR: Clearing stored credentials[0m
+[0;32mI (30996) WIFI_MGR: Credentials cleared successfully[0m
+[0;32mI (30996) MAIN: WiFi credentials cleared successfully[0m
+[0;32mI (30996) MAIN: Restarting device to begin reprovisioning...[0m
+[0;32mI (30996) WIFI_MGR: Disconnecting from WiFi[0m
+[0;32mI (31006) wifi:state: run -> init (0x0)[0m
+[0;32mI (31006) wifi:pm stop, total sleep time: 17874661 us / 24052583 us[0m
+
+[0;32mI (31006) wifi:<ba-del>idx:1, tid:0[0m
+[0;32mI (31016) wifi:<ba-del>idx:0, tid:7[0m
+[0;32mI (31016) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (31026) WIFI_MGR: WiFi disconnected (reason: 8)[0m
+[0;32mI (31026) WIFI_MGR: Retry connection attempt 1/5[0m
+[0;32mI (31036) PROV_STATE: State transition: PROVISIONED -> WIFI_CONNECTING (Status: SUCCESS, Message: Connecting... (attempt 1/5))[0m
+[0;32mI (31046) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Connecting... (attempt 1/5)[0m
+[0;32mI (31106) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (31106) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (31106) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (31116) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (31116) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (31126) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (31136) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (31146) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (31156) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (31166) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (31176) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (31186) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (31186) wifi:(connect)dot11_authmode:0x6, pairwise_cipher:0x3, group_cipher:0x3[0m
+[0;32mI (31196) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (31206) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (31216) wifi:(assoc)RESP, Extended Capabilities length:11, operating_mode_notification:0[0m
+[0;32mI (31216) wifi:(assoc)RESP, Extended Capabilities, MBSSID:0, TWT Responder:0, OBSS Narrow Bandwidth RU In OFDMA Tolerance:0[0m
+[0;32mI (31226) wifi:Extended Capabilities length:11, operating_mode_notification:1[0m
+[0;32mI (31226) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (31236) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (31246) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (31246) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (31256) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (31266) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (31276) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (31286) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (31286) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (31306) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (31306) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (31316) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (31316) wifi:(he)ppe_thresholds_present:1, nominal_packet_padding(rx:3, cfg:2)[0m
+[0;32mI (31326) wifi:(trc)phytype:CBW20-SGI, snr:9, maxRate:172, highestRateIdx:0[0m
+[0;33mW (31336) wifi:(trc)band:2G, phymode:3, highestRateIdx:0, lowestRateIdx:11, dataSchedTableSize:14[0m
+[0;32mI (31346) wifi:(trc)band:2G, rate(L-MCS0, rateIdx:8), ampdu(rate:L-MCS0, schedIdx(8, stop:8)), snr:9, ampduState:wait operational[0m
+[0;32mI (31356) wifi:ifidx:0, rssi:-89, nf:-98, phytype(0x3, CBW20-SGI), phymode(0x7, 11ax), max_rate:172, he:1, vht:0, ht:1[0m
+[0;32mI (31366) wifi:(ht)max.RxAMPDULenExponent:3(65535 bytes), MMSS:5(4 us)[0m
+[0;32mI (31386) wifi:(extcap)mbssid:0, enhanced_mbssid_advertise:0, complete_nontxbssid_profiles:0, twt_responder: 1[0m
+[0;32mI (31386) wifi:connected with AP-5GHz, aid = 11, channel 1, BW20, bssid = 72:13:01:32:b2:79[0m
+[0;32mI (31396) wifi:security: WPA3-SAE, phy:ax, rssi:-89, cipher(pairwise:0x3, group:0x3), pmf:1, [0m
+[0;32mI (31406) wifi:pm start, type: 1, twt_start:0[0m
+
+[0;32mI (31406) wifi:pm start, type:1, aid:0xb, trans-BSSID:72:13:01:32:b2:79, BSSID[5]:0x79, mbssid(max-indicator:0, index:0), he:1[0m
+[0;32mI (31416) wifi:set rx beacon pti, rx_bcn_pti: 10, bcn_timeout: 25000, mt_pti: 10, mt_time: 10000[0m
+[0;32mI (31426) wifi:[ADDBA]TX addba request, tid:0, dialogtoken:5, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (31436) wifi:[ADDBA]TX addba request, tid:7, dialogtoken:6, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x20)[0m
+[0;32mI (31446) wifi:[ADDBA]TX addba request, tid:5, dialogtoken:7, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (31456) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (31486) wifi:[ADDBA]RX addba response, status:0, tid:7/tb:1(0xa1), bufsize:32, batimeout:0, txa_wnd:32[0m
+[1;31mE (31496) wifi:CCMP replay detected: A1=98:a3:16:90:2f:08 A2=72:13:01:32:b2:79 PN=1, RSC=2 seq=25008[0m
+[0;33mW (31506) wifi:<ba-add>idx:0, ifx:0, tid:7, TAHI:0x10079b2, TALO:0x32011372, (ssn:3, win:64, cur_ssn:3), CONF:0xc0007005[0m
+[0;32mI (32056) wifi:state: run -> init (0x0)[0m
+[0;32mI (32056) wifi:pm stop, total sleep time: 311080 us / 633055 us[0m
+
+[0;32mI (32056) wifi:<ba-del>idx:0, tid:7[0m
+[0;32mI (32056) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (32066) WIFI_MGR: WiFi disconnected (reason: 8)[0m
+[0;32mI (32066) WIFI_MGR: Retry connection attempt 2/5[0m
+[0;32mI (32066) PROV_STATE: State transition: WIFI_CONNECTING -> WIFI_CONNECTING (Status: SUCCESS, Message: Connecting... (attempt 2/5))[0m
+[0;32mI (32076) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Connecting... (attempt 2/5)[0m
+[0;32mI (32086) wifi:flush txq[0m
+[0;32mI (32096) wifi:stop sw txq[0m
+[0;32mI (32096) wifi:lmac stop hw txq[0m
+ESP-ROM:esp32c6-20220919
+Build:Sep 19 2022
+rst:0xc (SW_CPU),boot:0x1f (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4001975a
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40875730,len:0x1744
+load:0x4086b910,len:0xe78
+load:0x4086e610,len:0x31c8
+entry 0x4086b91a
+[0;32mI (22) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (22) boot: compile time Dec  5 2025 13:40:53[0m
+[0;32mI (24) boot: chip revision: v0.2[0m
+[0;32mI (24) boot: efuse block revision: v0.3[0m
+[0;32mI (25) boot.esp32c6: SPI Speed      : 80MHz[0m
+[0;32mI (29) boot.esp32c6: SPI Mode       : DIO[0m
+[0;32mI (33) boot.esp32c6: SPI Flash Size : 2MB[0m
+[0;32mI (37) boot: Enabling RNG early entropy source...[0m
+[0;32mI (41) boot: Partition Table:[0m
+[0;32mI (44) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (50) boot:  0 nvs              WiFi data        01 02 00009000 00004000[0m
+[0;32mI (57) boot:  1 nvs_key          NVS keys         01 04 0000d000 00001000[0m
+[0;32mI (63) boot:  2 phy_init         RF data          01 01 0000e000 00001000[0m
+[0;32mI (70) boot:  3 factory          factory app      00 00 00010000 001f0000[0m
+[0;32mI (76) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=42128020 size=485b0h (296368) map[0m
+[0;32mI (197) esp_image: segment 1: paddr=000585d8 vaddr=40800000 size=07a40h ( 31296) load[0m
+[0;32mI (211) esp_image: segment 2: paddr=00060020 vaddr=42000020 size=12580ch (1202188) map[0m
+[0;32mI (657) esp_image: segment 3: paddr=00185834 vaddr=40807a40 size=19878h (104568) load[0m
+[0;32mI (702) esp_image: segment 4: paddr=0019f0b4 vaddr=408212c0 size=03a64h ( 14948) load[0m
+[0;32mI (724) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (725) boot: Disabling RNG early entropy source...[0m
+[0;32mI (735) cpu_start: Unicore app[0m
+[0;32mI (744) cpu_start: Pro cpu start user code[0m
+[0;32mI (744) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (744) app_init: Application information:[0m
+[0;32mI (745) app_init: Project name:     kc_device[0m
+[0;32mI (748) app_init: App version:      4236587-dirty[0m
+[0;32mI (752) app_init: Compile time:     Dec  5 2025 13:40:25[0m
+[0;32mI (758) app_init: ELF file SHA256:  a7d6c77ef...[0m
+[0;32mI (762) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (766) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (770) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (774) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (777) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (784) heap_init: At 4082E7E0 len 0004DE30 (311 KiB): RAM[0m
+[0;32mI (789) heap_init: At 4087C610 len 00002F54 (11 KiB): RAM[0m
+[0;32mI (794) heap_init: At 50000000 len 00003FE8 (15 KiB): RTCRAM[0m
+[0;32mI (800) spi_flash: detected chip: generic[0m
+[0;32mI (803) spi_flash: flash io: dio[0m
+[0;33mW (806) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (818) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (824) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (831) coexist: coex firmware version: b0bcc39[0m
+[0;32mI (835) coexist: coexist rom version 5b8dcfa[0m
+[0;32mI (840) main_task: Started on CPU0[0m
+[0;32mI (840) main_task: Calling app_main()[0m
+[0;32mI (840) MAIN: =================================[0m
+[0;32mI (850) MAIN: KC-Device WiFi Provisioning[0m
+[0;32mI (850) MAIN: =================================[0m
+[0;32mI (850) CHIP_INFO: ========================================[0m
+[0;32mI (860) CHIP_INFO: Chip Information[0m
+[0;32mI (860) CHIP_INFO: ========================================[0m
+[0;32mI (870) CHIP_INFO: Model:         ESP32-C6[0m
+[0;32mI (870) CHIP_INFO: Architecture:  RISC-V[0m
+[0;32mI (870) CHIP_INFO: Revision:      v0.2[0m
+[0;32mI (880) CHIP_INFO: CPU Cores:     1[0m
+[0;32mI (880) CHIP_INFO: Flash Size:    2 MB[0m
+[0;32mI (880) CHIP_INFO: Features:[0m
+[0;32mI (890) CHIP_INFO:   - WiFi:      Yes (2.4 GHz)[0m
+[0;32mI (890) CHIP_INFO:   - Bluetooth: No[0m
+[0;32mI (890) CHIP_INFO:   - BLE:       Yes[0m
+[0;32mI (900) CHIP_INFO:   - WiFi 6:    Yes (802.11ax)[0m
+[0;32mI (900) CHIP_INFO:   - Zigbee:    Yes (802.15.4)[0m
+[0;32mI (910) CHIP_INFO:   - Thread:    Yes (802.15.4)[0m
+[0;32mI (910) CHIP_INFO: ========================================[0m
+[0;32mI (920) CHIP_INFO: ESP-IDF Version: v5.5.1[0m
+[0;32mI (920) CHIP_INFO: ========================================[0m
+[0;32mI (930) SECURITY: =================================[0m
+[0;32mI (930) SECURITY: Initializing Security Features[0m
+[0;32mI (930) SECURITY: =================================[0m
+[0;32mI (940) SECURITY: NVS keys partition found at 0xd000 (size: 4096 bytes)[0m
+[0;32mI (950) SECURITY: Initializing NVS with encryption...[0m
+[0;32mI (950) SECURITY: ✓ NVS encryption keys loaded from partition[0m
+[0;32mI (990) SECURITY: ✓ NVS encryption initialized successfully[0m
+[0;32mI (990) SECURITY: ✓ WiFi credentials will be stored encrypted[0m
+[0;33mW (990) SECURITY: ✗ Flash encryption is DISABLED[0m
+[0;33mW (990) SECURITY:   Firmware and data are NOT protected in flash[0m
+[0;33mW (1000) SECURITY:   Enable flash encryption for production deployment[0m
+[0;32mI (1010) SECURITY: =================================[0m
+[0;32mI (1010) SECURITY: Security Status Summary:[0m
+[0;32mI (1020) SECURITY:   NVS Encryption:   ENABLED ✓[0m
+[0;32mI (1020) SECURITY:   Flash Encryption: DISABLED ✗[0m
+[0;32mI (1020) SECURITY:   Key Protection:   HMAC-based (eFuse)[0m
+[0;32mI (1030) SECURITY:   Security Level:   MEDIUM ✓✓[0m
+[0;32mI (1030) SECURITY: =================================[0m
+[0;32mI (1040) RESET_BTN: Initializing reset button on GPIO1[0m
+[0;32mI (1040) RESET_BTN: Reset button initialized successfully[0m
+[0;32mI (1050) RESET_BTN:   Short press (<3s): Clear WiFi credentials[0m
+[0;32mI (1050) RESET_BTN:   Long press (>=3s): Factory reset[0m
+[0;32mI (1060) PROV_STATE: Provisioning state machine initialized[0m
+[0;32mI (1060) PROV_STATE: State change callback registered[0m
+[0;32mI (1070) WIFI_MGR: Initializing WiFi manager[0m
+[0;32mI (1080) pp: pp rom version: 5b8dcfa[0m
+[0;32mI (1080) net80211: net80211 rom version: 5b8dcfa[0m
+[0;32mI (1090) wifi:wifi driver task: 40836bb4, prio:23, stack:6656, core=0[0m
+[0;32mI (1110) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (1110) wifi:wifi certification version: v7.0[0m
+[0;32mI (1110) wifi:config NVS flash: enabled[0m
+[0;32mI (1110) wifi:config nano formatting: disabled[0m
+[0;32mI (1110) wifi:mac_version:HAL_MAC_ESP32AX_761,ut_version:N, band mode:0x1[0m
+[0;32mI (1120) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (1120) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (1130) wifi:Init management short buffer num: 32[0m
+[0;32mI (1130) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (1140) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (1140) wifi:Init static rx buffer size: 1700 (rxctrl:92, csi:512)[0m
+[0;32mI (1150) wifi:Init static rx buffer num: 10[0m
+[0;32mI (1150) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (1150) wifi_init: rx ba win: 6[0m
+[0;32mI (1160) wifi_init: accept mbox: 6[0m
+[0;32mI (1160) wifi_init: tcpip mbox: 32[0m
+[0;32mI (1160) wifi_init: udp mbox: 6[0m
+[0;32mI (1170) wifi_init: tcp mbox: 6[0m
+[0;32mI (1170) wifi_init: tcp tx win: 5760[0m
+[0;32mI (1170) wifi_init: tcp rx win: 5760[0m
+[0;32mI (1180) wifi_init: tcp mss: 1440[0m
+[0;32mI (1180) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1180) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1190) wifi_init: WiFi SLP IRAM OP enabled[0m
+[0;32mI (1190) phy_init: phy_version 341,a6c8fe6,Jul 30 2025,18:34:11[0m
+[0;33mW (1290) wifi:ACK_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (1290) wifi:CTS_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (1290) wifi:(agc)0x600a7128:0xd213d9ea, min.avgNF:0xce->0xd2(dB), RCalCount:0x13d, min.RRssi:0x9ea(-97.38)[0m
+[0;32mI (1300) wifi:11ax coex: WDEVAX_PTI0(0x55777555), WDEVAX_PTI1(0x00003377).[0m
+
+[0;32mI (1310) wifi:mode : sta (98:a3:16:90:2f:08)[0m
+[0;32mI (1310) wifi:enable tsf[0m
+[0;32mI (1320) WIFI_MGR: WiFi station started, attempting to connect...[0m
+[0;32mI (1320) WIFI_MGR: WiFi manager initialized successfully[0m
+[0;32mI (1330) WIFI_MGR: No stored credentials found[0m
+[0;32mI (1330) MAIN: No stored credentials found[0m
+[0;32mI (1340) MAIN: Starting ESP-IDF BLE provisioning (service=kc-902F08, PoP enabled)[0m
+[0;32mI (1340) wifi_prov_scheme_ble: BT memory released[0m
+[0;33mW (1350) wifi:(itwt)itwt_stop_process![0m
+[0;32mI (1350) BLE_INIT: Using main XTAL as clock source, chip ver: 2[0m
+[0;32mI (1360) BLE_INIT: ble controller commit:[898f73c][0m
+[0;32mI (1370) BLE_INIT: Bluetooth MAC: 98:a3:16:90:2f:0a[0m
+[0;32mI (1370) phy: libbtbb version: a945109, Jul 30 2025, 18:34:25[0m
+[0;32mI (1370) protocomm_nimble: BLE Host Task Started[0m
+[0;32mI (1380) NimBLE: GAP procedure initiated: stop advertising.[0m
+
+[0;32mI (1380) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (1390) NimBLE: disc_mode=2[0m
+[0;32mI (1390) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=256 adv_itvl_max=256[0m
+[0;32mI (1400) NimBLE: [0m
+
+[0;32mI (1400) wifi_prov_mgr: Provisioning started with service name : kc-902F08 [0m
+[0;32mI (1410) PROV_STATE: State transition: IDLE -> BLE_CONNECTED (Status: SUCCESS, Message: Waiting for app)[0m
+[0;32mI (1420) MAIN: State changed: BLE_CONNECTED | Status: SUCCESS | Message: Waiting for app[0m
+[0;32mI (1420) PROV_STATE: State transition: BLE_CONNECTED -> BLE_CONNECTED (Status: SUCCESS, Message: BLE ready)[0m
+[0;32mI (1430) MAIN: State changed: BLE_CONNECTED | Status: SUCCESS | Message: BLE ready[0m
+[0;32mI (1440) idf_prov: Provisioning started (service kc-902F08)[0m
+[0;32mI (29640) protocomm_nimble: mtu update event; conn_handle=0 cid=4 mtu=256[0m
+[0;33mW (59300) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;33mW (59300) idf_prov: Unhandled provisioning event 2[0m
+[0;32mI (59340) PROV_STATE: State transition: BLE_CONNECTED -> CREDENTIALS_RECEIVED (Status: SUCCESS, Message: Credentials received)[0m
+[0;32mI (59340) MAIN: State changed: CREDENTIALS_RECEIVED | Status: SUCCESS | Message: Credentials received[0m
+[0;32mI (59350) WIFI_MGR: Connecting to WiFi SSID: AP-5GHz[0m
+[0;33mW (59350) wifi:(itwt)itwt_stop_process![0m
+[0;32mI (59350) wifi:flush txq[0m
+[0;32mI (59360) wifi:stop sw txq[0m
+[0;32mI (59360) wifi:lmac stop hw txq[0m
+[0;33mW (59390) wifi:ACK_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (59390) wifi:CTS_TAB0   :0x   90a0b, QAM16:0x9 (24Mbps), QPSK:0xa (12Mbps), BPSK:0xb (6Mbps)[0m
+[0;33mW (59400) wifi:(agc)0x600a7128:0xd21699e8, min.avgNF:0xce->0xd2(dB), RCalCount:0x169, min.RRssi:0x9e8(-97.50)[0m
+[0;32mI (59410) wifi:11ax coex: WDEVAX_PTI0(0x55777555), WDEVAX_PTI1(0x00003377).[0m
+
+[0;32mI (59410) wifi:mode : sta (98:a3:16:90:2f:08)[0m
+[0;32mI (59420) wifi:enable tsf[0m
+[0;32mI (59420) PROV_STATE: State transition: CREDENTIALS_RECEIVED -> WIFI_CONNECTING (Status: SUCCESS, Message: Initiating WiFi connection)[0m
+[0;32mI (59430) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Initiating WiFi connection[0m
+[0;32mI (59440) WIFI_MGR: WiFi station started, attempting to connect...[0m
+[0;32mI (59450) wifi_prov_mgr: STA Start[0m
+[0;32mI (59450) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (59460) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (59460) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (59470) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (59470) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (59480) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (59490) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (59500) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (59510) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (59520) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (59530) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (59540) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (59540) wifi:(connect)dot11_authmode:0x6, pairwise_cipher:0x3, group_cipher:0x3[0m
+[0;32mI (59550) wifi:state: init -> auth (0xb0)[0m
+[1;31mE (60340) wifi:sta is connecting, return error[0m
+[1;31mE (60340) wifi_prov_mgr: Failed to connect Wi-Fi[0m
+[0;32mI (63750) wifi:state: auth -> init (0x200)[0m
+[0;32mI (63760) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy[0m
+
+[0;32mI (63760) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (63760) WIFI_MGR: WiFi disconnected (reason: 2)[0m
+[0;32mI (63760) WIFI_MGR: Retry connection attempt 1/5[0m
+[0;32mI (63770) PROV_STATE: State transition: WIFI_CONNECTING -> WIFI_CONNECTING (Status: SUCCESS, Message: Connecting... (attempt 1/5))[0m
+[0;32mI (63780) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Connecting... (attempt 1/5)[0m
+[0;32mI (63790) PROV_STATE: State transition: WIFI_CONNECTING -> WIFI_FAILED (Status: ERROR_WIFI_TIMEOUT, Message: WiFi disconnected)[0m
+[0;32mI (63800) MAIN: State changed: WIFI_FAILED | Status: ERROR_WIFI_TIMEOUT | Message: WiFi disconnected[0m
+[1;31mE (63810) wifi_prov_mgr: STA Disconnected[0m
+[1;31mE (63810) wifi_prov_mgr: Disconnect reason : 2[0m
+[1;31mE (63820) wifi:sta is connecting, return error[0m
+[0;32mI (68580) wifi:Coexist: Wi-Fi connect fail, apply reconnect coex policy[0m
+
+[0;32mI (68580) WIFI_MGR: WiFi disconnected (reason: 205)[0m
+[0;32mI (68580) WIFI_MGR: Retry connection attempt 2/5[0m
+[0;32mI (68580) PROV_STATE: State transition: WIFI_FAILED -> WIFI_CONNECTING (Status: SUCCESS, Message: Connecting... (attempt 2/5))[0m
+[0;32mI (68590) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Connecting... (attempt 2/5)[0m
+[0;32mI (68600) PROV_STATE: State transition: WIFI_CONNECTING -> WIFI_FAILED (Status: ERROR_WIFI_TIMEOUT, Message: WiFi disconnected)[0m
+[0;32mI (68610) MAIN: State changed: WIFI_FAILED | Status: ERROR_WIFI_TIMEOUT | Message: WiFi disconnected[0m
+[1;31mE (68620) wifi_prov_mgr: STA Disconnected[0m
+[1;31mE (68620) wifi_prov_mgr: Disconnect reason : 205[0m
+[1;31mE (68630) wifi:sta is connecting, return error[0m
+[0;32mI (68730) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (68730) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (68730) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (68730) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (68740) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (68750) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (68760) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (68770) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (68770) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (68790) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (68800) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (68800) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (68810) wifi:(connect)dot11_authmode:0x6, pairwise_cipher:0x3, group_cipher:0x3[0m
+[0;32mI (68820) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (69090) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (69100) wifi:(assoc)RESP, Extended Capabilities length:11, operating_mode_notification:0[0m
+[0;32mI (69100) wifi:(assoc)RESP, Extended Capabilities, MBSSID:0, TWT Responder:0, OBSS Narrow Bandwidth RU In OFDMA Tolerance:0[0m
+[0;32mI (69110) wifi:Extended Capabilities length:11, operating_mode_notification:1[0m
+[0;32mI (69120) wifi:(he)max.RxAMPDULenExponentExtension:2, max.RxAMPDUpre-EOFpaddingBytes:4194303(0x3fffff)[0m
+[0;32mI (69130) wifi:(mac)omc_ul_mu_data_disable_rx:1[0m
+[0;32mI (69130) wifi:(phy)ppe_thresholds_present:1, nominal_packet_padding:3[0m
+[0;32mI (69140) wifi:(phy)dcm tx(constellation:0, nss:0), dcm rx(constellation:0, nss:0)[0m
+[0;32mI (69140) wifi:(phy)rx_mcs_map:0xffaa, tx_mcs_map:0xffaa, stbc_tx:0, bfmer(su:1, mu:1), ldpc:1, max_rate:172[0m
+[0;32mI (69150) wifi:(phy)nsts:4, ru_index_bitmap:0x3(242:1, 484:1, 996:0, 2*996:0)[0m
+[0;32mI (69160) wifi:(phy)threshold_bits:48, nsts_num:4, ru_num:2, he_cap->len:29, ppe_threshold_len:7(6,11,4)[0m
+[0;32mI (69170) wifi:(ppe)RU242, NSTS0, PPE16:0, PPE8:7, nominal_packet_padding:2[0m
+[0;32mI (69180) wifi:(opr)len:8, TWT Required:0, VHT Opr Info Present:0, 6GHz Opr Info Present:0, Co-Hosted BSS:1(max_indicator:3), Basic MCS and NSS:0xfffc[0m
+[0;32mI (69190) wifi:(opr)len:8, Default PE Duration:4, TXOP RTS Threshold:0(0 us), ER-SU-Disable:1[0m
+[0;32mI (69200) wifi:(opr)len:8, BSS Color:5, disabled:0, Partial BSS Color:0[0m
+[0;32mI (69200) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (69210) wifi:(he)ppe_thresholds_present:1, nominal_packet_padding(rx:3, cfg:2)[0m
+[0;32mI (69210) wifi:(trc)phytype:CBW20-SGI, snr:18, maxRate:172, highestRateIdx:0[0m
+[0;33mW (69220) wifi:(trc)band:2G, phymode:3, highestRateIdx:0, lowestRateIdx:11, dataSchedTableSize:14[0m
+[0;32mI (69230) wifi:(trc)band:2G, rate(L-MCS3, rateIdx:5), ampdu(rate:L-MCS3, schedIdx(5, stop:8)), snr:18, ampduState:wait operational[0m
+[0;32mI (69240) wifi:ifidx:0, rssi:-80, nf:-98, phytype(0x3, CBW20-SGI), phymode(0x7, 11ax), max_rate:172, he:1, vht:0, ht:1[0m
+[0;32mI (69250) wifi:(ht)max.RxAMPDULenExponent:3(65535 bytes), MMSS:5(4 us)[0m
+[0;32mI (69280) wifi:(extcap)mbssid:0, enhanced_mbssid_advertise:0, complete_nontxbssid_profiles:0, twt_responder: 1[0m
+[0;32mI (69280) wifi:connected with AP-5GHz, aid = 22, channel 1, BW20, bssid = 72:13:01:32:b2:79[0m
+[0;32mI (69290) wifi:security: WPA3-SAE, phy:ax, rssi:-80, cipher(pairwise:0x3, group:0x3), pmf:1, [0m
+[0;32mI (69310) wifi:pm start, type: 1, twt_start:0[0m
+
+[0;32mI (69310) wifi:pm start, type:1, aid:0x16, trans-BSSID:72:13:01:32:b2:79, BSSID[5]:0x79, mbssid(max-indicator:0, index:0), he:1[0m
+[0;32mI (69310) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (69320) wifi:set rx beacon pti, rx_bcn_pti: 10, bcn_timeout: 25000, mt_pti: 10, mt_time: 10000[0m
+[0;32mI (69330) wifi:[ADDBA]TX addba request, tid:0, dialogtoken:1, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (69340) wifi:[ADDBA]TX addba request, tid:7, dialogtoken:2, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x20)[0m
+[0;32mI (69350) wifi:[ADDBA]TX addba request, tid:5, dialogtoken:3, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (69360) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (69380) wifi:[ADDBA]RX addba response, status:0, tid:7/tb:1(0xa1), bufsize:32, batimeout:0, txa_wnd:32[0m
+[0;33mW (69660) wifi:<ba-add>idx:0, ifx:0, tid:7, TAHI:0x10079b2, TALO:0x32011372, (ssn:3, win:64, cur_ssn:3), CONF:0xc0007005[0m
+[0;32mI (70950) esp_netif_handlers: sta ip: 192.168.0.176, mask: 255.255.255.0, gw: 192.168.0.1[0m
+[0;32mI (70950) WIFI_MGR: WiFi connected! IP: 192.168.0.176[0m
+[0;32mI (70950) WIFI_MGR: Credentials saved to NVS successfully[0m
+[0;32mI (70950) PROV_STATE: State transition: WIFI_FAILED -> PROVISIONED (Status: SUCCESS, Message: 192.168.0.176)[0m
+[0;32mI (70960) MAIN: State changed: PROVISIONED | Status: SUCCESS | Message: 192.168.0.176[0m
+[0;32mI (70970) PROV_STATE: State transition: PROVISIONED -> PROVISIONED (Status: SUCCESS, Message: WiFi connected)[0m
+[0;32mI (70980) MAIN: State changed: PROVISIONED | Status: SUCCESS | Message: WiFi connected[0m
+[0;32mI (70990) wifi_prov_mgr: STA Got IP[0m
+[0;32mI (70990) PROV_STATE: State transition: PROVISIONED -> WIFI_CONNECTING (Status: SUCCESS, Message: Connecting to AP)[0m
+[0;32mI (71000) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Connecting to AP[0m
+[0;32mI (71560) MAIN: Provisioning completed, WiFi connected[0m
+[0;32mI (72560) NimBLE: GAP procedure initiated: stop advertising.[0m
+
+[0;32mI (72560) NimBLE: GAP procedure initiated: stop advertising.[0m
+
+[0;32mI (72560) NimBLE: GAP procedure initiated: terminate connection; conn_handle=0 hci_reason=19[0m
+
+[1;31mE (72620) protocomm_nimble: Error setting advertisement data; rc = 30[0m
+[0;32mI (72620) wifi_prov_mgr: Provisioning stopped[0m
+[0;32mI (72620) idf_prov: Provisioning complete, waiting before BLE cleanup...[0m
+[0;32mI (72660) wifi_prov_scheme_ble: BTDM memory released[0m
+[0;33mW (73120) idf_prov: Unhandled provisioning event 7[0m
+[0;32mI (73120) idf_prov: Provisioning stopped[0m
+[0;32mI (73120) MAIN: Initializing NTP time synchronization...[0m
+[0;32mI (73120) TIME_SYNC: Initializing SNTP time synchronization[0m
+[0;32mI (73120) TIME_SYNC: Timezone set to: UTC (default)[0m
+[0;32mI (73130) TIME_SYNC: NTP server 0: pool.ntp.org[0m
+[0;32mI (73130) TIME_SYNC: NTP server 1: time.nist.gov[0m
+[0;32mI (73140) TIME_SYNC: NTP server 2: time.google.com[0m
+[0;32mI (73140) TIME_SYNC: SNTP initialized, waiting for time sync...[0m
+[0;32mI (73150) MAIN: Waiting for time synchronization...[0m
+[0;33mW (75080) wifi:<ba-add>idx:1, ifx:0, tid:0, TAHI:0x10079b2, TALO:0x32011372, (ssn:1, win:64, cur_ssn:1), CONF:0xc0000005[0m
+[0;32mI (78160) wifi:[ADDBA]TX addba request, tid:0, dialogtoken:4, bufsize:32, A-MSDU:0(not supported), policy:1(IMR), ssn:0(0x0)[0m
+[0;32mI (78160) wifi:[ADDBA]RX addba response, status:0, tid:0/tb:1(0xa1), bufsize:32, batimeout:0, txa_wnd:32[0m
+[0;32mI (78220) TIME_SYNC: ✓ Time synchronized: 2025-12-05 21:32:38[0m
+[0;32mI (78220) MAIN: ====================================[0m
+[0;32mI (78220) MAIN: Time Synchronized Successfully![0m
+[0;32mI (78230) MAIN: Current time: 2025-12-05 21:32:38 UTC[0m
+[0;32mI (78230) MAIN: ====================================[0m
+[0;32mI (79150) MAIN: Initializing API key manager...[0m
+[0;32mI (79150) API_KEY_MGR: Initializing API key manager[0m
+[0;32mI (79150) API_KEY_MGR: No stored API keys found[0m
+[0;32mI (79150) API_KEY_MGR: API key manager initialized with 0 keys[0m
+[0;32mI (79150) MAIN: Initializing cloud provisioning...[0m
+[0;32mI (79160) CLOUD_PROV: Initializing cloud provisioning[0m
+[0;32mI (79160) MAIN: Starting cloud provisioning...[0m
+[0;32mI (79170) CLOUD_PROV: ===========================================[0m
+[0;32mI (79170) CLOUD_PROV: Starting automatic device provisioning[0m
+[0;32mI (79180) CLOUD_PROV: ===========================================[0m
+[0;32mI (79180) CLOUD_PROV: Requesting certificate generation from https://ssl.kannacloud.com[0m
+[0;32mI (80410) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (81570) CLOUD_PROV: Certificate generated with ID: ZM6xFQMJi1tHo4dOx34B8Q[0m
+[0;32mI (81570) CLOUD_PROV: Downloading key from: https://ssl.kannacloud.com/download/ZM6xFQMJi1tHo4dOx34B8Q/key[0m
+[0;32mI (82560) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (83380) CLOUD_PROV: Download response - Status: 200, Length: 1679 bytes[0m
+[0;32mI (83380) CLOUD_PROV: Response preview: -----BEGIN RSA PRIVATE KEY-----[0m
+MIIEpQIBAAKCAQEAqubE9PfANoVdlYieLScwybsVHIo63Ai+1uNIKBlSYkanYuTH
+0aic8aQ4K27bSZLUMNGYp2PnTG/8+stnIV9NEzA6CLhIxmx5jZ2/fjr05EWemI3c
+u5Z8ZIAKoM5+YfMRghmtJ20VuQs4OOMFfFpoUu
+[0;32mI (83400) CLOUD_PROV: Downloaded key (1679 bytes)[0m
+[0;32mI (83400) CLOUD_PROV: Downloading cert from: https://ssl.kannacloud.com/download/ZM6xFQMJi1tHo4dOx34B8Q/cert[0m
+[0;32mI (84610) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (85440) CLOUD_PROV: Download response - Status: 200, Length: 1509 bytes[0m
+[0;32mI (85440) CLOUD_PROV: Response preview: -----BEGIN CERTIFICATE-----[0m
+MIIELjCCAxagAwIBAgIUYunkL7wb7C042J7fBvBLltS8rpQwDQYJKoZIhvcNAQEL
+BQAwgZoxETAPBgNVBAMMCGtjLmxvY2FsMRMwEQYDVQQKDApLYW5uYUNsb3VkMRQw
+EgYDVQQLDAtJb1QgU2Vuc29yczEUMBIGA1UEBwwLQ2
+[0;32mI (85460) CLOUD_PROV: Downloaded cert (1509 bytes)[0m
+[0;32mI (85460) CLOUD_PROV: Downloading ca from: https://ssl.kannacloud.com/download/ZM6xFQMJi1tHo4dOx34B8Q/ca[0m
+[0;32mI (86550) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (87370) CLOUD_PROV: Download response - Status: 404, Length: 207 bytes[0m
+[0;32mI (87370) CLOUD_PROV: Response preview: <!doctype html>[0m
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai
+[1;31mE (87390) CLOUD_PROV: Failed to download ca: ESP_OK (status: 404)[0m
+[0;33mW (87390) CLOUD_PROV: CA certificate download failed (optional): ESP_FAIL[0m
+[0;32mI (87400) CLOUD_PROV: Initializing certificate NVS partition[0m
+[1;31mE (87400) CLOUD_PROV: Failed to initialize NVS partition: ESP_ERR_NOT_FOUND[0m
+[0;33mW (87410) MAIN: Cloud provisioning failed, dashboard not available[0m
+[0;32mI (87420) MAIN: Entering normal operation mode[0m
+[0;32mI (821) wifi:Init management short buffer num: 32[0m
+[0;32mI (831) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (831) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (841) wifi:Init static rx buffer size: 1700 (rxctrl:92, csi:512)[0m
+[0;32mI (841) wifi:Init static rx buffer num: 10[0m
+[0;32mI (851) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (851) wifi_init: rx ba win: 6[0m
+[0;32mI (851) wifi_init: accept mbox: 6[0m
+[0;32mI (861) wifi_init: tcpip mbox: 32[0m
