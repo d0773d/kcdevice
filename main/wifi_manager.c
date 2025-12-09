@@ -217,7 +217,7 @@ esp_err_t wifi_manager_get_stored_credentials(char* ssid, char* password)
     strncpy(ssid, (char*)wifi_cfg.sta.ssid, 33);
     strncpy(password, (char*)wifi_cfg.sta.password, 64);
     
-    ESP_LOGI(TAG, "Retrieved stored credentials for SSID: %s", ssid);
+    ESP_LOGD(TAG, "Retrieved stored credentials for SSID: %s", ssid);
     return ESP_OK;
 }
 

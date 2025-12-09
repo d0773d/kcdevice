@@ -189,6 +189,23 @@ esp_err_t mqtt_unsubscribe(const char *topic);
 esp_err_t mqtt_set_telemetry_interval(uint32_t interval_sec);
 
 /**
+ * @brief Get current telemetry publishing interval
+ * 
+ * @return Current interval in seconds (0 means automatic publishing disabled)
+ */
+uint32_t mqtt_get_telemetry_interval(void);
+
+/**
+ * @brief Trigger an immediate MQTT publish
+ * 
+ * Wakes up the MQTT publish task to send data immediately.
+ * Useful when interval is set to 0 (on-read publishing).
+ * 
+ * @return ESP_OK on success, ESP_ERR_INVALID_STATE if task not running
+ */
+esp_err_t mqtt_trigger_immediate_publish(void);
+
+/**
  * @brief Get device ID for MQTT topics
  * 
  * @param device_id Buffer to store device ID

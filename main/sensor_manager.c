@@ -7,9 +7,12 @@
 #include "i2c_scanner.h"
 #include "max17048.h"
 #include "ezo_sensor.h"
+#include "mqtt_telemetry.h"
 #include "esp_log.h"
 #include "esp_timer.h"
 #include "esp_wifi.h"
+#include "nvs_flash.h"
+#include "nvs.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/semphr.h"
@@ -641,6 +644,12 @@ static void sensor_reading_task(void *arg) {
                     listener_snapshot = s_sensor_cache;
                     notify_listener = true;
                 }
+                
+                // Trigger MQTT publish if periodic publishing is disabled (interval=0)
+                if (mqtt_get_telemetry_interval() == 0) {
+                    ESP_LOGI(TAG, "Triggering MQTT publish (on-read mode)");
+                    mqtt_trigger_immediate_publish();
+                }
             }
 
             s_reading_in_progress = false;
@@ -657,6 +666,19 @@ esp_err_t sensor_manager_start_reading_task(uint32_t interval_sec) {
     if (s_reading_task_handle != NULL) {
         ESP_LOGW(TAG, "Reading task already running");
         return ESP_OK;
+    }
+    
+    // Load saved sensor interval from NVS (or use provided default)
+    nvs_handle_t nvs_handle;
+    esp_err_t err = nvs_open("settings", NVS_READONLY, &nvs_handle);
+    if (err == ESP_OK) {
+        uint32_t saved_interval = interval_sec;
+        err = nvs_get_u32(nvs_handle, "sensor_interval", &saved_interval);
+        if (err == ESP_OK) {
+            interval_sec = saved_interval;
+            ESP_LOGI(TAG, "Loaded sensor interval from NVS: %lu seconds", saved_interval);
+        }
+        nvs_close(nvs_handle);
     }
     
     s_reading_interval_sec = interval_sec;
@@ -741,7 +763,24 @@ esp_err_t sensor_manager_get_cached_data(sensor_cache_t *cache) {
 esp_err_t sensor_manager_set_reading_interval(uint32_t interval_sec) {
     s_reading_interval_sec = interval_sec;
     ESP_LOGI(TAG, "Reading interval updated to %lu seconds", interval_sec);
+    
+    // Save to NVS
+    nvs_handle_t nvs_handle;
+    esp_err_t err = nvs_open("settings", NVS_READWRITE, &nvs_handle);
+    if (err == ESP_OK) {
+        err = nvs_set_u32(nvs_handle, "sensor_interval", interval_sec);
+        if (err == ESP_OK) {
+            nvs_commit(nvs_handle);
+            ESP_LOGI(TAG, "Sensor interval saved to NVS");
+        }
+        nvs_close(nvs_handle);
+    }
+    
     return ESP_OK;
+}
+
+uint32_t sensor_manager_get_reading_interval(void) {
+    return s_reading_interval_sec;
 }
 
 esp_err_t sensor_manager_pause_reading(void) {

@@ -196,6 +196,13 @@ esp_err_t sensor_manager_get_cached_data(sensor_cache_t *cache);
 esp_err_t sensor_manager_set_reading_interval(uint32_t interval_sec);
 
 /**
+ * @brief Get current sensor reading interval
+ * 
+ * @return Current interval in seconds
+ */
+uint32_t sensor_manager_get_reading_interval(void);
+
+/**
  * @brief Pause sensor reading task
  * 
  * Useful for performing manual I2C operations from web interface

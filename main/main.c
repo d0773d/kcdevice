@@ -135,15 +135,17 @@ void app_main(void)
     }
 
     ESP_LOGI(TAG, "Entering normal operation mode");
+    
+    // Store credentials once at startup for reconnection
+    static char stored_reconnect_ssid[33] = {0};
+    static char stored_reconnect_password[64] = {0};
+    bool has_stored_creds = (wifi_manager_get_stored_credentials(stored_reconnect_ssid, stored_reconnect_password) == ESP_OK);
+    
     while (1) {
-        if (!wifi_manager_is_connected()) {
-            ESP_LOGW(TAG, "WiFi connection lost, attempting to reconnect...");
-            char reconnect_ssid[33] = {0};
-            char reconnect_password[64] = {0};
-            if (wifi_manager_get_stored_credentials(reconnect_ssid, reconnect_password) == ESP_OK) {
-                wifi_manager_connect(reconnect_ssid, reconnect_password);
-                memset(reconnect_password, 0, sizeof(reconnect_password));
-            }
+        // Check connection status and reconnect if needed
+        if (!wifi_manager_is_connected() && has_stored_creds) {
+            ESP_LOGW(TAG, "WiFi connection lost, attempting to reconnect to %s", stored_reconnect_ssid);
+            wifi_manager_connect(stored_reconnect_ssid, stored_reconnect_password);
         }
 
         vTaskDelay(pdMS_TO_TICKS(10000));

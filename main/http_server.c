@@ -1090,8 +1090,31 @@ static esp_err_t api_test_mqtt_handler(httpd_req_t *req)
  */
 static esp_err_t api_settings_handler(httpd_req_t *req)
 {
-    char content[100];
-    int ret = httpd_req_recv(req, content, sizeof(content));
+    // Handle GET request - return current settings
+    if (req->method == HTTP_GET) {
+        cJSON *root = cJSON_CreateObject();
+        
+        // Get current MQTT telemetry interval
+        uint32_t mqtt_interval = mqtt_get_telemetry_interval();
+        cJSON_AddNumberToObject(root, "mqtt_interval", mqtt_interval);
+        
+        // Get sensor reading interval
+        uint32_t sensor_interval = sensor_manager_get_reading_interval();
+        cJSON_AddNumberToObject(root, "sensor_interval", sensor_interval);
+        
+        char *json_str = cJSON_PrintUnformatted(root);
+        cJSON_Delete(root);
+        
+        httpd_resp_set_type(req, "application/json");
+        httpd_resp_sendstr(req, json_str);
+        free(json_str);
+        
+        return ESP_OK;
+    }
+    
+    // Handle POST request - update settings
+    char content[200];
+    int ret = httpd_req_recv(req, content, sizeof(content) - 1);
     if (ret <= 0) {
         httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST, "Invalid request");
         return ESP_FAIL;
@@ -1105,19 +1128,63 @@ static esp_err_t api_settings_handler(httpd_req_t *req)
         return ESP_FAIL;
     }
     
-    // Get mqtt_interval if present
-    cJSON *interval = cJSON_GetObjectItem(root, "mqtt_interval");
-    if (interval != NULL && cJSON_IsNumber(interval)) {
-        int interval_val = interval->valueint;
-        ESP_LOGI(TAG, "Settings update: MQTT interval = %d seconds", interval_val);
-        // TODO: Implement actual settings storage and application
-        // For now, just acknowledge the setting
+    // Update MQTT telemetry interval if present
+    cJSON *mqtt_interval = cJSON_GetObjectItem(root, "mqtt_interval");
+    if (mqtt_interval != NULL && cJSON_IsNumber(mqtt_interval)) {
+        int interval_val = mqtt_interval->valueint;
+        if (interval_val < 0) {
+            cJSON_Delete(root);
+            httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST, "Interval must be >= 0");
+            return ESP_FAIL;
+        }
+        
+        ESP_LOGI(TAG, "Setting MQTT telemetry interval to %d seconds (0=on-read only)", interval_val);
+        esp_err_t err = mqtt_set_telemetry_interval(interval_val);
+        if (err != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to set MQTT interval: %s", esp_err_to_name(err));
+        }
+    }
+    
+    // Update sensor reading interval if present
+    cJSON *sensor_interval = cJSON_GetObjectItem(root, "sensor_interval");
+    if (sensor_interval != NULL && cJSON_IsNumber(sensor_interval)) {
+        int interval_val = sensor_interval->valueint;
+        if (interval_val < 1) {
+            cJSON_Delete(root);
+            httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST, "Sensor interval must be >= 1");
+            return ESP_FAIL;
+        }
+        
+        ESP_LOGI(TAG, "Setting sensor reading interval to %d seconds", interval_val);
+        sensor_manager_set_reading_interval(interval_val);
     }
     
     cJSON_Delete(root);
     
     httpd_resp_set_type(req, "application/json");
     httpd_resp_send(req, "{\"status\":\"saved\"}", HTTPD_RESP_USE_STRLEN);
+    
+    return ESP_OK;
+}
+
+/**
+ * @brief POST /api/settings/reset - Reset settings to defaults
+ */
+static esp_err_t api_settings_reset_handler(httpd_req_t *req)
+{
+    const uint32_t DEFAULT_MQTT_INTERVAL = 10;
+    const uint32_t DEFAULT_SENSOR_INTERVAL = 10;
+    
+    ESP_LOGI(TAG, "Resetting settings to defaults");
+    
+    // Reset MQTT interval
+    mqtt_set_telemetry_interval(DEFAULT_MQTT_INTERVAL);
+    
+    // Reset sensor interval
+    sensor_manager_set_reading_interval(DEFAULT_SENSOR_INTERVAL);
+    
+    httpd_resp_set_type(req, "application/json");
+    httpd_resp_sendstr(req, "{\"status\":\"reset\",\"mqtt_interval\":10,\"sensor_interval\":10}");
     
     return ESP_OK;
 }
@@ -1821,10 +1888,25 @@ static const httpd_uri_t api_test_mqtt_uri = {
     .user_ctx = NULL
 };
 
-static const httpd_uri_t api_settings_uri = {
+// Settings API - handles both GET and POST
+static const httpd_uri_t api_settings_get_uri = {
+    .uri = "/api/settings",
+    .method = HTTP_GET,
+    .handler = api_settings_handler,
+    .user_ctx = NULL
+};
+
+static const httpd_uri_t api_settings_post_uri = {
     .uri = "/api/settings",
     .method = HTTP_POST,
     .handler = api_settings_handler,
+    .user_ctx = NULL
+};
+
+static const httpd_uri_t api_settings_reset_uri = {
+    .uri = "/api/settings/reset",
+    .method = HTTP_POST,
+    .handler = api_settings_reset_handler,
     .user_ctx = NULL
 };
 
@@ -2308,7 +2390,9 @@ esp_err_t http_server_start(void)
     httpd_register_uri_handler(s_server, &api_clear_wifi_uri);
     httpd_register_uri_handler(s_server, &api_reboot_uri);
     httpd_register_uri_handler(s_server, &api_test_mqtt_uri);
-    httpd_register_uri_handler(s_server, &api_settings_uri);
+    httpd_register_uri_handler(s_server, &api_settings_get_uri);
+    httpd_register_uri_handler(s_server, &api_settings_post_uri);
+    httpd_register_uri_handler(s_server, &api_settings_reset_uri);
     httpd_register_uri_handler(s_server, &api_sensors_list_uri);
     httpd_register_uri_handler(s_server, &api_sensors_rescan_uri);
     httpd_register_uri_handler(s_server, &api_sensors_config_uri);

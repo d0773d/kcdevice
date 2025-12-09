@@ -14,6 +14,8 @@
 #include "esp_wifi.h"
 #include "esp_event.h"
 #include "esp_random.h"
+#include "nvs_flash.h"
+#include "nvs.h"
 #include "cJSON.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -260,7 +262,12 @@ static void mqtt_publish_task(void *arg)
         }
         
         // Wait for next publish cycle
-        vTaskDelay(pdMS_TO_TICKS(s_publish_interval_sec * 1000));
+        // If interval is 0, wait for notification (triggered by sensor reads)
+        if (s_publish_interval_sec == 0) {
+            ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+        } else {
+            vTaskDelay(pdMS_TO_TICKS(s_publish_interval_sec * 1000));
+        }
     }
 }
 
@@ -269,6 +276,19 @@ esp_err_t mqtt_client_init(const char *broker_uri, const char *username, const c
     if (s_mqtt_client != NULL) {
         ESP_LOGW(TAG, "MQTT client already initialized");
         return ESP_OK;
+    }
+    
+    // Load saved MQTT interval from NVS
+    nvs_handle_t nvs_handle;
+    esp_err_t err = nvs_open("settings", NVS_READONLY, &nvs_handle);
+    if (err == ESP_OK) {
+        uint32_t saved_interval = 10; // Default
+        err = nvs_get_u32(nvs_handle, "mqtt_interval", &saved_interval);
+        if (err == ESP_OK) {
+            s_publish_interval_sec = saved_interval;
+            ESP_LOGI(TAG, "Loaded MQTT interval from NVS: %lu seconds", saved_interval);
+        }
+        nvs_close(nvs_handle);
     }
     
     // Get device ID from cloud provisioning
@@ -753,9 +773,41 @@ esp_err_t mqtt_unsubscribe(const char *topic)
 esp_err_t mqtt_set_telemetry_interval(uint32_t interval_sec)
 {
     s_publish_interval_sec = interval_sec;
-    // Also update sensor reading interval
-    sensor_manager_set_reading_interval(interval_sec);
-    ESP_LOGI(TAG, "MQTT publish interval updated to %lu seconds", interval_sec);
+    
+    if (interval_sec == 0) {
+        ESP_LOGI(TAG, "MQTT periodic publishing disabled (will publish on sensor read only)");
+    } else {
+        ESP_LOGI(TAG, "MQTT publish interval updated to %lu seconds", interval_sec);
+    }
+    
+    // Save to NVS
+    nvs_handle_t nvs_handle;
+    esp_err_t err = nvs_open("settings", NVS_READWRITE, &nvs_handle);
+    if (err == ESP_OK) {
+        err = nvs_set_u32(nvs_handle, "mqtt_interval", interval_sec);
+        if (err == ESP_OK) {
+            nvs_commit(nvs_handle);
+            ESP_LOGI(TAG, "MQTT interval saved to NVS");
+        }
+        nvs_close(nvs_handle);
+    }
+    
+    return ESP_OK;
+}
+
+uint32_t mqtt_get_telemetry_interval(void)
+{
+    return s_publish_interval_sec;
+}
+
+esp_err_t mqtt_trigger_immediate_publish(void)
+{
+    if (s_publish_task_handle == NULL) {
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    // Wake up the publish task
+    xTaskNotifyGive(s_publish_task_handle);
     return ESP_OK;
 }
 
