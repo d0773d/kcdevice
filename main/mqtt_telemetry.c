@@ -772,12 +772,19 @@ esp_err_t mqtt_unsubscribe(const char *topic)
 
 esp_err_t mqtt_set_telemetry_interval(uint32_t interval_sec)
 {
+    uint32_t old_interval = s_publish_interval_sec;
     s_publish_interval_sec = interval_sec;
     
     if (interval_sec == 0) {
         ESP_LOGI(TAG, "MQTT periodic publishing disabled (will publish on sensor read only)");
     } else {
         ESP_LOGI(TAG, "MQTT publish interval updated to %lu seconds", interval_sec);
+        
+        // If changing from 0 to non-zero, wake up the task so it starts periodic publishing
+        if (old_interval == 0 && s_publish_task_handle != NULL) {
+            ESP_LOGI(TAG, "Waking up MQTT task to start periodic publishing");
+            xTaskNotifyGive(s_publish_task_handle);
+        }
     }
     
     // Save to NVS
@@ -786,10 +793,18 @@ esp_err_t mqtt_set_telemetry_interval(uint32_t interval_sec)
     if (err == ESP_OK) {
         err = nvs_set_u32(nvs_handle, "mqtt_interval", interval_sec);
         if (err == ESP_OK) {
-            nvs_commit(nvs_handle);
-            ESP_LOGI(TAG, "MQTT interval saved to NVS");
+            err = nvs_commit(nvs_handle);
+            if (err == ESP_OK) {
+                ESP_LOGI(TAG, "MQTT interval %lu saved to NVS", interval_sec);
+            } else {
+                ESP_LOGE(TAG, "Failed to commit MQTT interval to NVS: %s", esp_err_to_name(err));
+            }
+        } else {
+            ESP_LOGE(TAG, "Failed to set MQTT interval in NVS: %s", esp_err_to_name(err));
         }
         nvs_close(nvs_handle);
+    } else {
+        ESP_LOGE(TAG, "Failed to open NVS for MQTT interval: %s", esp_err_to_name(err));
     }
     
     return ESP_OK;
