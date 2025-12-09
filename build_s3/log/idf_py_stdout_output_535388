@@ -1,0 +1,682 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1-2\tools/idf_monitor.py -p COM3 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 C:\Code\kc_device\build_s3\kc_device.elf C:\Code\kc_device\build_s3\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1-2\tools\idf.py' '-B' 'build_s3' '-D' 'SDKCONFIG=sdkconfig.s3' '-p' 'COM3'
+[0;32mI (25871) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.9109992980957,"pH":7.13100004196167,"EC":1255,"HUM":{"humidity":40.3400001525879,"air_temp":21.809999465942383,"dew_point":7.7899999618530273}},"battery":94.01953125,"rssi":-59}[0m
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x42008f43
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x158c
+load:0x403c8700,len:0xd24
+load:0x403cb700,len:0x2f34
+entry 0x403c8924
+[0;32mI (24) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time Dec  5 2025 13:05:55[0m
+[0;32mI (25) boot: Multicore bootloader[0m
+[0;32mI (25) boot: chip revision: v0.2[0m
+[0;32mI (27) boot: efuse block revision: v1.3[0m
+[0;32mI (31) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (35) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (39) boot.esp32s3: SPI Flash Size : 4MB[0m
+[0;32mI (42) boot: Enabling RNG early entropy source...[0m
+[0;32mI (47) boot: Partition Table:[0m
+[0;32mI (50) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (62) boot:  1 nvs_key          NVS keys         01 04 0000f000 00001000[0m
+[0;32mI (69) boot:  2 otadata          OTA data         01 00 00010000 00002000[0m
+[0;32mI (75) boot:  3 phy_init         RF data          01 01 00012000 00001000[0m
+[0;32mI (82) boot:  4 nvs_certs        WiFi data        01 02 00013000 0000d000[0m
+[0;32mI (88) boot:  5 ota_0            OTA app          00 10 00020000 001b0000[0m
+[0;32mI (95) boot:  6 ota_1            OTA app          00 11 001d0000 001b0000[0m
+[0;32mI (101) boot:  7 www              Unknown data     01 81 00380000 00080000[0m
+[0;32mI (108) boot: End of partition table[0m
+[0;32mI (112) esp_image: segment 0: paddr=00020020 vaddr=3c110020 size=5c064h (376932) map[0m
+[0;32mI (185) esp_image: segment 1: paddr=0007c08c vaddr=3fca0800 size=03f8ch ( 16268) load[0m
+[0;32mI (189) esp_image: segment 2: paddr=00080020 vaddr=42000020 size=10375ch (1062748) map[0m
+[0;32mI (377) esp_image: segment 3: paddr=00183784 vaddr=3fca478c size=0154ch (  5452) load[0m
+[0;32mI (378) esp_image: segment 4: paddr=00184cd8 vaddr=40374000 size=1c74ch (116556) load[0m
+[0;32mI (406) esp_image: segment 5: paddr=001a142c vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (417) boot: Loaded app from partition at offset 0x20000[0m
+[0;32mI (417) boot: Disabling RNG early entropy source...[0m
+[0;32mI (428) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (428) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (428) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (430) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (434) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (439) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (443) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (448) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (452) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (457) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (462) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (466) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (470) esp_psram: Speed: 40MHz[0m
+[0;32mI (473) cpu_start: Multicore app[0m
+[0;32mI (1207) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (1216) cpu_start: Pro cpu start user code[0m
+[0;32mI (1216) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (1216) app_init: Application information:[0m
+[0;32mI (1216) app_init: Project name:     kc_device[0m
+[0;32mI (1220) app_init: App version:      ba19029-dirty[0m
+[0;32mI (1225) app_init: Compile time:     Dec  8 2025 20:27:59[0m
+[0;32mI (1230) app_init: ELF file SHA256:  35d4c1803...[0m
+[0;32mI (1234) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (1238) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (1242) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (1246) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (1250) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (1257) heap_init: At 3FCAF0C0 len 0003A650 (233 KiB): RAM[0m
+[0;32mI (1262) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (1267) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (1272) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (1278) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (1285) spi_flash: detected chip: gd[0m
+[0;32mI (1288) spi_flash: flash io: dio[0m
+[0;33mW (1291) spi_flash: Detected size(16384k) larger than the size in the binary image header(4096k). Using the size in the binary image header.[0m
+[0;32mI (1303) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (1310) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (1316) coexist: coex firmware version: b0bcc39[0m
+[0;32mI (1321) coexist: coexist rom version e7ae62f[0m
+[0;32mI (1325) main_task: Started on CPU0[0m
+[0;32mI (1335) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (1335) main_task: Calling app_main()[0m
+[0;32mI (1335) MAIN: =================================[0m
+[0;32mI (1345) MAIN: KC-Device WiFi Provisioning[0m
+[0;32mI (1345) MAIN: =================================[0m
+[0;32mI (1355) CHIP_INFO: ========================================[0m
+[0;32mI (1355) CHIP_INFO: Chip Information[0m
+[0;32mI (1365) CHIP_INFO: ========================================[0m
+[0;32mI (1365) CHIP_INFO: Model:         ESP32-S3[0m
+[0;32mI (1365) CHIP_INFO: Architecture:  Xtensa[0m
+[0;32mI (1375) CHIP_INFO: Revision:      v0.2[0m
+[0;32mI (1375) CHIP_INFO: CPU Cores:     2[0m
+[0;32mI (1385) CHIP_INFO: Flash Size:    4 MB[0m
+[0;32mI (1385) CHIP_INFO: Features:[0m
+[0;32mI (1385) CHIP_INFO:   - WiFi:      Yes (2.4 GHz)[0m
+[0;32mI (1395) CHIP_INFO:   - Bluetooth: No[0m
+[0;32mI (1395) CHIP_INFO:   - BLE:       Yes[0m
+[0;32mI (1395) CHIP_INFO:   - PSRAM:     No[0m
+[0;32mI (1405) CHIP_INFO: ========================================[0m
+[0;32mI (1405) CHIP_INFO: ESP-IDF Version: v5.5.1[0m
+[0;32mI (1415) CHIP_INFO: ========================================[0m
+[0;32mI (1415) SECURITY: =================================[0m
+[0;32mI (1425) SECURITY: Initializing Security Features[0m
+[0;32mI (1425) SECURITY: =================================[0m
+[0;32mI (1425) SECURITY: NVS keys partition found at 0xf000 (size: 4096 bytes)[0m
+[0;32mI (1435) SECURITY: Initializing NVS with encryption...[0m
+[0;32mI (1445) SECURITY: ✓ NVS encryption keys loaded from partition[0m
+[0;32mI (1505) SECURITY: ✓ NVS encryption initialized successfully[0m
+[0;32mI (1505) SECURITY: ✓ WiFi credentials will be stored encrypted[0m
+[0;33mW (1505) SECURITY: ✗ Flash encryption is DISABLED[0m
+[0;33mW (1505) SECURITY:   Firmware and data are NOT protected in flash[0m
+[0;33mW (1515) SECURITY:   Enable flash encryption for production deployment[0m
+[0;32mI (1515) SECURITY: =================================[0m
+[0;32mI (1525) SECURITY: Security Status Summary:[0m
+[0;32mI (1525) SECURITY:   NVS Encryption:   ENABLED ✓[0m
+[0;32mI (1535) SECURITY:   Flash Encryption: DISABLED ✗[0m
+[0;32mI (1535) SECURITY:   Key Protection:   HMAC-based (eFuse)[0m
+[0;32mI (1545) SECURITY:   Security Level:   MEDIUM ✓✓[0m
+[0;32mI (1545) SECURITY: =================================[0m
+[0;32mI (1555) RESET_BTN: Initializing reset button on GPIO14[0m
+[0;32mI (1555) RESET_BTN: Reset button initialized successfully[0m
+[0;32mI (1565) RESET_BTN:   Short press (<3s): Clear WiFi credentials[0m
+[0;32mI (1565) RESET_BTN:   Long press (>=3s): Factory reset[0m
+[0;32mI (1575) PROV_STATE: Provisioning state machine initialized[0m
+[0;32mI (1575) PROV_STATE: State change callback registered[0m
+[0;32mI (1585) MAIN: Initializing WiFi manager...[0m
+[0;32mI (1585) WIFI_MGR: Initializing WiFi manager[0m
+[0;32mI (1595) pp: pp rom version: e7ae62f[0m
+[0;32mI (1595) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (1605) wifi:wifi driver task: 3fcbef24, prio:23, stack:6656, core=0[0m
+[0;32mI (1635) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (1635) wifi:wifi certification version: v7.0[0m
+[0;32mI (1635) wifi:config NVS flash: enabled[0m
+[0;32mI (1635) wifi:config nano formatting: disabled[0m
+[0;32mI (1635) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (1645) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (1645) wifi:Init management short buffer num: 32[0m
+[0;32mI (1645) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (1655) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (1655) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (1665) wifi:Init static rx buffer num: 10[0m
+[0;32mI (1665) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (1675) wifi_init: rx ba win: 6[0m
+[0;32mI (1675) wifi_init: accept mbox: 6[0m
+[0;32mI (1675) wifi_init: tcpip mbox: 32[0m
+[0;32mI (1675) wifi_init: udp mbox: 6[0m
+[0;32mI (1685) wifi_init: tcp mbox: 6[0m
+[0;32mI (1685) wifi_init: tcp tx win: 5760[0m
+[0;32mI (1685) wifi_init: tcp rx win: 5760[0m
+[0;32mI (1695) wifi_init: tcp mss: 1440[0m
+[0;32mI (1695) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1695) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1705) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10[0m
+[0;32mI (1755) wifi:mode : sta (30:30:f9:73:c5:cc)[0m
+[0;32mI (1755) wifi:enable tsf[0m
+[0;32mI (1755) WIFI_MGR: WiFi manager initialized successfully[0m
+[0;32mI (1755) WIFI_MGR: WiFi station started, attempting to connect...[0m
+[0;32mI (1765) MAIN: Found stored credentials, attempting to connect to: AP-5GHz[0m
+[0;32mI (1765) WIFI_MGR: Connecting to WiFi SSID: AP-5GHz[0m
+[0;32mI (1775) wifi:flush txq[0m
+[0;32mI (1775) wifi:stop sw txq[0m
+[0;32mI (1775) wifi:lmac stop hw txq[0m
+[0;32mI (1835) wifi:mode : sta (30:30:f9:73:c5:cc)[0m
+[0;32mI (1835) wifi:enable tsf[0m
+[0;32mI (1835) PROV_STATE: State transition: IDLE -> WIFI_CONNECTING (Status: SUCCESS, Message: Initiating WiFi connection)[0m
+[0;32mI (1835) WIFI_MGR: WiFi station started, attempting to connect...[0m
+[0;32mI (1845) MAIN: State changed: WIFI_CONNECTING | Status: SUCCESS | Message: Initiating WiFi connection[0m
+[0;32mI (1855) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (1865) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1865) MAIN: Connecting to stored WiFi network...[0m
+[0;32mI (2555) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (2565) wifi:Association refused temporarily time 1953, comeback time 2053 (TUs)[0m
+[0;32mI (4665) wifi:state: assoc -> auth (0xb0)[0m
+[0;32mI (5365) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (5385) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (5415) wifi:connected with AP-5GHz, aid = 27, channel 1, BW20, bssid = 72:13:01:32:b2:79[0m
+[0;32mI (5415) wifi:security: WPA3-SAE, phy: bgn, rssi: -60[0m
+[0;32mI (5435) wifi:pm start, type: 1[0m
+
+[0;32mI (5435) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (5435) wifi:set rx beacon pti, rx_bcn_pti: 14, bcn_timeout: 25000, mt_pti: 14, mt_time: 10000[0m
+[0;32mI (5455) wifi:<ba-add>idx:0 (ifx:0, 72:13:01:32:b2:79), tid:7, ssn:3, winSize:64[0m
+[0;32mI (5465) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (5515) wifi:<ba-add>idx:1 (ifx:0, 72:13:01:32:b2:79), tid:0, ssn:1, winSize:64[0m
+[0;32mI (6475) esp_netif_handlers: sta ip: 192.168.0.215, mask: 255.255.255.0, gw: 192.168.0.1[0m
+[0;32mI (6475) WIFI_MGR: WiFi connected! IP: 192.168.0.215[0m
+[0;32mI (6475) WIFI_MGR: Credentials saved automatically by ESP-IDF (encrypted in NVS)[0m
+[0;32mI (6475) PROV_STATE: State transition: WIFI_CONNECTING -> PROVISIONED (Status: SUCCESS, Message: 192.168.0.215)[0m
+[0;32mI (6485) MAIN: State changed: PROVISIONED | Status: SUCCESS | Message: 192.168.0.215[0m
+[0;32mI (6875) MAIN: Successfully connected using stored credentials[0m
+[0;32mI (6875) PROV_STATE: State transition: PROVISIONED -> PROVISIONED (Status: SUCCESS, Message: Connected using stored credentials)[0m
+[0;32mI (6875) MAIN: State changed: PROVISIONED | Status: SUCCESS | Message: Connected using stored credentials[0m
+[0;32mI (6885) MAIN: Initializing NTP time synchronization...[0m
+[0;32mI (6895) TIME_SYNC: Initializing SNTP time synchronization[0m
+[0;32mI (6895) TIME_SYNC: Timezone set to: UTC (default)[0m
+[0;32mI (6905) TIME_SYNC: NTP server 0: pool.ntp.org[0m
+[0;32mI (6905) TIME_SYNC: NTP server 1: time.nist.gov[0m
+[0;32mI (6905) TIME_SYNC: NTP server 2: time.google.com[0m
+[0;32mI (6915) TIME_SYNC: SNTP initialized, waiting for time sync...[0m
+[0;32mI (6915) MAIN: Waiting for time synchronization...[0m
+[0;32mI (11885) TIME_SYNC: ✓ Time synchronized: 2025-12-09 03:40:32[0m
+[0;32mI (11885) MAIN: ====================================[0m
+[0;32mI (11885) MAIN: Time Synchronized Successfully![0m
+[0;32mI (11885) MAIN: Current time: 2025-12-09 03:40:32 UTC[0m
+[0;32mI (11885) MAIN: ====================================[0m
+[0;32mI (11925) MAIN: Initializing API key manager...[0m
+[0;32mI (11925) API_KEY_MGR: Initializing API key manager[0m
+[0;32mI (11925) API_KEY_MGR: No stored API keys found[0m
+[0;32mI (11925) API_KEY_MGR: API key manager initialized with 0 keys[0m
+[0;32mI (11925) MAIN: Initializing cloud provisioning...[0m
+[0;32mI (11935) CLOUD_PROV: Initializing cloud provisioning[0m
+[0;32mI (11935) MAIN: Starting cloud provisioning...[0m
+[0;32mI (11945) CLOUD_PROV: ===========================================[0m
+[0;32mI (11945) CLOUD_PROV: Starting automatic device provisioning[0m
+[0;32mI (11955) CLOUD_PROV: ===========================================[0m
+[0;32mI (11965) CLOUD_PROV: Device already has certificates[0m
+[0;32mI (11965) MAIN: ====================================[0m
+[0;32mI (11965) MAIN: Cloud Provisioning Successful![0m
+[0;32mI (11975) MAIN: Message: Already provisioned[0m
+[0;32mI (11975) MAIN: ====================================[0m
+[0;32mI (11985) MAIN: Downloading MQTT CA certificate...[0m
+[0;32mI (11985) CLOUD_PROV: MQTT CA certificate already exists (1425 bytes), skipping download[0m
+[0;32mI (11995) MAIN: Initializing mDNS service...[0m
+[0;32mI (11995) MDNS: Initializing mDNS service[0m
+[0;32mI (12005) MDNS: Hostname: kc.local[0m
+[0;32mI (12005) mdns_mem: mDNS task will be created from internal RAM[0m
+[0;32mI (12015) MDNS: mDNS service started successfully[0m
+[0;32mI (12015) MDNS: Device accessible at: https://kc.local[0m
+[0;32mI (12015) MDNS: Adding HTTPS service on port 443[0m
+[0;32mI (12025) MDNS: HTTPS service added to mDNS[0m
+[0;32mI (12025) MAIN: Starting HTTPS dashboard server...[0m
+[0;32mI (12035) WEB_EDITOR: Initializing FATFS dashboard volume...[0m
+[0;32mI (12045) WEB_EDITOR: FATFS: total=480 KB, free=412 KB[0m
+[0;32mI (12045) HTTP_SERVER: Starting HTTPS server...[0m
+[0;32mI (12055) HTTP_SERVER: Certificate length: 1509 bytes[0m
+[0;32mI (12055) HTTP_SERVER: Private key length: 1679 bytes[0m
+[0;32mI (12055) HTTP_SERVER: Cert first 100 chars: -----BEGIN CERTIFICATE-----[0m
+MIIELjCCAxagAwIBAgIUR8aGwylXkcja/jryG9vMDL1jbZswDQYJKoZIhvcNAQEL
+BQAwgZo
+[0;32mI (12065) HTTP_SERVER: Cert last 100 chars: /vybtsC04sldpjET22Joehc0QavY2zu/pIrvtzfos5fCwe0m[0m
+XxEFT+bjKzrlECzK+VyEKDz/
+-----END CERTIFICATE-----
+
+[0;32mI (12085) esp_https_server: Starting server[0m
+[0;32mI (12085) esp_https_server: Server listening on port 443[0m
+[0;32mI (12095) HTTP_SERVER: ✓ HTTPS server started successfully[0m
+[0;32mI (12095) HTTP_SERVER: Dashboard accessible at: https://kc.local[0m
+[0;32mI (12105) HTTP_SERVER: Registered sensor + dashboard API endpoints[0m
+[0;32mI (12105) MAIN: ✓ HTTPS dashboard is ready![0m
+[0;32mI (12115) MAIN: ✓ Access at: https://kc.local[0m
+[0;32mI (12115) MAIN: Initializing I2C scanner...[0m
+[0;32mI (12125) I2C_SCAN: Initializing I2C master bus[0m
+[0;32mI (12125) I2C_SCAN:   SDA: GPIO47, SCL: GPIO48[0m
+[0;32mI (12125) I2C_SCAN: ✓ I2C master bus initialized successfully[0m
+[0;32mI (12135) I2C_SCAN: ========================================[0m
+[0;32mI (12135) I2C_SCAN: Scanning I2C bus for devices...[0m
+[0;32mI (12145) I2C_SCAN: ========================================[0m
+[0;32mI (12155) I2C_SCAN: ✓ Device found at address 0x16[0m
+[0;32mI (12155) I2C_SCAN: ✓ Device found at address 0x36[0m
+[0;32mI (12165) I2C_SCAN: ✓ Device found at address 0x63[0m
+[0;32mI (12165) I2C_SCAN: ✓ Device found at address 0x64[0m
+[0;32mI (12165) I2C_SCAN: ✓ Device found at address 0x6F[0m
+[0;32mI (12175) I2C_SCAN: ========================================[0m
+[0;32mI (12175) I2C_SCAN: Scan complete: 5 device(s) found[0m
+[0;32mI (12185) I2C_SCAN: ========================================[0m
+[0;32mI (12185) MAIN: Initializing sensor manager...[0m
+[0;32mI (12195) SENSOR_MGR: Initializing sensor manager[0m
+[0;32mI (12195) SENSOR_MGR: MAX17048 battery monitor detected at 0x36[0m
+[0;32mI (12205) MAX17048: Initializing MAX17048 battery monitor[0m
+[0;32mI (12205) MAX17048: MAX17048 chip version: 0x0012[0m
+[0;32mI (12215) SENSOR_MGR: ✓ MAX17048 initialized successfully[0m
+[0;32mI (12215) SENSOR_MGR:   Battery: 4.09 V, 94.0%[0m
+[0;32mI (12225) SENSOR_MGR: EZO sensor detected at 0x16[0m
+[0;32mI (12225) EZO_SENSOR: Initializing EZO sensor at address 0x16[0m
+[0;32mI (12235) EZO_SENSOR: Sending command to 0x16: i[0m
+[0;32mI (12325) esp_https_server: performing session handshake[0m
+[0;32mI (12745) EZO_SENSOR: Sending command to 0x16: Name,?[0m
+[0;32mI (13055) EZO_SENSOR: Sending command to 0x16: L,?[0m
+[0;32mI (13355) EZO_SENSOR: Sending command to 0x16: Plock,?[0m
+[0;32mI (13365) HTTP_SERVER: WS client added (fd=57, slot=0)[0m
+[0;32mI (13655) EZO_SENSOR: Sending command to 0x16: S,?[0m
+[0;32mI (13955) EZO_SENSOR: EZO sensor initialized: Type=RTD, FW=2.12[0m
+[0;32mI (13955) SENSOR_MGR: ✓ EZO sensor initialized: Type=RTD, Name=, FW=2.12[0m
+[0;32mI (13955) SENSOR_MGR:   → Temperature sensor (RTD)[0m
+[0;32mI (13955) SENSOR_MGR: EZO sensor detected at 0x63[0m
+[0;32mI (13965) EZO_SENSOR: Initializing EZO sensor at address 0x63[0m
+[0;32mI (13965) EZO_SENSOR: Sending command to 0x63: i[0m
+[0;32mI (14275) EZO_SENSOR: Sending command to 0x63: Name,?[0m
+[0;32mI (14385) esp_https_server: performing session handshake[0m
+[0;32mI (14865) EZO_SENSOR: Sending command to 0x63: L,?[0m
+[0;32mI (15165) EZO_SENSOR: Sending command to 0x63: Plock,?[0m
+[0;32mI (15465) EZO_SENSOR: Sending command to 0x63: pHext,?[0m
+[0;32mI (15765) EZO_SENSOR: EZO sensor initialized: Type=pH, FW=2.14[0m
+[0;32mI (15765) SENSOR_MGR: ✓ EZO sensor initialized: Type=pH, Name=, FW=2.14[0m
+[0;32mI (15765) SENSOR_MGR:   → pH sensor[0m
+[0;32mI (15765) SENSOR_MGR: EZO sensor detected at 0x64[0m
+[0;32mI (15775) EZO_SENSOR: Initializing EZO sensor at address 0x64[0m
+[0;32mI (15775) EZO_SENSOR: Sending command to 0x64: i[0m
+[0;32mI (16085) EZO_SENSOR: Sending command to 0x64: Name,?[0m
+[0;32mI (16385) EZO_SENSOR: Sending command to 0x64: L,?[0m
+[0;32mI (16685) EZO_SENSOR: Sending command to 0x64: Plock,?[0m
+[0;32mI (16985) EZO_SENSOR: Sending command to 0x64: K,?[0m
+[0;32mI (17285) EZO_SENSOR: Sending command to 0x64: TDS,?[0m
+[0;32mI (17585) EZO_SENSOR: EZO sensor initialized: Type=EC, FW=2.17[0m
+[0;32mI (17585) SENSOR_MGR: ✓ EZO sensor initialized: Type=EC, Name=, FW=2.17[0m
+[0;32mI (17585) SENSOR_MGR:   → Electrical Conductivity sensor[0m
+[0;32mI (17585) SENSOR_MGR: EZO sensor detected at 0x6F[0m
+[0;32mI (17595) EZO_SENSOR: Initializing EZO sensor at address 0x6F[0m
+[0;32mI (17595) EZO_SENSOR: Sending command to 0x6F: i[0m
+[0;32mI (17905) EZO_SENSOR: Sending command to 0x6F: Name,?[0m
+[0;32mI (18205) EZO_SENSOR: Sending command to 0x6F: L,?[0m
+[0;32mI (18505) EZO_SENSOR: Sending command to 0x6F: Plock,?[0m
+[0;32mI (18805) EZO_SENSOR: Sending command to 0x6F: O,?[0m
+[0;32mI (19105) EZO_SENSOR: HUM sensor has 3 parameters enabled[0m
+[0;32mI (19105) EZO_SENSOR: EZO sensor initialized: Type=HUM, FW=1.0[0m
+[0;32mI (19105) SENSOR_MGR: ✓ EZO sensor initialized: Type=HUM, Name=, FW=1.0[0m
+[0;32mI (19105) SENSOR_MGR:   → Humidity sensor[0m
+[0;32mI (19115) SENSOR_MGR: Sensor manager initialized: Battery=YES, EZO sensors=4[0m
+[0;32mI (19125) SENSOR_MGR: Refreshing settings for 4 EZO sensor(s)[0m
+[0;32mI (19125) EZO_SENSOR: Sending command to 0x16: Cal,?[0m
+[0;32mI (19485) EZO_SENSOR: Sending command to 0x63: Cal,?[0m
+[0;32mI (19785) EZO_SENSOR: Sending command to 0x63: T,?[0m
+[0;32mI (20085) EZO_SENSOR: Sending command to 0x63: C,?[0m
+[0;32mI (20435) EZO_SENSOR: Sending command to 0x64: Cal,?[0m
+[0;32mI (20735) EZO_SENSOR: Sending command to 0x64: C,?[0m
+[0;32mI (21135) MAIN: ✓ Sensors initialized: Battery=YES, EZO sensors=4[0m
+[0;32mI (21135) MAIN: Starting sensor reading task...[0m
+[0;32mI (21135) SENSOR_MGR: Loaded sensor interval from NVS: 3 seconds[0m
+[0;32mI (21135) SENSOR_MGR: Sensor reading task started[0m
+[0;32mI (21135) SENSOR_MGR: Sensor reading task started (interval: 3 seconds)[0m
+[0;32mI (21135) MAIN: Initializing MQTT client...[0m
+[0;32mI (21145) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (21155) MQTT_CLIENT: Loaded MQTT interval from NVS: 10 seconds[0m
+[0;32mI (21165) MQTT_CLIENT: Initializing MQTT client[0m
+[0;32mI (21165) MQTT_CLIENT: Broker URI: mqtts://mqtt.kannacloud.com:8883[0m
+[0;32mI (21175) MQTT_CLIENT: Device ID: esp32-3030f973c5cc[0m
+[0;32mI (21175) MQTT_CLIENT: Username: sensor01[0m
+[0;32mI (21175) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (21175) MQTT_CLIENT: Configuring MQTTS with TLS encryption[0m
+[0;32mI (21195) MQTT_CLIENT: Loaded CA certificate for MQTTS (1424 bytes)[0m
+[0;32mI (21195) MQTT_CLIENT: Certificate START: -----BEGIN CERTIFICATE-----[0m
+MIID7TCCAtWgAwIBAgIUJ3peazJES0Y1KwBDIDqz703ItnwwDQYJKoZIhvcNAQEL
+BQAwgYUxCzAJBgNVBAYTAlVTMRAwDgYDVQQIDAdBcml6b25hMRQwEgYD
+[0;32mI (21205) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (21215) MQTT_CLIENT: Certificate END: YkF[0m
+2OVAwGyyM4LaaQDVJyXcjXQ1cs5HC6nKomKRWlSCCW/bzkQgFI7V9YL9N7uq5CzF
+iw==
+-----END CERTIFICATE-----
+
+[0;32mI (21225) MQTT_CLIENT: Certificate null-terminated: YES[0m
+[0;32mI (21235) MQTT_CLIENT: ✓ TLS encryption enabled with CA certificate verification[0m
+[0;32mI (21235) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (21245) MQTT_CLIENT: ✓ MQTT client initialized successfully[0m
+[0;32mI (21255) MQTT_CLIENT: Starting MQTT client...[0m
+[0;32mI (21255) MQTT_CLIENT: MQTT publish task started (interval: 10 seconds)[0m
+[0;32mI (21265) MQTT_CLIENT: ✓ MQTT publish task started (publish interval: 10 seconds)[0m
+[0;32mI (21265) MAIN: ✓ MQTT telemetry enabled[0m
+[0;32mI (21275) MQTT_CLIENT: MQTT publish interval updated to 10 seconds[0m
+[0;32mI (21275) MQTT_CLIENT: MQTT interval 10 saved to NVS[0m
+[0;32mI (21285) MAIN: Entering normal operation mode[0m
+[0;32mI (22275) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (22295) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (22315) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1254.00[0m
+[0;32mI (22335) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.30,...[0m
+[0;32mI (22355) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (22365) MQTT_CLIENT: ✓ Connected to MQTT broker[0m
+[0;32mI (22375) MQTT_CLIENT: Subscribed to: kannacloud/sensor/esp32-3030f973c5cc/cmd[0m
+[0;32mI (22375) MQTT_CLIENT: Device ready to publish sensor data[0m
+[0;32mI (22435) MQTT_CLIENT: Subscribed, msg_id=25262[0m
+[0;32mI (23265) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.909999847412109,"pH":7.1230001449584961,"EC":1254,"HUM":{"humidity":40.299999237060547,"air_temp":21.819999694824219,"dew_point":7.78000020980835}},"battery":94.01953125,"rssi":-60}[0m
+[0;32mI (23275) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (25355) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (25375) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (25395) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (25415) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (26435) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (26455) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.11[0m
+[0;32mI (26475) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (26495) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.32,...[0m
+[0;32mI (26515) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (29515) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (29535) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (29555) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (29575) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (30595) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (30615) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (30635) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (30655) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.32,...[0m
+[0;32mI (30675) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (33285) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.9109992980957,"pH":7.130000114440918,"EC":1255,"HUM":{"humidity":40.319999694824219,"air_temp":21.819999694824219,"dew_point":7.7899999618530273}},"battery":94.01953125,"rssi":-58}[0m
+[0;32mI (33295) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (33675) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (33695) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (33715) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (33735) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (34755) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (34775) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (34795) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (34815) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.31,...[0m
+[0;32mI (34835) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (37835) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (37855) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (37875) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (37895) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (38915) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (38935) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (38955) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (38975) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.29,...[0m
+[0;32mI (38995) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (41995) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (42015) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (42035) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (42055) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (43075) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (43095) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (43115) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (43135) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.27,...[0m
+[0;32mI (43155) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (43305) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.9109992980957,"pH":7.124000072479248,"EC":1255,"HUM":{"humidity":40.270000457763672,"air_temp":21.809999465942383,"dew_point":7.7699999809265137}},"battery":94.01953125,"rssi":-58}[0m
+[0;32mI (43315) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (45225) WEB_EDITOR: Loaded file: index.html (15020 bytes)[0m
+[0;32mI (45225) HTTP_SERVER: Serving index.html from FATFS (15020 bytes)[0m
+[0;32mI (46155) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (46175) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (46195) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (46215) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (47165) esp_https_server: performing session handshake[0m
+[0;32mI (47235) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (47255) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.11[0m
+[0;32mI (47275) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1254.00[0m
+[0;32mI (47295) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.24,...[0m
+[0;32mI (47315) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (48235) HTTP_SERVER: GET handler called for file: dashboard.css[0m
+[0;32mI (48235) WEB_EDITOR: Loaded file: dashboard.css (299 bytes)[0m
+[0;32mI (48295) HTTP_SERVER: GET handler called for file: dashboard.js[0m
+[0;32mI (48315) WEB_EDITOR: Loaded file: dashboard.js (46922 bytes)[0m
+[0;32mI (50315) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (50335) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (50355) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (50375) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (51395) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (51415) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (51435) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (51455) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.23,...[0m
+[0;32mI (51475) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (53325) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.91200065612793,"pH":7.1269998550415039,"EC":1255,"HUM":{"humidity":40.229999542236328,"air_temp":21.819999694824219,"dew_point":7.7600002288818359}},"battery":94.01953125,"rssi":-60}[0m
+[0;32mI (53335) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (54475) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (54495) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (54515) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (54535) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (55555) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (55575) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (55595) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (55615) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.23,...[0m
+[0;32mI (55635) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (58635) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (58655) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (58675) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (58695) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (59715) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (59735) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.14[0m
+[0;32mI (59755) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (59775) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.23,...[0m
+[0;32mI (59795) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (62795) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (62815) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (62835) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (62855) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (63875) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (63895) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (63915) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (63935) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.26,...[0m
+[0;32mI (63955) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (64345) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.913999557495117,"pH":7.120999813079834,"EC":1255,"HUM":{"humidity":40.2599983215332,"air_temp":21.809999465942383,"dew_point":7.7600002288818359}},"battery":94.01953125,"rssi":-58}[0m
+[0;32mI (64355) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (66955) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (66975) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (66995) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (67015) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (68035) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (68055) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (68075) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (68095) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.31,...[0m
+[0;32mI (68115) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (71115) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (71135) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (71155) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (71175) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (72195) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (72215) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (72235) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (72255) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.28,...[0m
+[0;32mI (72275) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (74365) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.915000915527344,"pH":7.1329998970031738,"EC":1255,"HUM":{"humidity":40.279998779296875,"air_temp":21.819999694824219,"dew_point":7.78000020980835}},"battery":94.01953125,"rssi":-58}[0m
+[0;32mI (74375) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (75275) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (75295) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (75315) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (75335) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (76355) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (76375) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (76395) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (76415) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.20,...[0m
+[0;32mI (76435) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (78695) WEB_EDITOR: Loaded file: index.html (15020 bytes)[0m
+[0;32mI (78695) HTTP_SERVER: Serving index.html from FATFS (15020 bytes)[0m
+[0;32mI (79435) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (79455) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (79475) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (79495) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (80515) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (80535) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (80555) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (80575) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.17,...[0m
+[0;32mI (80595) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (80675) HTTP_SERVER: GET handler called for file: dashboard.css[0m
+[0;32mI (80685) WEB_EDITOR: Loaded file: dashboard.css (299 bytes)[0m
+[0;32mI (80755) HTTP_SERVER: GET handler called for file: dashboard.js[0m
+[0;32mI (80775) WEB_EDITOR: Loaded file: dashboard.js (46922 bytes)[0m
+[0;32mI (81365) esp_https_server: performing session handshake[0m
+[0;32mI (82335) esp_https_server: performing session handshake[0m
+[0;32mI (83285) SENSOR_MGR: Sensor reading paused[0m
+[0;32mI (83285) SENSOR_MGR: Refreshing settings for 4 EZO sensor(s)[0m
+[0;32mI (83285) EZO_SENSOR: Sending command to 0x16: Cal,?[0m
+[0;32mI (83595) SENSOR_MGR: Sensor reading paused before trigger phase completed (0/4)[0m
+[0;32mI (83635) EZO_SENSOR: Sending command to 0x63: Cal,?[0m
+[0;32mI (83935) EZO_SENSOR: Sending command to 0x63: T,?[0m
+[0;32mI (84235) EZO_SENSOR: Sending command to 0x63: C,?[0m
+[0;32mI (84385) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.916000366210938,"pH":7.1220002174377441,"EC":1255,"HUM":{"humidity":40.169998168945312,"air_temp":21.819999694824219,"dew_point":7.7399997711181641}},"battery":94.01953125,"rssi":-59}[0m
+[0;32mI (84395) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (84585) EZO_SENSOR: Sending command to 0x64: Cal,?[0m
+[0;32mI (84885) EZO_SENSOR: Sending command to 0x64: C,?[0m
+[0;32mI (85285) SENSOR_MGR: Sensor reading resumed[0m
+[0;32mI (85465) esp_https_server: performing session handshake[0m
+[0;32mI (86585) HTTP_SERVER: WS client added (fd=60, slot=1)[0m
+[0;32mI (88595) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (88615) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (88635) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (88655) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (89675) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (89695) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (89715) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (89735) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.21,...[0m
+[0;32mI (89755) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (92755) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (92775) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (92795) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (92815) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (93835) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (93855) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (93875) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (93895) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.21,...[0m
+[0;32mI (93915) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (94405) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.915000915527344,"pH":7.125999927520752,"EC":1255,"HUM":{"humidity":40.209999084472656,"air_temp":21.829999923706055,"dew_point":7.7600002288818359}},"battery":94.01953125,"rssi":-57}[0m
+[0;32mI (94415) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[1;31mE (95505) esp-tls-mbedtls: read error :-0x0050[0m
+[0;32mI (96915) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (96935) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (96955) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (96975) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (97995) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (98015) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (98035) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (98055) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.16,...[0m
+[0;32mI (98075) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;33mW (98075) HTTP_SERVER: Failed to send WS frame to fd 57: ESP_ERR_INVALID_ARG[0m
+[0;32mI (98075) HTTP_SERVER: WS client removed (fd=57)[0m
+[0;32mI (101075) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (101095) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (101115) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (101135) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (102155) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (102175) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (102195) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (102215) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.17,...[0m
+[0;32mI (102235) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (104425) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.913999557495117,"pH":7.1230001449584961,"EC":1255,"HUM":{"humidity":40.169998168945312,"air_temp":21.829999923706055,"dew_point":7.75}},"battery":94.01953125,"rssi":-58}[0m
+[0;32mI (104435) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (105245) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (105265) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (105285) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (105305) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (106325) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (106345) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (106365) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (106385) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.18,...[0m
+[0;32mI (106405) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (109405) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (109425) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (109445) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (109465) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (110485) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (110505) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (110525) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (110545) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.16,...[0m
+[0;32mI (110565) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (113565) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (113585) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (113605) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (113625) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (114645) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (114665) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (114685) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (114705) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.14,...[0m
+[0;32mI (114725) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (115435) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.915000915527344,"pH":7.129000186920166,"EC":1255,"HUM":{"humidity":40.139999389648438,"air_temp":21.819999694824219,"dew_point":7.7300000190734863}},"battery":94.01953125,"rssi":-57}[0m
+[0;32mI (115445) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (117735) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (117755) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (117775) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (117795) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (118815) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.91[0m
+[0;32mI (118835) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.12[0m
+[0;32mI (118855) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (118875) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.12,...[0m
+[0;32mI (118895) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (121895) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (121915) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (121935) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (121955) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (122825) HTTP_SERVER: Setting MQTT telemetry interval to 0 seconds (0=on-read only)[0m
+[0;32mI (122825) MQTT_CLIENT: MQTT periodic publishing disabled (will publish on sensor read only)[0m
+[0;32mI (122835) MQTT_CLIENT: MQTT interval 0 saved to NVS[0m
+[0;32mI (122835) HTTP_SERVER: Setting sensor reading interval to 3 seconds[0m
+[0;32mI (122835) SENSOR_MGR: Reading interval updated to 3 seconds[0m
+[0;32mI (122845) SENSOR_MGR: Sensor interval saved to NVS[0m
+[0;32mI (122975) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (122995) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.14[0m
+[0;32mI (123015) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (123035) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.12,...[0m
+[0;32mI (123055) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (123055) SENSOR_MGR: Triggering MQTT publish (on-read mode)[0m
+[0;32mI (125455) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.915000915527344,"pH":7.1380000114440918,"EC":1255,"HUM":{"humidity":40.119998931884766,"air_temp":21.819999694824219,"dew_point":7.71999979019165}},"battery":94.01953125,"rssi":-60}[0m
+[0;32mI (125465) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (125475) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.915000915527344,"pH":7.1380000114440918,"EC":1255,"HUM":{"humidity":40.119998931884766,"air_temp":21.819999694824219,"dew_point":7.71999979019165}},"battery":94.01953125,"rssi":-60}[0m
+[0;32mI (125495) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (126055) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (126075) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (126095) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (126115) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (127135) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (127155) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (127175) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (127195) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.12,...[0m
+[0;32mI (127215) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (127215) SENSOR_MGR: Triggering MQTT publish (on-read mode)[0m
+[0;32mI (127215) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.915000915527344,"pH":7.1329998970031738,"EC":1255,"HUM":{"humidity":40.119998931884766,"air_temp":21.819999694824219,"dew_point":7.71999979019165}},"battery":94.01953125,"rssi":-58}[0m
+[0;32mI (127245) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (130215) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (130235) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (130255) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (130275) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (131295) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (131315) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (131335) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (131355) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.17,...[0m
+[0;32mI (131375) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (131375) SENSOR_MGR: Triggering MQTT publish (on-read mode)[0m
+[0;32mI (131375) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.915000915527344,"pH":7.1319999694824219,"EC":1255,"HUM":{"humidity":40.169998168945312,"air_temp":21.829999923706055,"dew_point":7.75}},"battery":94.01953125,"rssi":-58}[0m
+[0;32mI (131405) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (134375) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (134395) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (134415) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (134435) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (135455) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (135475) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (135495) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (135515) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.22,...[0m
+[0;32mI (135535) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (135535) SENSOR_MGR: Triggering MQTT publish (on-read mode)[0m
+[0;32mI (135535) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.916000366210938,"pH":7.125999927520752,"EC":1255,"HUM":{"humidity":40.220001220703125,"air_temp":21.819999694824219,"dew_point":7.7600002288818359}},"battery":94.01953125,"rssi":-60}[0m
+[0;32mI (135565) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (138535) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (138555) EZO_SENSOR: Sending command to 0x63: R[0m
+[0;32mI (138575) EZO_SENSOR: Sending command to 0x64: R[0m
+[0;32mI (138595) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (139615) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.92[0m
+[0;32mI (139635) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (139655) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1255.00[0m
+[0;32mI (139675) EZO_SENSOR: Sensor 0x6F fetch 3 values: 40.23,...[0m
+[0;32mI (139695) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)
