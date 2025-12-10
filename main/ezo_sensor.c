@@ -516,14 +516,28 @@ esp_err_t ezo_sensor_get_name(ezo_sensor_t *sensor, char *name, size_t name_size
         return ret;
     }
 
-    // Parse response: ?Name,<name>
-    char *token = strtok(response, ",");
-    if (token != NULL && strcmp(token, "?Name") == 0) {
-        token = strtok(NULL, ",");
-        if (token != NULL) {
-            strncpy(name, token, name_size - 1);
+    ESP_LOGD(TAG, "Get name response from 0x%02X: '%s'", sensor->config.i2c_address, response);
+
+    // Initialize name to empty
+    name[0] = '\0';
+
+    // Parse response: ?NAME,<name> (note: uppercase NAME in response)
+    // Response format: "?NAME,<name>" if name is set, or just status code if not set
+    if (strstr(response, "?NAME,") == response || strstr(response, "?Name,") == response) {
+        // Name is set, extract it (skip "?NAME," or "?Name,")
+        const char *name_start = strchr(response, ',');
+        if (name_start != NULL) {
+            name_start++; // Skip the comma
+            strncpy(name, name_start, name_size - 1);
             name[name_size - 1] = '\0';
+            ESP_LOGD(TAG, "Parsed name from 0x%02X: '%s'", sensor->config.i2c_address, name);
         }
+    } else if (strcmp(response, "?NAME") == 0 || strcmp(response, "?Name") == 0) {
+        // No name set (some firmware versions may return just "?NAME" or "?Name")
+        ESP_LOGD(TAG, "No name set for sensor 0x%02X", sensor->config.i2c_address);
+    } else {
+        // Status code only (no name set)
+        ESP_LOGD(TAG, "No name set for sensor 0x%02X (response: '%s')", sensor->config.i2c_address, response);
     }
 
     return ESP_OK;
@@ -539,6 +553,9 @@ esp_err_t ezo_sensor_set_name(ezo_sensor_t *sensor, const char *name) {
     if (sensor == NULL || name == NULL) {
         return ESP_ERR_INVALID_ARG;
     }
+
+    // Check firmware version - Name command may not be supported in older firmware
+    ESP_LOGI(TAG, "Sensor 0x%02X firmware: %s", sensor->config.i2c_address, sensor->config.firmware_version);
 
     // Validate name length
     size_t name_len = strnlen(name, EZO_MAX_SENSOR_NAME + 1);
@@ -557,17 +574,82 @@ esp_err_t ezo_sensor_set_name(ezo_sensor_t *sensor, const char *name) {
         }
     }
 
+    // Pause sensor reading to avoid I2C conflicts
+    extern esp_err_t sensor_manager_pause_reading(void);
+    extern bool sensor_manager_is_reading_in_progress(void);
+    extern esp_err_t sensor_manager_resume_reading(void);
+    
+    sensor_manager_pause_reading();
+    
+    // Wait for any in-progress reading to complete (max 3 seconds)
+    int wait_count = 0;
+    while (sensor_manager_is_reading_in_progress() && wait_count < 30) {
+        vTaskDelay(pdMS_TO_TICKS(100));
+        wait_count++;
+    }
+    
+    if (sensor_manager_is_reading_in_progress()) {
+        ESP_LOGW(TAG, "Timed out waiting for sensor reading to complete");
+    }
+    
+    // Clear any stale data in sensor buffer before setting name
+    char dummy[EZO_LARGEST_STRING];
+    for (int i = 0; i < 3; i++) {
+        ezo_sensor_receive_response(sensor, dummy, sizeof(dummy));
+    }
+    vTaskDelay(pdMS_TO_TICKS(100));
+
     char command[32];
+    char response[EZO_LARGEST_STRING] = {0};
     snprintf(command, sizeof(command), "Name,%s", name);
     
-    esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
+    ESP_LOGI(TAG, "Setting name for 0x%02X with command: '%s'", sensor->config.i2c_address, command);
+    
+    esp_err_t ret = ezo_sensor_send_command(sensor, command, response, sizeof(response), EZO_LONG_WAIT_MS);
     if (ret == ESP_OK) {
-        strncpy(sensor->config.name, name, EZO_MAX_SENSOR_NAME - 1);
-        sensor->config.name[EZO_MAX_SENSOR_NAME - 1] = '\0';
-        ESP_LOGI(TAG, "Sensor 0x%02X name set to: %s", sensor->config.i2c_address, name);
+        ESP_LOGI(TAG, "Sensor 0x%02X name set command response: '%s' (len=%d)", 
+                 sensor->config.i2c_address, response, strlen(response));
+        
+        // Wait for command to complete and sensor to be ready
+        vTaskDelay(pdMS_TO_TICKS(600));
+        
+        // Clear any stale data before querying name
+        char dummy2[EZO_LARGEST_STRING];
+        for (int i = 0; i < 3; i++) {
+            ezo_sensor_receive_response(sensor, dummy2, sizeof(dummy2));
+        }
+        vTaskDelay(pdMS_TO_TICKS(100));
+        
+        // Verify by reading back with raw response logging
+        char verify[EZO_MAX_SENSOR_NAME] = {0};
+        char raw_verify_response[EZO_LARGEST_STRING] = {0};
+        esp_err_t verify_ret = ezo_sensor_send_command(sensor, "Name,?", raw_verify_response, 
+                                                       sizeof(raw_verify_response), EZO_LONG_WAIT_MS);
+        
+        ESP_LOGI(TAG, "Sensor 0x%02X name query raw response: '%s' (len=%d, ret=%s)", 
+                 sensor->config.i2c_address, raw_verify_response, strlen(raw_verify_response),
+                 esp_err_to_name(verify_ret));
+        
+        // Parse the response
+        ezo_sensor_get_name(sensor, verify, sizeof(verify));
+        
+        if (verify_ret == ESP_OK && strlen(verify) > 0 && strcmp(verify, name) == 0) {
+            strncpy(sensor->config.name, name, EZO_MAX_SENSOR_NAME - 1);
+            sensor->config.name[EZO_MAX_SENSOR_NAME - 1] = '\0';
+            ESP_LOGI(TAG, "✓ Sensor 0x%02X name verified: '%s'", sensor->config.i2c_address, name);
+        } else {
+            ESP_LOGW(TAG, "⚠ Sensor 0x%02X name verification failed. Set='%s', Read='%s', Raw='%s'", 
+                     sensor->config.i2c_address, name, verify, raw_verify_response);
+            // Still update local config even if verification fails (sensor may not support name persistence)
+            strncpy(sensor->config.name, name, EZO_MAX_SENSOR_NAME - 1);
+            sensor->config.name[EZO_MAX_SENSOR_NAME - 1] = '\0';
+        }
     } else {
         ESP_LOGE(TAG, "Failed to set sensor name: %s", esp_err_to_name(ret));
     }
+    
+    // Resume sensor reading
+    sensor_manager_resume_reading();
     
     return ret;
 }

@@ -157,7 +157,7 @@ const CalibrationWizard = {
       icon: '⚡',
       steps: [
         {id: 'intro', title: 'Introduction', skippable: false},
-        {id: 'dry', title: 'Dry Calibration', skippable: false, solution: 'Dry probe'},
+        {id: 'dry', title: 'Dry Calibration', skippable: false, solution: 'Dry probe', isDry: true},
         {id: 'low', title: 'Low Point', skippable: false, solution: 'Low EC', needsValue: true},
         {id: 'high', title: 'High Point', skippable: true, solution: 'High EC', needsValue: true},
         {id: 'complete', title: 'Complete', skippable: false}
@@ -364,41 +364,60 @@ const CalibrationWizard = {
       </div>
     `;
     
-    // Live reading display
-    html += `
-      <div class="reading-display text-gray-900 dark:text-white">
-        <div id="liveReading" class="text-5xl font-bold">--</div>
-        <div class="text-sm mt-2 text-gray-600 dark:text-gray-400">Current Reading</div>
-      </div>
-    `;
-    
-    // Stability indicator
-    html += `
-      <div id="stabilityIndicator" class="text-center">
-        <div class="stability-indicator unstable">
-          <div class="stability-dots">
-            <div class="stability-dot"></div>
-            <div class="stability-dot"></div>
-            <div class="stability-dot"></div>
-          </div>
-          <span>Stabilizing...</span>
+    // For dry calibration, skip live reading and stability
+    if (!step.isDry) {
+      // Live reading display
+      html += `
+        <div class="reading-display text-gray-900 dark:text-white">
+          <div id="liveReading" class="text-5xl font-bold">--</div>
+          <div class="text-sm mt-2 text-gray-600 dark:text-gray-400">Current Reading</div>
         </div>
-      </div>
-    `;
+      `;
+      
+      // Stability indicator
+      html += `
+        <div id="stabilityIndicator" class="text-center">
+          <div class="stability-indicator unstable">
+            <div class="stability-dots">
+              <div class="stability-dot"></div>
+              <div class="stability-dot"></div>
+              <div class="stability-dot"></div>
+            </div>
+            <span>Stabilizing...</span>
+          </div>
+        </div>
+      `;
+    }
     
     // Instructions
-    html += `
-      <div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 rounded">
-        <p class="font-semibold text-yellow-900 dark:text-yellow-200">
-          <i class="fas fa-lightbulb mr-2"></i>Instructions:
-        </p>
-        <ol class="mt-2 space-y-2 text-sm text-yellow-900 dark:text-yellow-100">
-          <li>1. Immerse the probe in ${step.solution} solution</li>
-          <li>2. Wait for the reading to stabilize (same value 3+ times)</li>
-          <li>3. When stable, click "Calibrate" to capture this point</li>
-        </ol>
-      </div>
-    `;
+    if (step.isDry) {
+      html += `
+        <div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 rounded">
+          <p class="font-semibold text-yellow-900 dark:text-yellow-200">
+            <i class="fas fa-lightbulb mr-2"></i>Instructions:
+          </p>
+          <ol class="mt-2 space-y-2 text-sm text-yellow-900 dark:text-yellow-100">
+            <li>1. Remove the probe from any solution</li>
+            <li>2. Thoroughly dry the probe with a clean cloth or paper towel</li>
+            <li>3. Ensure no liquid remains on the probe surface</li>
+            <li>4. Click "Calibrate" to perform dry calibration</li>
+          </ol>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 rounded">
+          <p class="font-semibold text-yellow-900 dark:text-yellow-200">
+            <i class="fas fa-lightbulb mr-2"></i>Instructions:
+          </p>
+          <ol class="mt-2 space-y-2 text-sm text-yellow-900 dark:text-yellow-100">
+            <li>1. Immerse the probe in ${step.solution} solution</li>
+            <li>2. Wait for the reading to stabilize (same value 3+ times)</li>
+            <li>3. When stable, click "Calibrate" to capture this point</li>
+          </ol>
+        </div>
+      `;
+    }
     
     // Value input if needed
     if (step.needsValue) {
@@ -424,7 +443,7 @@ const CalibrationWizard = {
         id="calibrateBtn"
         onclick="CalibrationWizard.calibratePoint('${step.id}')"
         class="w-full py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition"
-        disabled
+        ${step.isDry ? '' : 'disabled'}
       >
         <i class="fas fa-check-circle mr-2"></i>
         Calibrate This Point

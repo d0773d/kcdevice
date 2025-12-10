@@ -1283,6 +1283,40 @@ static esp_err_t api_sensors_rescan_handler(httpd_req_t *req)
     return ESP_OK;
 }
 
+static esp_err_t send_sensor_success_response(httpd_req_t *req, ezo_sensor_t *sensor)
+{
+    if (sensor != NULL) {
+        esp_err_t refresh = ezo_sensor_refresh_settings(sensor);
+        if (refresh != ESP_OK) {
+            ESP_LOGW(TAG, "Failed to refresh sensor settings before response: %s", esp_err_to_name(refresh));
+        }
+    }
+
+    cJSON *root = cJSON_CreateObject();
+    if (root == NULL) {
+        httpd_resp_send_err(req, HTTPD_500_INTERNAL_SERVER_ERROR, "Out of memory");
+        return ESP_FAIL;
+    }
+    cJSON_AddStringToObject(root, "status", "success");
+    cJSON *sensor_json = build_sensor_json(sensor, -1, true);
+    if (sensor_json != NULL) {
+        cJSON_AddItemToObject(root, "sensor", sensor_json);
+    }
+
+    const char *response = cJSON_PrintUnformatted(root);
+    if (response == NULL) {
+        cJSON_Delete(root);
+        httpd_resp_send_err(req, HTTPD_500_INTERNAL_SERVER_ERROR, "Failed to serialize JSON");
+        return ESP_FAIL;
+    }
+
+    httpd_resp_set_type(req, "application/json");
+    httpd_resp_sendstr(req, response);
+    free((void*)response);
+    cJSON_Delete(root);
+    return ESP_OK;
+}
+
 /**
  * @brief POST /api/sensors/config - Update sensor configuration
  * Body: {"address": 99, "led": 1, "name": "MySensor", "scale": "F", etc}
@@ -1402,44 +1436,13 @@ static esp_err_t api_sensors_config_handler(httpd_req_t *req)
     
     cJSON_Delete(root);
     
-    httpd_resp_set_type(req, "application/json");
-    httpd_resp_sendstr(req, "{\"status\":\"success\"}");
+    // Refresh sensor settings after update
+    esp_err_t refresh_ret = ezo_sensor_refresh_settings(sensor);
+    if (refresh_ret != ESP_OK) {
+        ESP_LOGW(TAG, "Failed to refresh sensor settings: %s", esp_err_to_name(refresh_ret));
+    }
     
-    return ESP_OK;
-}
-
-static esp_err_t send_sensor_success_response(httpd_req_t *req, ezo_sensor_t *sensor)
-{
-    if (sensor != NULL) {
-        esp_err_t refresh = ezo_sensor_refresh_settings(sensor);
-        if (refresh != ESP_OK) {
-            ESP_LOGW(TAG, "Failed to refresh sensor settings before response: %s", esp_err_to_name(refresh));
-        }
-    }
-
-    cJSON *root = cJSON_CreateObject();
-    if (root == NULL) {
-        httpd_resp_send_err(req, HTTPD_500_INTERNAL_SERVER_ERROR, "Out of memory");
-        return ESP_FAIL;
-    }
-    cJSON_AddStringToObject(root, "status", "success");
-    cJSON *sensor_json = build_sensor_json(sensor, -1, true);
-    if (sensor_json != NULL) {
-        cJSON_AddItemToObject(root, "sensor", sensor_json);
-    }
-
-    const char *response = cJSON_PrintUnformatted(root);
-    if (response == NULL) {
-        cJSON_Delete(root);
-        httpd_resp_send_err(req, HTTPD_500_INTERNAL_SERVER_ERROR, "Failed to serialize JSON");
-        return ESP_FAIL;
-    }
-
-    httpd_resp_set_type(req, "application/json");
-    httpd_resp_sendstr(req, response);
-    free((void*)response);
-    cJSON_Delete(root);
-    return ESP_OK;
+    return send_sensor_success_response(req, sensor);
 }
 
 static esp_err_t api_sensor_calibrate_handler(httpd_req_t *req)
