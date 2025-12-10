@@ -58,6 +58,11 @@ static SemaphoreHandle_t s_cache_mutex = NULL;
 static sensor_cache_listener_t s_cache_listener = NULL;
 static void *s_cache_listener_ctx = NULL;
 
+// RTD temperature tracking for compensation
+static float s_last_rtd_temp = 25.0f;  // Default fallback temperature
+static int64_t s_last_rtd_timestamp_us = 0;  // Timestamp of last RTD reading
+#define RTD_TEMP_STALE_THRESHOLD_US (30 * 1000000)  // 30 seconds
+
 // Background reading task
 static TaskHandle_t s_reading_task_handle = NULL;
 static uint32_t s_reading_interval_sec = 10;
@@ -512,6 +517,15 @@ static void sensor_reading_task(void *arg) {
             bool sensor_triggered[MAX_EZO_SENSORS] = {0};
             uint8_t triggered_count = 0;
             uint32_t max_wait_ms = 0;
+            
+            // Check if we have recent RTD temperature for compensation
+            int64_t now_us = esp_timer_get_time();
+            bool rtd_temp_valid = (now_us - s_last_rtd_timestamp_us) < RTD_TEMP_STALE_THRESHOLD_US;
+            float compensation_temp = rtd_temp_valid ? s_last_rtd_temp : 25.0f;
+            
+            if (!rtd_temp_valid && s_rtd_index >= 0) {
+                ESP_LOGD(TAG, "RTD temperature stale, using fallback 25°C for compensation");
+            }
 
             for (uint8_t i = 0; i < total_sensors; i++) {
                 if (s_reading_paused) {
@@ -520,7 +534,20 @@ static void sensor_reading_task(void *arg) {
                 }
 
                 ezo_sensor_t *sensor = &s_ezo_sensors[i];
-                esp_err_t trigger_ret = ezo_sensor_start_read(sensor);
+                esp_err_t trigger_ret;
+                
+                // Use temperature-compensated read for pH, EC, and ORP
+                const char *type = sensor->config.type;
+                bool needs_temp_comp = (strcmp(type, "pH") == 0 || 
+                                       strcmp(type, "EC") == 0 || 
+                                       strcmp(type, "ORP") == 0);
+                
+                if (needs_temp_comp && rtd_temp_valid) {
+                    trigger_ret = ezo_sensor_start_read_with_temp(sensor, compensation_temp);
+                } else {
+                    trigger_ret = ezo_sensor_start_read(sensor);
+                }
+                
                 if (trigger_ret == ESP_OK) {
                     sensor_triggered[i] = true;
                     triggered_count++;
@@ -597,6 +624,13 @@ static void sensor_reading_task(void *arg) {
                         slot->values[v] = cached->values[v];
                     }
                     valid_sensors++;
+                    
+                    // Update RTD temperature for compensation if this is the RTD sensor
+                    if (i == s_rtd_index && cached->value_count > 0) {
+                        s_last_rtd_temp = cached->values[0];
+                        s_last_rtd_timestamp_us = esp_timer_get_time();
+                        ESP_LOGD(TAG, "Updated RTD temperature for compensation: %.2f°C", s_last_rtd_temp);
+                    }
                 } else {
                     if (!sensor_manager_use_cached_value(i, cached, now_ms)) {
                         cached->valid = false;

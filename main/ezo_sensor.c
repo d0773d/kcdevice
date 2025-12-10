@@ -417,6 +417,24 @@ esp_err_t ezo_sensor_start_read(ezo_sensor_t *sensor) {
     return ezo_sensor_send_command(sensor, "R", NULL, 0, 0);
 }
 
+esp_err_t ezo_sensor_start_read_with_temp(ezo_sensor_t *sensor, float temp_celsius) {
+    if (sensor == NULL) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    
+    // Validate temperature range (EZO sensors typically support -126 to 1254°C)
+    if (temp_celsius < -126.0f || temp_celsius > 1254.0f) {
+        ESP_LOGW(TAG, "Temperature %.2f°C out of range, using regular read", temp_celsius);
+        return ezo_sensor_start_read(sensor);
+    }
+    
+    // Format RT command with temperature
+    char cmd[16];
+    snprintf(cmd, sizeof(cmd), "RT,%.2f", temp_celsius);
+    
+    return ezo_sensor_send_command(sensor, cmd, NULL, 0, 0);
+}
+
 esp_err_t ezo_sensor_fetch_all(ezo_sensor_t *sensor, float values[4], uint8_t *count) {
     if (sensor == NULL || values == NULL || count == NULL) {
         return ESP_ERR_INVALID_ARG;

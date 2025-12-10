@@ -168,6 +168,18 @@ esp_err_t ezo_sensor_read_all(ezo_sensor_t *sensor, float values[4], uint8_t *co
 esp_err_t ezo_sensor_start_read(ezo_sensor_t *sensor);
 
 /**
+ * @brief Kick off an asynchronous temperature-compensated reading.
+ * 
+ * Sends 'RT,<temp>' command for one-time temperature compensation.
+ * Only applicable to pH, EC, and ORP sensors.
+ * 
+ * @param sensor Pointer to EZO sensor handle
+ * @param temp_celsius Temperature in Celsius (typically from RTD sensor)
+ * @return esp_err_t ESP_OK on success
+ */
+esp_err_t ezo_sensor_start_read_with_temp(ezo_sensor_t *sensor, float temp_celsius);
+
+/**
  * @brief Fetch readings after a prior ezo_sensor_start_read().
  */
 esp_err_t ezo_sensor_fetch_all(ezo_sensor_t *sensor, float values[4], uint8_t *count);
