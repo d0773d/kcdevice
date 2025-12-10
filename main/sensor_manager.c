@@ -113,6 +113,14 @@ esp_err_t sensor_manager_init(void) {
     for (int i = 0; i < sizeof(ezo_addresses) && s_ezo_count < MAX_EZO_SENSORS; i++) {
         uint8_t addr = ezo_addresses[i];
         
+        // Add inter-sensor delay to prevent I2C bus interference
+        // Each sensor takes ~2-3 seconds to initialize, but adding a short gap
+        // between sensors ensures the bus is completely settled
+        if (i > 0) {
+            ESP_LOGI(TAG, "Waiting 500ms before initializing next sensor...");
+            vTaskDelay(pdMS_TO_TICKS(500));
+        }
+        
         if (i2c_scanner_device_exists(addr)) {
             ESP_LOGI(TAG, "EZO sensor detected at 0x%02X", addr);
             
@@ -467,7 +475,13 @@ static bool sensor_manager_use_cached_value(uint8_t index, cached_sensor_t *targ
 static void sensor_reading_task(void *arg) {
     ESP_LOGI(TAG, "Sensor reading task started (interval: %lu seconds)", s_reading_interval_sec);
     
-    // Perform first read immediately
+    // CRITICAL: Wait for all sensor initialization to fully complete
+    // EZO sensors need time to process initialization commands before being read
+    ESP_LOGI(TAG, "Waiting 2 seconds for sensor initialization to stabilize...");
+    vTaskDelay(pdMS_TO_TICKS(2000));
+    ESP_LOGI(TAG, "Starting sensor reading loop");
+    
+    // Perform first read immediately after stabilization
     bool first_read = true;
     
     while (1) {

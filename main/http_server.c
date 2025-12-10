@@ -1335,10 +1335,40 @@ static esp_err_t api_sensors_config_handler(httpd_req_t *req)
         ezo_sensor_set_led(sensor, cJSON_IsTrue(led));
     }
     
-    // Update name
+    // Update name with validation
     cJSON *name = cJSON_GetObjectItem(root, "name");
     if (name != NULL && cJSON_IsString(name)) {
-        ezo_sensor_set_name(sensor, name->valuestring);
+        const char *name_str = name->valuestring;
+        size_t name_len = strlen(name_str);
+        
+        // Validate name: 1-16 characters, alphanumeric and underscore only
+        if (name_len == 0 || name_len > 16) {
+            cJSON_Delete(root);
+            httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST, "Name must be 1-16 characters");
+            return ESP_FAIL;
+        }
+        
+        // Check for valid characters (alphanumeric and underscore only)
+        bool valid = true;
+        for (size_t i = 0; i < name_len; i++) {
+            char c = name_str[i];
+            if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || 
+                  (c >= '0' && c <= '9') || c == '_')) {
+                valid = false;
+                break;
+            }
+        }
+        
+        if (!valid) {
+            cJSON_Delete(root);
+            httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST, "Name must contain only letters, numbers, and underscores");
+            return ESP_FAIL;
+        }
+        
+        esp_err_t name_ret = ezo_sensor_set_name(sensor, name_str);
+        if (name_ret != ESP_OK) {
+            ESP_LOGW(TAG, "Failed to set sensor name: %s", esp_err_to_name(name_ret));
+        }
     }
     
     // Update protocol lock

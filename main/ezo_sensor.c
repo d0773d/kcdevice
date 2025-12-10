@@ -143,6 +143,26 @@ esp_err_t ezo_sensor_init(ezo_sensor_t *sensor, i2c_master_bus_handle_t bus_hand
         return ret;
     }
 
+    // CRITICAL: Wait for any pending response from previous boot to fully arrive
+    // Some EZO sensors (especially HUM) may have slow-arriving stale responses
+    vTaskDelay(pdMS_TO_TICKS(600));  // Wait 600ms for any pending data to arrive
+
+    // Clear any pending data from previous commands or boot cycles
+    // EZO sensors can have stale responses in buffer from previous sessions
+    char dummy[EZO_LARGEST_STRING] = {0};
+    int cleared_count = 0;
+    for (int i = 0; i < 5; i++) {  // Try up to 5 times to ensure buffer is fully cleared
+        esp_err_t flush_ret = ezo_sensor_receive_response(sensor, dummy, sizeof(dummy));
+        if (flush_ret == ESP_ERR_NOT_FINISHED) {
+            break;  // Buffer is empty
+        }
+        cleared_count++;
+        ESP_LOGW(TAG, "Cleared stale response #%d from 0x%02X: '%s'", cleared_count, i2c_address, dummy);
+    }
+    if (cleared_count > 0) {
+        ESP_LOGI(TAG, "Successfully cleared %d stale response(s) from 0x%02X", cleared_count, i2c_address);
+    }
+
     // Get device information with retries for slow sensors
     const int max_retries = 3;
     for (int i = 0; i < max_retries; i++) {
@@ -509,10 +529,30 @@ esp_err_t ezo_sensor_get_name(ezo_sensor_t *sensor, char *name, size_t name_size
 
 /**
  * @brief Set sensor name
+ * 
+ * Name must be 1-16 characters, alphanumeric and underscore only.
+ * EZO sensors do not accept spaces, commas, or special characters.
  */
 esp_err_t ezo_sensor_set_name(ezo_sensor_t *sensor, const char *name) {
     if (sensor == NULL || name == NULL) {
         return ESP_ERR_INVALID_ARG;
+    }
+
+    // Validate name length
+    size_t name_len = strnlen(name, EZO_MAX_SENSOR_NAME + 1);
+    if (name_len == 0 || name_len > EZO_MAX_SENSOR_NAME) {
+        ESP_LOGE(TAG, "Invalid name length: %d (must be 1-16)", name_len);
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    // Validate characters (alphanumeric and underscore only)
+    for (size_t i = 0; i < name_len; i++) {
+        char c = name[i];
+        if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || 
+              (c >= '0' && c <= '9') || c == '_')) {
+            ESP_LOGE(TAG, "Invalid character '%c' in sensor name (only A-Z, a-z, 0-9, _ allowed)", c);
+            return ESP_ERR_INVALID_ARG;
+        }
     }
 
     char command[32];
@@ -521,6 +561,10 @@ esp_err_t ezo_sensor_set_name(ezo_sensor_t *sensor, const char *name) {
     esp_err_t ret = ezo_sensor_send_command(sensor, command, NULL, 0, EZO_SHORT_WAIT_MS);
     if (ret == ESP_OK) {
         strncpy(sensor->config.name, name, EZO_MAX_SENSOR_NAME - 1);
+        sensor->config.name[EZO_MAX_SENSOR_NAME - 1] = '\0';
+        ESP_LOGI(TAG, "Sensor 0x%02X name set to: %s", sensor->config.i2c_address, name);
+    } else {
+        ESP_LOGE(TAG, "Failed to set sensor name: %s", esp_err_to_name(ret));
     }
     
     return ret;
