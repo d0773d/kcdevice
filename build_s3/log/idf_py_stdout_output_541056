@@ -1954,4 +1954,111 @@ iw==
 [0;32mI (657200) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
 [0;32mI (657220) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
 [0;32mI (657240) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1342.00[0m
-[0;32mI (657260) EZO_SENSOR: Sensor 0x6F fetch 3 values
+[0;32mI (657260) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.27,...[0m
+[0;32mI (657280) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (659110) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.900999069213867,"pH":7.1329998970031738,"EC":1342,"HUM":{"humidity":41.270000457763672,"air_temp":21.8799991607666,"dew_point":8.18000030517578}},"battery":93.703125,"rssi":-57}[0m
+[0;32mI (659120) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (659280) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (659300) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (659320) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (659340) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (660360) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (660380) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.14[0m
+[0;32mI (660400) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1342.00[0m
+[0;32mI (660420) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.25,...[0m
+[0;32mI (660440) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (662450) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (662470) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (662490) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (662510) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (663530) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (663550) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (663570) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1342.00[0m
+[0;32mI (663590) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.17,...[0m
+[0;32mI (663610) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (665610) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (665630) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (665650) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (665670) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (666690) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (666710) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.14[0m
+[0;32mI (666730) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1342.00[0m
+[0;32mI (666750) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.14,...[0m
+[0;32mI (666770) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (668770) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (668790) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (668810) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (668830) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (669850) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (669870) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (669890) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1341.00[0m
+[0;32mI (669910) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.16,...[0m
+[0;32mI (669930) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (670130) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.902000427246094,"pH":7.1319999694824219,"EC":1341,"HUM":{"humidity":41.1599998474121,"air_temp":21.8799991607666,"dew_point":8.1400003433227539}},"battery":93.86328125,"rssi":-58}[0m
+[0;32mI (670140) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (671930) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (671950) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (671970) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (671990) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (673010) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (673030) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.14[0m
+[0;32mI (673050) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1341.00[0m
+[0;32mI (673070) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.20,...[0m
+[0;32mI (673090) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (675090) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (675110) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (675130) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (675150) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (676170) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (676190) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.14[0m
+[0;32mI (676210) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1342.00[0m
+[0;32mI (676230) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.24,...[0m
+[0;32mI (676250) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (678250) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (678270) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (678290) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (678310) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (679330) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (679350) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.14[0m
+[0;32mI (679370) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1342.00[0m
+[0;32mI (679390) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.26,...[0m
+[0;32mI (679410) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (680150) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.89900016784668,"pH":7.1380000114440918,"EC":1342,"HUM":{"humidity":41.2599983215332,"air_temp":21.8700008392334,"dew_point":8.1700000762939453}},"battery":93.86328125,"rssi":-58}[0m
+[0;32mI (680160) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (681410) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (681430) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (681450) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (681470) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (682490) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (682510) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.14[0m
+[0;32mI (682530) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1342.00[0m
+[0;32mI (682550) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.20,...[0m
+[0;32mI (682570) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (684570) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (684590) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (684610) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (684630) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (685650) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (685670) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (685690) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1342.00[0m
+[0;32mI (685710) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.16,...[0m
+[0;32mI (685730) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (687730) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (687750) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (687770) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (687790) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (688810) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (688830) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.13[0m
+[0;32mI (688850) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1341.00[0m
+[0;32mI (688870) EZO_SENSOR: Sensor 0x6F fetch 3 values: 41.18,...[0m
+[0;32mI (688890) SENSOR_MGR: ✓ Cache updated (4/4 sensors valid)[0m
+[0;32mI (690170) MQTT_CLIENT: Publishing JSON: {"device_id":"esp32-3030f973c5cc","sensors":{"RTD":21.898000717163086,"pH":7.1319999694824219,"EC":1341,"HUM":{"humidity":41.180000305175781,"air_temp":21.889999389648438,"dew_point":8.15999984741211}},"battery":93.86328125,"rssi":-58}[0m
+[0;32mI (690180) MQTT_CLIENT: ✓ MQTT data published successfully[0m
+[0;32mI (690890) EZO_SENSOR: Sending command to 0x16: R[0m
+[0;32mI (690910) EZO_SENSOR: Sending command to 0x63: RT,21.90[0m
+[0;32mI (690930) EZO_SENSOR: Sending command to 0x64: RT,21.90[0m
+[0;32mI (690950) EZO_SENSOR: Sending command to 0x6F: R[0m
+[0;32mI (691970) EZO_SENSOR: Sensor 0x16 fetch 1 values: 21.90[0m
+[0;32mI (691990) EZO_SENSOR: Sensor 0x63 fetch 1 values: 7.14[0m
+[0;32mI (692010) EZO_SENSOR: Sensor 0x64 fetch 1 values: 1342.00[0m
+[0;32mI (692030) EZO_SENSOR: Sen
