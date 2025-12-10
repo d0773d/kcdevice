@@ -326,6 +326,8 @@ esp_err_t ezo_sensor_get_device_info(ezo_sensor_t *sensor) {
     ret = ezo_sensor_get_name(sensor, sensor->config.name, sizeof(sensor->config.name));
     if (ret != ESP_OK) {
         ESP_LOGW(TAG, "Failed to get sensor name");
+    } else if (sensor->config.name[0] != '\0') {
+        ESP_LOGI(TAG, "Address 0x%02X: Sensor name = '%s'", sensor->config.i2c_address, sensor->config.name);
     }
 
     // Get LED status

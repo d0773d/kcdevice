@@ -15,3 +15,134 @@
 .card-animate {
   animation: slideIn 0.3s ease-out;
 }
+
+/* Calibration Wizard Styles */
+.wizard-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.wizard-step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: all 0.3s;
+  border: 2px solid;
+}
+
+.wizard-step.active .wizard-step-circle {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-color: #10b981;
+  color: white;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.wizard-step.completed .wizard-step-circle {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+
+.wizard-step.pending .wizard-step-circle {
+  background: transparent;
+  border-color: #d1d5db;
+  color: #9ca3af;
+}
+
+.wizard-step-label {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  transition: color 0.3s;
+}
+
+.wizard-step.active .wizard-step-label {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.wizard-step-line {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #d1d5db;
+  z-index: -1;
+}
+
+.wizard-step.completed .wizard-step-line {
+  background: #10b981;
+}
+
+@keyframes stabilizing {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.stability-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+.stability-indicator.unstable {
+  background: #fef3c7;
+  color: #92400e;
+  animation: stabilizing 2s infinite;
+}
+
+.stability-indicator.stable {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.stability-dots {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.stability-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 1.5s infinite;
+}
+
+.stability-dot:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.stability-dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.reading-display {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+  border-radius: 1rem;
+  border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.solution-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: 2px solid #3b82f6;
+}

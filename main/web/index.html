@@ -192,6 +192,58 @@ class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md b
   </div>
 </div>
 
+<!-- Calibration Wizard Modal -->
+<div id='calibrationWizard' class='fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-[60] flex items-center justify-center p-4'>
+  <div class='relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden'>
+    <!-- Header -->
+    <div class='bg-gradient-to-r from-green-600 to-green-500 dark:from-green-500 dark:to-green-400 p-6'>
+      <div class='flex items-center justify-between'>
+        <div>
+          <h2 id='wizardTitle' class='text-2xl font-bold text-white flex items-center gap-2'>
+            <i class='fas fa-magic'></i> Calibration Wizard
+          </h2>
+          <p id='wizardSubtitle' class='text-green-100 text-sm mt-1'>Follow the steps to calibrate your sensor</p>
+        </div>
+        <button onclick='closeCalibrationWizard()' class='text-white hover:text-green-200 transition'>
+          <i class='fas fa-times text-2xl'></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class='bg-gray-100 dark:bg-gray-800 h-2'>
+      <div id='wizardProgress' class='bg-green-500 h-full transition-all duration-500' style='width: 0%'></div>
+    </div>
+
+    <!-- Step Indicators -->
+    <div id='wizardSteps' class='flex justify-between items-center px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700'>
+      <!-- Steps will be injected here -->
+    </div>
+
+    <!-- Content Area -->
+    <div class='p-6 min-h-[400px] max-h-[60vh] overflow-y-auto'>
+      <div id='wizardContent'>
+        <!-- Step content will be injected here -->
+      </div>
+    </div>
+
+    <!-- Footer with Actions -->
+    <div class='border-t border-gray-200 dark:border-gray-700 p-6 bg-gray-50 dark:bg-gray-800/30 flex justify-between items-center'>
+      <button id='wizardBack' onclick='CalibrationWizard.previousStep()' class='px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition' disabled>
+        <i class='fas fa-arrow-left mr-2'></i> Back
+      </button>
+      <div class='flex gap-3'>
+        <button id='wizardSkip' onclick='CalibrationWizard.skipStep()' class='px-6 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition hidden'>
+          Skip <i class='fas fa-forward ml-1'></i>
+        </button>
+        <button id='wizardNext' onclick='CalibrationWizard.nextStep()' class='px-8 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition'>
+          Next <i class='fas fa-arrow-right ml-2'></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <!-- Code Editor Section (hidden by default) -->

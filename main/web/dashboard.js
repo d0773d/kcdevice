@@ -71,7 +71,7 @@ async function loadSensors(){try{const res=await fetch('/api/sensors',{signal:Ab
 
 function updateSensorDetailCache(items){const nextCache={};items.forEach(sensor=>{const key=(sensor?.type||'').trim().toUpperCase();if(!key)return;if(!nextCache[key]){nextCache[key]=[];}nextCache[key].push(sensor);});Object.keys(sensorDetailCache).forEach(key=>{if(!nextCache[key]){delete sensorDetailCache[key];}});Object.keys(nextCache).forEach(key=>{sensorDetailCache[key]=nextCache[key];});}
 
-function renderSensorCard(sensor){const caps=Array.isArray(sensor.capabilities)?sensor.capabilities:[];const addrHex=formatAddress(sensor.address);const type=(sensor.type||'').trim();const typeKey=type.toUpperCase();const isPh=typeKey==='PH';const isOrp=typeKey==='ORP';const isRtd=typeKey==='RTD';const isEc=typeKey==='EC';const isDo=typeKey==='DO';const supportsCalibration=caps.includes('calibration')||isPh||isOrp||isRtd||isEc||isDo;const supportsTempComp=(caps.includes('temp_comp')&&isPh)||isPh;let html=`<div class='bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4' id='sensor-card-${sensor.address}'>`;html+=`<h3 class='text-lg font-bold text-green-600 dark:text-green-400 mb-2'>${type||'Sensor'} @ 0x${addrHex}</h3>`;if(sensor.firmware)html+=`<p class='text-sm text-gray-600 dark:text-gray-400 mb-3'>Firmware: ${sensor.firmware}</p>`;if(type!=='MAX17048'){html+=`<div class='mb-4'><label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Name:</label><input class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white' id='name-${sensor.address}' value='${sensor.name||''}' placeholder='Pool_pH' maxlength='16' pattern='[A-Za-z0-9_]+'><p class='text-xs text-gray-500 dark:text-gray-400 mt-1'>1-16 characters: letters, numbers, underscore only</p></div>`;html+=`<div class='mb-3 flex gap-4 flex-wrap'><label class='flex items-center text-gray-700 dark:text-gray-300'><input type='checkbox' class='mr-2' id='led-${sensor.address}' ${sensor.led?'checked':''}> LED On</label><label class='flex items-center text-gray-700 dark:text-gray-300'><input type='checkbox' class='mr-2' id='plock-${sensor.address}' ${sensor.plock?'checked':''}> Protocol Lock</label></div>`;if(isRtd){html+=`<div class='mb-4'><label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Scale:</label><select class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white' id='scale-${sensor.address}'><option ${sensor.scale==='C'?'selected':''}>C</option><option ${sensor.scale==='F'?'selected':''}>F</option><option ${sensor.scale==='K'?'selected':''}>K</option></select></div>`;}if(isPh){html+=`<div class='mb-3'><label class='flex items-center text-gray-700 dark:text-gray-300'><input type='checkbox' class='mr-2' id='extscale-${sensor.address}' ${sensor.extended_scale?'checked':''}> Extended pH Scale</label></div>`;}if(isEc){html+=`<div class='mb-4'><label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Probe K Value:</label><input class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white' type='number' step='0.1' id='probe-${sensor.address}' value='${sensor.probe_type??1.0}'></div>`;html+=`<div class='mb-4'><label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>TDS Factor:</label><input class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white' type='number' step='0.01' id='tds-${sensor.address}' value='${sensor.tds_factor??0.5}'></div>`;}html+=`<button class='bg-green-600 dark:bg-green-400 hover:bg-green-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded-md mt-2' onclick='saveSensorConfig(${sensor.address})'><i class='fas fa-save'></i> Save ${type||'Sensor'} Settings</button>`;}if(caps.length)html+=renderCapabilityBadges(caps);if(supportsCalibration){if(isPh)html+=renderPhCalibrationSection(sensor);else if(isOrp)html+=renderOrpCalibrationSection(sensor);else if(isRtd)html+=renderRtdCalibrationSection(sensor);else if(isEc)html+=renderEcCalibrationSection(sensor);else if(isDo)html+=renderDoCalibrationSection(sensor);}if(supportsTempComp)html+=renderPhTempCompSection(sensor);if(caps.includes('mode'))html+=renderModeSection(sensor);if(caps.includes('sleep'))html+=renderSleepSection(sensor);html+=`</div>`;return html;}
+function renderSensorCard(sensor){const caps=Array.isArray(sensor.capabilities)?sensor.capabilities:[];const addrHex=formatAddress(sensor.address);const type=(sensor.type||'').trim();const typeKey=type.toUpperCase();const isPh=typeKey==='PH';const isOrp=typeKey==='ORP';const isRtd=typeKey==='RTD';const isEc=typeKey==='EC';const isDo=typeKey==='DO';const supportsCalibration=caps.includes('calibration')||isPh||isOrp||isRtd||isEc||isDo;const supportsTempComp=(caps.includes('temp_comp')&&isPh)||isPh;let html=`<div class='bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-4' id='sensor-card-${sensor.address}'>`;html+=`<h3 class='text-lg font-bold text-green-600 dark:text-green-400 mb-2'>${type||'Sensor'} @ 0x${addrHex}</h3>`;if(sensor.firmware)html+=`<p class='text-sm text-gray-600 dark:text-gray-400 mb-3'>Firmware: ${sensor.firmware}</p>`;if(type!=='MAX17048'){html+=`<div class='mb-4'><label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Name:</label><input class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white' id='name-${sensor.address}' value='${sensor.name||''}' placeholder='Pool_pH' maxlength='16' pattern='[A-Za-z0-9_]+'><p class='text-xs text-gray-500 dark:text-gray-400 mt-1'>1-16 characters: letters, numbers, underscore only</p></div>`;html+=`<div class='mb-3 flex gap-4 flex-wrap'><label class='flex items-center text-gray-700 dark:text-gray-300'><input type='checkbox' class='mr-2' id='led-${sensor.address}' ${sensor.led?'checked':''}> LED On</label><label class='flex items-center text-gray-700 dark:text-gray-300'><input type='checkbox' class='mr-2' id='plock-${sensor.address}' ${sensor.plock?'checked':''}> Protocol Lock</label></div>`;if(isRtd){html+=`<div class='mb-4'><label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Scale:</label><select class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white' id='scale-${sensor.address}'><option ${sensor.scale==='C'?'selected':''}>C</option><option ${sensor.scale==='F'?'selected':''}>F</option><option ${sensor.scale==='K'?'selected':''}>K</option></select></div>`;}if(isPh){html+=`<div class='mb-3'><label class='flex items-center text-gray-700 dark:text-gray-300'><input type='checkbox' class='mr-2' id='extscale-${sensor.address}' ${sensor.extended_scale?'checked':''}> Extended pH Scale</label></div>`;}if(isEc){html+=`<div class='mb-4'><label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Probe K Value:</label><input class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white' type='number' step='0.1' id='probe-${sensor.address}' value='${sensor.probe_type??1.0}'></div>`;html+=`<div class='mb-4'><label class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>TDS Factor:</label><input class='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white' type='number' step='0.01' id='tds-${sensor.address}' value='${sensor.tds_factor??0.5}'></div>`;}html+=`<button class='bg-green-600 dark:bg-green-400 hover:bg-green-700 dark:hover:bg-green-500 text-white px-4 py-2 rounded-md mt-2' onclick='saveSensorConfig(${sensor.address})'><i class='fas fa-save'></i> Save ${type||'Sensor'} Settings</button>`;}if(caps.length)html+=renderCapabilityBadges(caps);if(supportsCalibration){html+=`<div class='mt-4'><button class='w-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2' onclick='openCalibrationWizard({address:${sensor.address},type:"${type}",name:"${sensor.name||''}"});'><i class='fas fa-magic'></i> Start Calibration Wizard</button></div>`;if(isPh)html+=renderPhCalibrationSection(sensor);else if(isOrp)html+=renderOrpCalibrationSection(sensor);else if(isRtd)html+=renderRtdCalibrationSection(sensor);else if(isEc)html+=renderEcCalibrationSection(sensor);else if(isDo)html+=renderDoCalibrationSection(sensor);}if(supportsTempComp)html+=renderPhTempCompSection(sensor);if(caps.includes('mode'))html+=renderModeSection(sensor);if(caps.includes('sleep'))html+=renderSleepSection(sensor);html+=`</div>`;return html;}
 
 function formatAddress(address){return Number(address).toString(16).toUpperCase().padStart(2,'0');}
 
@@ -126,4 +126,533 @@ async function saveFile(){if(!currentFile){alert('No file selected');return;}con
 async function uploadAssetFile(){const input=document.getElementById('assetFileInput');const status=document.getElementById('assetUploadStatus');if(!input||!input.files||input.files.length===0){alert('Select an HTML, CSS, or JS file first.');return;}const file=input.files[0];const name=file.name||'';if(!name.toLowerCase().match(/\.(html|css|js)$/)){alert('Only .html, .css, or .js files are allowed.');return;}if(file.size>200*1024){alert('File exceeds the 200 KB limit.');return;}if(!confirm(`Upload ${name} to the device? This will overwrite the existing file immediately.`))return;status.textContent='Uploading...';try{const res=await fetch('/api/webfiles/'+encodeURIComponent(name),{method:'PUT',headers:{'Content-Type':'text/plain'},body:file});if(!res.ok){const errText=await res.text();throw new Error(errText||'Upload failed');}status.textContent='Upload successful!';input.value='';await loadFileList();alert(`${name} uploaded successfully.`);}catch(err){console.error('Asset upload failed',err);status.textContent=`Upload failed: ${err.message}`;}}
 function refreshPreview(){if(!currentFile){alert('No file selected');return;}if(currentFile==='index.html'){if(confirm('Reload the dashboard to preview changes?')){window.location.reload();}}else{alert('Preview is only available for index.html. Save and refresh manually for other files.');}}
 function resetFile(){if(!currentFile){alert('No file selected');return;}if(confirm('Reset to last saved version?')){document.getElementById('codeEditor').value=originalContent;}}
+
+// Calibration Wizard System
+const CalibrationWizard = {
+  config: null,
+  sensor: null,
+  currentStep: 0,
+  steps: [],
+  readingsHistory: [],
+  isStable: false,
+  stableCount: 0,
+  lastReading: null,
+  focusInterval: null,
+  
+  // Sensor-specific configurations
+  configs: {
+    pH: {
+      name: 'pH Sensor',
+      icon: '⚗️',
+      steps: [
+        {id: 'intro', title: 'Introduction', skippable: false},
+        {id: 'mid', title: 'Mid Point (7.00)', skippable: false, solution: '7.00 pH', value: 7.00},
+        {id: 'low', title: 'Low Point (4.00)', skippable: true, solution: '4.00 pH', value: 4.00},
+        {id: 'high', title: 'High Point (10.00)', skippable: true, solution: '10.00 pH', value: 10.00},
+        {id: 'complete', title: 'Complete', skippable: false}
+      ]
+    },
+    EC: {
+      name: 'EC Sensor',
+      icon: '⚡',
+      steps: [
+        {id: 'intro', title: 'Introduction', skippable: false},
+        {id: 'dry', title: 'Dry Calibration', skippable: false, solution: 'Dry probe'},
+        {id: 'low', title: 'Low Point', skippable: false, solution: 'Low EC', needsValue: true},
+        {id: 'high', title: 'High Point', skippable: true, solution: 'High EC', needsValue: true},
+        {id: 'complete', title: 'Complete', skippable: false}
+      ]
+    },
+    ORP: {
+      name: 'ORP Sensor',
+      icon: '🔋',
+      steps: [
+        {id: 'intro', title: 'Introduction', skippable: false},
+        {id: 'calibrate', title: 'Calibration', skippable: false, solution: 'ORP Solution', needsValue: true},
+        {id: 'complete', title: 'Complete', skippable: false}
+      ]
+    },
+    RTD: {
+      name: 'Temperature Sensor',
+      icon: '🌡️',
+      steps: [
+        {id: 'intro', title: 'Introduction', skippable: false},
+        {id: 'calibrate', title: 'Calibration', skippable: false, solution: 'Reference Temperature', needsValue: true},
+        {id: 'complete', title: 'Complete', skippable: false}
+      ]
+    },
+    DO: {
+      name: 'Dissolved Oxygen',
+      icon: '🫧',
+      steps: [
+        {id: 'intro', title: 'Introduction', skippable: false},
+        {id: 'atmospheric', title: 'Atmospheric', skippable: false, solution: 'Air'},
+        {id: 'zero', title: 'Zero Oxygen', skippable: true, solution: 'Zero O₂'},
+        {id: 'complete', title: 'Complete', skippable: false}
+      ]
+    }
+  },
+  
+  open(sensor) {
+    if (!sensor || !sensor.type) return;
+    
+    const sensorType = sensor.type.toUpperCase();
+    this.config = this.configs[sensorType];
+    
+    if (!this.config) {
+      alert(`Calibration wizard not available for ${sensorType} sensors`);
+      return;
+    }
+    
+    this.sensor = sensor;
+    this.currentStep = 0;
+    this.readingsHistory = [];
+    this.isStable = false;
+    this.stableCount = 0;
+    this.lastReading = null;
+    
+    this.steps = this.config.steps;
+    
+    const modal = document.getElementById('calibrationWizard');
+    const wizardTitle = document.getElementById('wizardTitle');
+    const wizardSubtitle = document.getElementById('wizardSubtitle');
+    
+    wizardTitle.innerHTML = `<i class='fas fa-magic'></i> ${this.config.icon} ${this.config.name} Calibration`;
+    wizardSubtitle.textContent = 'Follow the guided steps to calibrate your sensor accurately';
+    
+    this.renderSteps();
+    this.renderContent();
+    this.updateButtons();
+    
+    modal.classList.remove('hidden');
+    
+    // Start focus mode for live readings
+    if (this.sensor.address !== undefined) {
+      startSensorFocus(this.sensor).then(() => {
+        this.startReadingMonitor();
+      });
+    }
+  },
+  
+  close() {
+    const modal = document.getElementById('calibrationWizard');
+    modal.classList.add('hidden');
+    
+    // Stop focus mode
+    if (this.focusInterval) {
+      clearInterval(this.focusInterval);
+      this.focusInterval = null;
+    }
+    stopSensorFocus();
+    
+    // Refresh sensor list
+    loadSensors();
+  },
+  
+  renderSteps() {
+    const container = document.getElementById('wizardSteps');
+    const totalSteps = this.steps.length;
+    
+    let html = '<div class="flex items-center justify-between w-full">';
+    
+    this.steps.forEach((step, index) => {
+      const isActive = index === this.currentStep;
+      const isCompleted = index < this.currentStep;
+      const isPending = index > this.currentStep;
+      
+      const status = isActive ? 'active' : (isCompleted ? 'completed' : 'pending');
+      
+      html += `<div class="wizard-step ${status} flex-1 relative">`;
+      html += `<div class="wizard-step-circle">`;
+      
+      if (isCompleted) {
+        html += `<i class="fas fa-check"></i>`;
+      } else {
+        html += `${index + 1}`;
+      }
+      
+      html += `</div>`;
+      html += `<div class="wizard-step-label">${step.title}</div>`;
+      
+      if (index < totalSteps - 1) {
+        html += `<div class="wizard-step-line"></div>`;
+      }
+      
+      html += `</div>`;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+    
+    // Update progress bar
+    const progress = (this.currentStep / (totalSteps - 1)) * 100;
+    document.getElementById('wizardProgress').style.width = `${progress}%`;
+  },
+  
+  renderContent() {
+    const step = this.steps[this.currentStep];
+    const content = document.getElementById('wizardContent');
+    
+    if (step.id === 'intro') {
+      content.innerHTML = this.renderIntroStep();
+    } else if (step.id === 'complete') {
+      content.innerHTML = this.renderCompleteStep();
+    } else {
+      content.innerHTML = this.renderCalibrationStep(step);
+    }
+  },
+  
+  renderIntroStep() {
+    return `
+      <div class="text-center space-y-6">
+        <div class="text-6xl">${this.config.icon}</div>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Welcome to ${this.config.name} Calibration</h3>
+        <div class="text-left max-w-md mx-auto space-y-4 text-gray-700 dark:text-gray-300">
+          <p>This wizard will guide you through the calibration process step by step.</p>
+          <div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4 rounded">
+            <p class="font-semibold text-blue-900 dark:text-blue-200">
+              <i class="fas fa-info-circle mr-2"></i>Before you begin:
+            </p>
+            <ul class="mt-2 space-y-2 text-sm">
+              <li>• Prepare your calibration solutions</li>
+              <li>• Ensure the probe is clean and dry</li>
+              <li>• Have a timer ready</li>
+              <li>• Follow each step carefully</li>
+            </ul>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Calibration typically takes 5-10 minutes depending on probe response time.
+          </p>
+        </div>
+      </div>
+    `;
+  },
+  
+  renderCompleteStep() {
+    return `
+      <div class="text-center space-y-6">
+        <div class="text-6xl">✅</div>
+        <h3 class="text-2xl font-bold text-green-600 dark:text-green-400">Calibration Complete!</h3>
+        <div class="max-w-md mx-auto space-y-4 text-gray-700 dark:text-gray-300">
+          <p>Your ${this.config.name} has been successfully calibrated.</p>
+          <div class="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-4 rounded text-left">
+            <p class="font-semibold text-green-900 dark:text-green-200">
+              <i class="fas fa-check-circle mr-2"></i>Next steps:
+            </p>
+            <ul class="mt-2 space-y-2 text-sm">
+              <li>• Rinse the probe with distilled water</li>
+              <li>• Store the probe properly</li>
+              <li>• Verify readings with known samples</li>
+              <li>• Re-calibrate if readings drift</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+  
+  renderCalibrationStep(step) {
+    let html = `<div class="space-y-6">`;
+    
+    // Step header
+    html += `
+      <div class="text-center">
+        <span class="solution-badge text-lg">${step.solution}</span>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-4">
+          ${step.title}
+        </h3>
+      </div>
+    `;
+    
+    // Live reading display
+    html += `
+      <div class="reading-display text-gray-900 dark:text-white">
+        <div id="liveReading" class="text-5xl font-bold">--</div>
+        <div class="text-sm mt-2 text-gray-600 dark:text-gray-400">Current Reading</div>
+      </div>
+    `;
+    
+    // Stability indicator
+    html += `
+      <div id="stabilityIndicator" class="text-center">
+        <div class="stability-indicator unstable">
+          <div class="stability-dots">
+            <div class="stability-dot"></div>
+            <div class="stability-dot"></div>
+            <div class="stability-dot"></div>
+          </div>
+          <span>Stabilizing...</span>
+        </div>
+      </div>
+    `;
+    
+    // Instructions
+    html += `
+      <div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 rounded">
+        <p class="font-semibold text-yellow-900 dark:text-yellow-200">
+          <i class="fas fa-lightbulb mr-2"></i>Instructions:
+        </p>
+        <ol class="mt-2 space-y-2 text-sm text-yellow-900 dark:text-yellow-100">
+          <li>1. Immerse the probe in ${step.solution} solution</li>
+          <li>2. Wait for the reading to stabilize (same value 3+ times)</li>
+          <li>3. When stable, click "Calibrate" to capture this point</li>
+        </ol>
+      </div>
+    `;
+    
+    // Value input if needed
+    if (step.needsValue) {
+      html += `
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Solution Value:
+          </label>
+          <input 
+            type="number" 
+            step="0.01" 
+            id="calibrationValue" 
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+            placeholder="Enter value..."
+          />
+        </div>
+      `;
+    }
+    
+    // Calibrate button
+    html += `
+      <button 
+        id="calibrateBtn"
+        onclick="CalibrationWizard.calibratePoint('${step.id}')"
+        class="w-full py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition"
+        disabled
+      >
+        <i class="fas fa-check-circle mr-2"></i>
+        Calibrate This Point
+      </button>
+    `;
+    
+    html += `</div>`;
+    return html;
+  },
+  
+  startReadingMonitor() {
+    // Clear any existing interval
+    if (this.focusInterval) {
+      clearInterval(this.focusInterval);
+    }
+    
+    // Monitor readings every 500ms
+    this.focusInterval = setInterval(() => {
+      this.updateLiveReading();
+    }, 500);
+  },
+  
+  updateLiveReading() {
+    const step = this.steps[this.currentStep];
+    if (step.id === 'intro' || step.id === 'complete') return;
+    
+    const sensorType = this.sensor.type.toUpperCase();
+    const snapshot = latestSensorSnapshots[sensorType];
+    
+    if (!snapshot || snapshot.value == null) return;
+    
+    let currentReading = snapshot.value;
+    
+    // Extract numeric value for stability check
+    let numericValue = null;
+    if (typeof currentReading === 'number') {
+      numericValue = currentReading;
+    } else if (typeof currentReading === 'object' && !Array.isArray(currentReading)) {
+      // For HUM sensor, use first value
+      const keys = Object.keys(currentReading);
+      if (keys.length > 0) {
+        numericValue = currentReading[keys[0]];
+      }
+    }
+    
+    if (numericValue === null) return;
+    
+    // Update display
+    const display = document.getElementById('liveReading');
+    if (display) {
+      display.textContent = numericValue.toFixed(2);
+    }
+    
+    // Check stability
+    this.checkStability(numericValue);
+  },
+  
+  checkStability(value) {
+    const tolerance = 0.02; // Consider stable if within 2% of last reading
+    
+    if (this.lastReading !== null) {
+      const diff = Math.abs(value - this.lastReading);
+      const percentDiff = (diff / Math.abs(this.lastReading)) * 100;
+      
+      if (percentDiff <= tolerance) {
+        this.stableCount++;
+      } else {
+        this.stableCount = 0;
+      }
+    }
+    
+    this.lastReading = value;
+    this.readingsHistory.push(value);
+    if (this.readingsHistory.length > 10) {
+      this.readingsHistory.shift();
+    }
+    
+    // Need 3 consecutive stable readings
+    const wasStable = this.isStable;
+    this.isStable = this.stableCount >= 3;
+    
+    // Update UI if stability changed
+    if (wasStable !== this.isStable) {
+      this.updateStabilityUI();
+    }
+  },
+  
+  updateStabilityUI() {
+    const indicator = document.getElementById('stabilityIndicator');
+    const calibrateBtn = document.getElementById('calibrateBtn');
+    
+    if (!indicator) return;
+    
+    if (this.isStable) {
+      indicator.innerHTML = `
+        <div class="stability-indicator stable">
+          <i class="fas fa-check-circle text-xl"></i>
+          <span>Reading Stable - Ready to Calibrate</span>
+        </div>
+      `;
+      if (calibrateBtn) calibrateBtn.disabled = false;
+    } else {
+      indicator.innerHTML = `
+        <div class="stability-indicator unstable">
+          <div class="stability-dots">
+            <div class="stability-dot"></div>
+            <div class="stability-dot"></div>
+            <div class="stability-dot"></div>
+          </div>
+          <span>Stabilizing... (${this.stableCount}/3)</span>
+        </div>
+      `;
+      if (calibrateBtn) calibrateBtn.disabled = true;
+    }
+  },
+  
+  async calibratePoint(pointId) {
+    const step = this.steps.find(s => s.id === pointId);
+    if (!step) return;
+    
+    let value = step.value;
+    
+    // Get value from input if needed
+    if (step.needsValue) {
+      const input = document.getElementById('calibrationValue');
+      if (!input || !input.value) {
+        alert('Please enter the solution value');
+        return;
+      }
+      value = parseFloat(input.value);
+    }
+    
+    const payload = {point: pointId};
+    if (value !== undefined) {
+      payload.value = value;
+    }
+    
+    try {
+      const res = await fetch(`/api/sensors/calibrate/${this.sensor.address}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      });
+      
+      if (!res.ok) throw new Error('Calibration failed');
+      
+      // Move to next step
+      this.nextStep();
+      
+    } catch (err) {
+      alert(`Calibration failed: ${err.message}`);
+    }
+  },
+  
+  nextStep() {
+    if (this.currentStep < this.steps.length - 1) {
+      this.currentStep++;
+      this.isStable = false;
+      this.stableCount = 0;
+      this.lastReading = null;
+      this.readingsHistory = [];
+      
+      this.renderSteps();
+      this.renderContent();
+      this.updateButtons();
+    } else {
+      this.close();
+    }
+  },
+  
+  previousStep() {
+    if (this.currentStep > 0) {
+      this.currentStep--;
+      this.isStable = false;
+      this.stableCount = 0;
+      this.lastReading = null;
+      this.readingsHistory = [];
+      
+      this.renderSteps();
+      this.renderContent();
+      this.updateButtons();
+    }
+  },
+  
+  skipStep() {
+    const step = this.steps[this.currentStep];
+    if (step.skippable) {
+      this.nextStep();
+    }
+  },
+  
+  updateButtons() {
+    const backBtn = document.getElementById('wizardBack');
+    const nextBtn = document.getElementById('wizardNext');
+    const skipBtn = document.getElementById('wizardSkip');
+    const step = this.steps[this.currentStep];
+    
+    // Back button
+    backBtn.disabled = this.currentStep === 0;
+    
+    // Next button text
+    if (step.id === 'intro') {
+      nextBtn.innerHTML = `Start <i class="fas fa-arrow-right ml-2"></i>`;
+      nextBtn.onclick = () => this.nextStep();
+      nextBtn.disabled = false;
+    } else if (step.id === 'complete') {
+      nextBtn.innerHTML = `<i class="fas fa-check mr-2"></i> Finish`;
+      nextBtn.onclick = () => this.close();
+      nextBtn.disabled = false;
+    } else {
+      nextBtn.classList.add('hidden');
+    }
+    
+    // Skip button
+    if (step.skippable && step.id !== 'intro' && step.id !== 'complete') {
+      skipBtn.classList.remove('hidden');
+    } else {
+      skipBtn.classList.add('hidden');
+    }
+  }
+};
+
+function openCalibrationWizard(sensor) {
+  CalibrationWizard.open(sensor);
+}
+
+function closeCalibrationWizard() {
+  CalibrationWizard.close();
+}
+
 window.onload=()=>{initializeDashboard();};
