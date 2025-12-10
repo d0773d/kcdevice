@@ -180,14 +180,27 @@ static void mqtt_publish_task(void *arg)
     ESP_LOGI(TAG, "MQTT publish task started (interval: %lu seconds)", s_publish_interval_sec);
     
     while (1) {
+        // Wait for next publish cycle FIRST (before checking conditions)
+        // If interval is 0, wait for notification (triggered by sensor reads)
+        if (s_publish_interval_sec == 0) {
+            ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+        } else {
+            vTaskDelay(pdMS_TO_TICKS(s_publish_interval_sec * 1000));
+        }
+        
         // Only publish if connected to MQTT broker
         if (s_mqtt_state != MQTT_STATE_CONNECTED) {
-            vTaskDelay(pdMS_TO_TICKS(1000));
             continue;
         }
         
         // Skip publishing if sensor reading is in progress
         if (sensor_manager_is_reading_in_progress()) {
+            vTaskDelay(pdMS_TO_TICKS(1000));
+            continue;
+        }
+        
+        // Skip publishing if sensor reading is paused (focus mode active)
+        if (sensor_manager_is_reading_paused()) {
             vTaskDelay(pdMS_TO_TICKS(1000));
             continue;
         }
@@ -260,14 +273,6 @@ static void mqtt_publish_task(void *arg)
             }
             free(json_str);
         }
-        
-        // Wait for next publish cycle
-        // If interval is 0, wait for notification (triggered by sensor reads)
-        if (s_publish_interval_sec == 0) {
-            ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-        } else {
-            vTaskDelay(pdMS_TO_TICKS(s_publish_interval_sec * 1000));
-        }
     }
 }
 
@@ -287,8 +292,14 @@ esp_err_t mqtt_client_init(const char *broker_uri, const char *username, const c
         if (err == ESP_OK) {
             s_publish_interval_sec = saved_interval;
             ESP_LOGI(TAG, "Loaded MQTT interval from NVS: %lu seconds", saved_interval);
+        } else {
+            ESP_LOGW(TAG, "Failed to load MQTT interval from NVS: %s, using default %lu", esp_err_to_name(err), saved_interval);
+            s_publish_interval_sec = saved_interval;
         }
         nvs_close(nvs_handle);
+    } else {
+        ESP_LOGW(TAG, "Failed to open NVS for MQTT interval: %s, using default 10", esp_err_to_name(err));
+        s_publish_interval_sec = 10;
     }
     
     // Get device ID from cloud provisioning

@@ -158,6 +158,15 @@ esp_err_t ezo_sensor_init(ezo_sensor_t *sensor, i2c_master_bus_handle_t bus_hand
         }
     }
 
+    // Validate type field after all initialization
+    size_t type_len = strnlen(sensor->config.type, sizeof(sensor->config.type));
+    if (type_len == 0 || type_len >= sizeof(sensor->config.type)) {
+        ESP_LOGE(TAG, "Address 0x%02X: CRITICAL - type field corrupted after init! len=%d, content='%.*s'", 
+                 sensor->config.i2c_address, type_len, sizeof(sensor->config.type), sensor->config.type);
+        // Force to empty string to trigger UNKNOWN fallback later
+        sensor->config.type[0] = '\0';
+    }
+
     ESP_LOGI(TAG, "EZO sensor initialized: Type=%s, FW=%s", 
              sensor->config.type, sensor->config.firmware_version);
 
@@ -249,8 +258,12 @@ esp_err_t ezo_sensor_get_device_info(ezo_sensor_t *sensor) {
     // Send info command
     esp_err_t ret = ezo_sensor_send_command(sensor, "i", response, sizeof(response), EZO_SHORT_WAIT_MS);
     if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Address 0x%02X: Failed to send 'i' command: %s", 
+                 sensor->config.i2c_address, esp_err_to_name(ret));
         return ret;
     }
+
+    ESP_LOGI(TAG, "Address 0x%02X: Device info response: '%s'", sensor->config.i2c_address, response);
 
     // Parse response: ?I,<type>,<version>
     char *token = strtok(response, ",");
@@ -263,6 +276,7 @@ esp_err_t ezo_sensor_get_device_info(ezo_sensor_t *sensor) {
             // Sensor type
             strncpy(sensor->config.type, token, EZO_MAX_SENSOR_TYPE - 1);
             sensor->config.type[EZO_MAX_SENSOR_TYPE - 1] = '\0';  // Ensure null termination
+            ESP_LOGI(TAG, "Address 0x%02X: Parsed type = '%s'", sensor->config.i2c_address, sensor->config.type);
         } else if (field == 2) {
             // Firmware version
             strncpy(sensor->config.firmware_version, token, EZO_MAX_FW_VERSION - 1);
@@ -315,10 +329,15 @@ esp_err_t ezo_sensor_get_device_info(ezo_sensor_t *sensor) {
         ezo_ec_get_probe_type(sensor, &sensor->config.ec.probe_type);
         ezo_ec_get_tds_factor(sensor, &sensor->config.ec.tds_conversion_factor);
     } else if (strcmp(sensor->config.type, EZO_TYPE_HUM) == 0) {
+        ESP_LOGI(TAG, "Address 0x%02X: Configuring HUM sensor (type verified: '%s')", 
+                 sensor->config.i2c_address, sensor->config.type);
+        
         // Query which output parameters are enabled
         char param_response[EZO_LARGEST_STRING] = {0};
         ret = ezo_sensor_send_command(sensor, "O,?", param_response, sizeof(param_response), EZO_SHORT_WAIT_MS);
         if (ret == ESP_OK) {
+            ESP_LOGI(TAG, "Address 0x%02X: HUM param response: '%s'", sensor->config.i2c_address, param_response);
+            
             // Parse response: ?O,HUM,T,Dew or ?O,HUM,Dew etc.
             // Reset counts
             sensor->config.hum.param_count = 0;
@@ -352,8 +371,11 @@ esp_err_t ezo_sensor_get_device_info(ezo_sensor_t *sensor) {
             }
             
             ESP_LOGI(TAG, "HUM sensor has %d parameters enabled", sensor->config.hum.param_count);
+            ESP_LOGI(TAG, "Address 0x%02X: After HUM config, type still = '%s'", 
+                     sensor->config.i2c_address, sensor->config.type);
         } else {
-            ESP_LOGW(TAG, "Failed to query HUM output parameters");
+            ESP_LOGE(TAG, "Address 0x%02X: Failed to query HUM output parameters: %s", 
+                     sensor->config.i2c_address, esp_err_to_name(ret));
         }
     }
 

@@ -256,7 +256,7 @@ static void start_cloud_services(void)
             ret = mqtt_client_start();
             if (ret == ESP_OK) {
                 ESP_LOGI(TAG, "✓ MQTT telemetry enabled");
-                mqtt_set_telemetry_interval(10);
+                // MQTT interval already loaded from NVS in mqtt_client_init()
             } else {
                 ESP_LOGW(TAG, "Failed to start MQTT client: %s", esp_err_to_name(ret));
             }

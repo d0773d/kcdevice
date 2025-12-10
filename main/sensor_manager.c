@@ -601,8 +601,21 @@ static void sensor_reading_task(void *arg) {
                 memset(cached, 0, sizeof(*cached));
 
                 ezo_sensor_t *sensor = &s_ezo_sensors[i];
-                strncpy(cached->sensor_type, sensor->config.type, sizeof(cached->sensor_type) - 1);
-                cached->sensor_type[sizeof(cached->sensor_type) - 1] = '\0';
+                
+                // Safely copy sensor type with validation
+                if (sensor->config.type[0] != '\0' && strnlen(sensor->config.type, sizeof(sensor->config.type)) > 0) {
+                    strncpy(cached->sensor_type, sensor->config.type, sizeof(cached->sensor_type) - 1);
+                    cached->sensor_type[sizeof(cached->sensor_type) - 1] = '\0';
+                    // Verify the copy was successful
+                    if (cached->sensor_type[0] == '\0' || strncmp(cached->sensor_type, sensor->config.type, 3) != 0) {
+                        ESP_LOGE(TAG, "Sensor type copy failed! Source: '%s', Dest: '%s', Address: 0x%02X", 
+                                 sensor->config.type, cached->sensor_type, sensor->config.i2c_address);
+                        snprintf(cached->sensor_type, sizeof(cached->sensor_type), "COPY_FAIL_%02X", sensor->config.i2c_address);
+                    }
+                } else {
+                    snprintf(cached->sensor_type, sizeof(cached->sensor_type), "UNKNOWN_%02X", sensor->config.i2c_address);
+                    ESP_LOGW(TAG, "Sensor at 0x%02X has invalid type, using fallback name", sensor->config.i2c_address);
+                }
 
                 esp_err_t read_ret = ESP_FAIL;
                 if (sensor_triggered[i]) {
